@@ -37,7 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # ***
+    'CampMAP.apps.CampmapConfig',
+    'django.contrib.gis',
+    'leaflet',
 ]
+
+# TODO: configure the center with the camping
+LEAFLET_CONFIG = {
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 15,
+    'DEFAULT_ZOOM': 7,
+    'DEFAULT_CENTER': (46.7, 8),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,6 +85,7 @@ WSGI_APPLICATION = 'HEVS_S8_GIS_Camping.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# TODO: everyone creates local database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
