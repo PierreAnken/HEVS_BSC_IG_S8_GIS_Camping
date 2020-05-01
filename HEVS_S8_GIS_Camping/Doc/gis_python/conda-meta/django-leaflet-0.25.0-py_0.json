@@ -1,0 +1,654 @@
+{
+  "build": "py_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/conda-forge/noarch",
+  "constrains": [],
+  "depends": [
+    "django",
+    "python"
+  ],
+  "extracted_package_dir": "C:\\Users\\Montaine\\Anaconda3\\pkgs\\django-leaflet-0.25.0-py_0",
+  "features": "",
+  "files": [
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/INSTALLER",
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/LICENSE",
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/METADATA",
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/RECORD",
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/WHEEL",
+    "Lib/site-packages/django_leaflet-0.25.0.dist-info/top_level.txt",
+    "Lib/site-packages/leaflet/__init__.py",
+    "Lib/site-packages/leaflet/admin.py",
+    "Lib/site-packages/leaflet/apps.py",
+    "Lib/site-packages/leaflet/forms/__init__.py",
+    "Lib/site-packages/leaflet/forms/backport.py",
+    "Lib/site-packages/leaflet/forms/fields.py",
+    "Lib/site-packages/leaflet/forms/nogeos.py",
+    "Lib/site-packages/leaflet/forms/widgets.py",
+    "Lib/site-packages/leaflet/locale/cs/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/de/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/es/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/fr/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/he/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/hu/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/it/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/locale/ru/LC_MESSAGES/django.mo",
+    "Lib/site-packages/leaflet/models.py",
+    "Lib/site-packages/leaflet/static/leaflet/Control.MiniMap.css",
+    "Lib/site-packages/leaflet/static/leaflet/Control.MiniMap.js",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/layers-2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/layers.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/marker-icon-2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/marker-icon.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/marker-shadow.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/spritesheet-2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/spritesheet.png",
+    "Lib/site-packages/leaflet/static/leaflet/draw/images/spritesheet.svg",
+    "Lib/site-packages/leaflet/static/leaflet/draw/leaflet.draw-src.css",
+    "Lib/site-packages/leaflet/static/leaflet/draw/leaflet.draw-src.js",
+    "Lib/site-packages/leaflet/static/leaflet/draw/leaflet.draw.css",
+    "Lib/site-packages/leaflet/static/leaflet/draw/leaflet.draw.js",
+    "Lib/site-packages/leaflet/static/leaflet/eventlistener.ie6-7.js",
+    "Lib/site-packages/leaflet/static/leaflet/eventlistener.ie8.js",
+    "Lib/site-packages/leaflet/static/leaflet/images/layers-2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/layers.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/marker-icon-2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/marker-icon.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/marker-icon@2x.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/marker-shadow.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/reset-view.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/toggle.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/zoom-in.png",
+    "Lib/site-packages/leaflet/static/leaflet/images/zoom-out.png",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet-src.js",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet.css",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet.extras.js",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet.forms.js",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet.ie.css",
+    "Lib/site-packages/leaflet/static/leaflet/leaflet.js",
+    "Lib/site-packages/leaflet/static/leaflet/proj4js.js",
+    "Lib/site-packages/leaflet/static/leaflet/proj4leaflet.js",
+    "Lib/site-packages/leaflet/templates/leaflet/_leaflet_draw_i18n.js",
+    "Lib/site-packages/leaflet/templates/leaflet/_leaflet_map.html",
+    "Lib/site-packages/leaflet/templates/leaflet/admin/widget.html",
+    "Lib/site-packages/leaflet/templates/leaflet/css.html",
+    "Lib/site-packages/leaflet/templates/leaflet/js.html",
+    "Lib/site-packages/leaflet/templates/leaflet/widget.html",
+    "Lib/site-packages/leaflet/templatetags/__init__.py",
+    "Lib/site-packages/leaflet/templatetags/leaflet_tags.py",
+    "Lib/site-packages/leaflet/tests/__init__.py",
+    "Lib/site-packages/leaflet/tests/tests.py",
+    "Lib/site-packages/leaflet/utils.py",
+    ".nonadmin",
+    "Lib/site-packages/leaflet/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/leaflet/__pycache__/admin.cpython-37.pyc",
+    "Lib/site-packages/leaflet/__pycache__/apps.cpython-37.pyc",
+    "Lib/site-packages/leaflet/forms/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/leaflet/forms/__pycache__/backport.cpython-37.pyc",
+    "Lib/site-packages/leaflet/forms/__pycache__/fields.cpython-37.pyc",
+    "Lib/site-packages/leaflet/forms/__pycache__/nogeos.cpython-37.pyc",
+    "Lib/site-packages/leaflet/forms/__pycache__/widgets.cpython-37.pyc",
+    "Lib/site-packages/leaflet/__pycache__/models.cpython-37.pyc",
+    "Lib/site-packages/leaflet/templatetags/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/leaflet/templatetags/__pycache__/leaflet_tags.cpython-37.pyc",
+    "Lib/site-packages/leaflet/tests/__pycache__/__init__.cpython-37.pyc",
+    "Lib/site-packages/leaflet/tests/__pycache__/tests.cpython-37.pyc",
+    "Lib/site-packages/leaflet/__pycache__/utils.cpython-37.pyc"
+  ],
+  "fn": "django-leaflet-0.25.0-py_0.tar.bz2",
+  "license": "LGPL",
+  "license_family": "LGPL",
+  "link": {
+    "source": "C:\\Users\\Montaine\\Anaconda3\\pkgs\\django-leaflet-0.25.0-py_0",
+    "type": 1
+  },
+  "md5": "3a962180d26f1bb6bc26f6eee76bf4a1",
+  "name": "django-leaflet",
+  "noarch": "python",
+  "package_tarball_full_path": "C:\\Users\\Montaine\\Anaconda3\\pkgs\\django-leaflet-0.25.0-py_0.tar.bz2",
+  "package_type": "noarch_python",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+        "sha256_in_prefix": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+        "size_in_bytes": 7651
+      },
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "2eeea73ce255d1bc68ad65b0272423c0832e7beaa64f075597dce4dc6f470d94",
+        "sha256_in_prefix": "2eeea73ce255d1bc68ad65b0272423c0832e7beaa64f075597dce4dc6f470d94",
+        "size_in_bytes": 15742
+      },
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "8a268fd60e6872aeb47513f74de0e2dd80f0d13293ed787e40bc3e1b27a7a5ba",
+        "sha256_in_prefix": "8a268fd60e6872aeb47513f74de0e2dd80f0d13293ed787e40bc3e1b27a7a5ba",
+        "size_in_bytes": 6847
+      },
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "23bf6aa29589ebd9794fac196b2b7d55438c79c19918fceedbf89c6d16168e92",
+        "sha256_in_prefix": "23bf6aa29589ebd9794fac196b2b7d55438c79c19918fceedbf89c6d16168e92",
+        "size_in_bytes": 93
+      },
+      {
+        "_path": "site-packages/django_leaflet-0.25.0.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "98814dcf8ca0f397ea55abfe6fca5a193ca9a0a73804cf0c872d27f570c65f6b",
+        "sha256_in_prefix": "98814dcf8ca0f397ea55abfe6fca5a193ca9a0a73804cf0c872d27f570c65f6b",
+        "size_in_bytes": 8
+      },
+      {
+        "_path": "site-packages/leaflet/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "a734926ff39cd08f208e1ff89b7faa2163014654ca53f4e45a40da45fd47c4fd",
+        "sha256_in_prefix": "a734926ff39cd08f208e1ff89b7faa2163014654ca53f4e45a40da45fd47c4fd",
+        "size_in_bytes": 9097
+      },
+      {
+        "_path": "site-packages/leaflet/admin.py",
+        "path_type": "hardlink",
+        "sha256": "6db8ee6bb09db4e8bb6a084306755a6a53ec4ddea8a9c942254001e64d252482",
+        "sha256_in_prefix": "6db8ee6bb09db4e8bb6a084306755a6a53ec4ddea8a9c942254001e64d252482",
+        "size_in_bytes": 2321
+      },
+      {
+        "_path": "site-packages/leaflet/apps.py",
+        "path_type": "hardlink",
+        "sha256": "c91c3ac33cfbab7694137336a4ed71dc1964d11bcbb91f52d59b447d93daf895",
+        "sha256_in_prefix": "c91c3ac33cfbab7694137336a4ed71dc1964d11bcbb91f52d59b447d93daf895",
+        "size_in_bytes": 249
+      },
+      {
+        "_path": "site-packages/leaflet/forms/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "site-packages/leaflet/forms/backport.py",
+        "path_type": "hardlink",
+        "sha256": "7a7fdf2ade0b1699a6622c5d570e9fdc757613eaefa0c03ef7c5228c4b3a9289",
+        "sha256_in_prefix": "7a7fdf2ade0b1699a6622c5d570e9fdc757613eaefa0c03ef7c5228c4b3a9289",
+        "size_in_bytes": 14267
+      },
+      {
+        "_path": "site-packages/leaflet/forms/fields.py",
+        "path_type": "hardlink",
+        "sha256": "cfb40239213172eac63b52c3a47d1a880698d05272b82a91975d729ff8dbcc05",
+        "sha256_in_prefix": "cfb40239213172eac63b52c3a47d1a880698d05272b82a91975d729ff8dbcc05",
+        "size_in_bytes": 1017
+      },
+      {
+        "_path": "site-packages/leaflet/forms/nogeos.py",
+        "path_type": "hardlink",
+        "sha256": "62f2f9d77900deea9ca966e60cb33cda87f20bff9edc11748e4fb4d55958e437",
+        "sha256_in_prefix": "62f2f9d77900deea9ca966e60cb33cda87f20bff9edc11748e4fb4d55958e437",
+        "size_in_bytes": 407
+      },
+      {
+        "_path": "site-packages/leaflet/forms/widgets.py",
+        "path_type": "hardlink",
+        "sha256": "53f6ffeb580404173704aca9314a052039a2e2328023896190ec13609aa08ed4",
+        "sha256_in_prefix": "53f6ffeb580404173704aca9314a052039a2e2328023896190ec13609aa08ed4",
+        "size_in_bytes": 3651
+      },
+      {
+        "_path": "site-packages/leaflet/locale/cs/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "7ed2fb76d725b0cef73342a1133cc9fa77864ffc3d85ef558a9307a5932796be",
+        "sha256_in_prefix": "7ed2fb76d725b0cef73342a1133cc9fa77864ffc3d85ef558a9307a5932796be",
+        "size_in_bytes": 3005
+      },
+      {
+        "_path": "site-packages/leaflet/locale/de/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "abb76d5878f8c2c1555ae7ef7710bef9d42babe1a0239abd41ea85ea4e13d9a6",
+        "sha256_in_prefix": "abb76d5878f8c2c1555ae7ef7710bef9d42babe1a0239abd41ea85ea4e13d9a6",
+        "size_in_bytes": 2605
+      },
+      {
+        "_path": "site-packages/leaflet/locale/es/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "41a422890c70a62f71acd88d1730d8cc7f5e76af3d7895f5609006ba1d77d03a",
+        "sha256_in_prefix": "41a422890c70a62f71acd88d1730d8cc7f5e76af3d7895f5609006ba1d77d03a",
+        "size_in_bytes": 3336
+      },
+      {
+        "_path": "site-packages/leaflet/locale/fr/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "3fa46f02502bcc84377b8819f25f3e6d5363822642a0a73a710779fac7697899",
+        "sha256_in_prefix": "3fa46f02502bcc84377b8819f25f3e6d5363822642a0a73a710779fac7697899",
+        "size_in_bytes": 3124
+      },
+      {
+        "_path": "site-packages/leaflet/locale/he/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "4ac376752c071234235919e269151926befba0184f3a24970ea7663fdb3c444f",
+        "sha256_in_prefix": "4ac376752c071234235919e269151926befba0184f3a24970ea7663fdb3c444f",
+        "size_in_bytes": 3649
+      },
+      {
+        "_path": "site-packages/leaflet/locale/hu/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "a2e48a543bca1ad957b1479ac691fc63beb4f9392fbe682cb2ef0f11866b59cf",
+        "sha256_in_prefix": "a2e48a543bca1ad957b1479ac691fc63beb4f9392fbe682cb2ef0f11866b59cf",
+        "size_in_bytes": 2984
+      },
+      {
+        "_path": "site-packages/leaflet/locale/it/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "9210b8751a7c38c11591bafd58ac3eb571189ef5ba1b70ab180c1f60432ae26a",
+        "sha256_in_prefix": "9210b8751a7c38c11591bafd58ac3eb571189ef5ba1b70ab180c1f60432ae26a",
+        "size_in_bytes": 552
+      },
+      {
+        "_path": "site-packages/leaflet/locale/ru/LC_MESSAGES/django.mo",
+        "path_type": "hardlink",
+        "sha256": "c55ee4e807a7426dcbce13e0617b963091296d3a37315bbdd88fcfc05531b45e",
+        "sha256_in_prefix": "c55ee4e807a7426dcbce13e0617b963091296d3a37315bbdd88fcfc05531b45e",
+        "size_in_bytes": 3831
+      },
+      {
+        "_path": "site-packages/leaflet/models.py",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/Control.MiniMap.css",
+        "path_type": "hardlink",
+        "sha256": "a558ea2c9d07a73207a047f028ee1763cc59c9d92ec4a272c2114a2e53cf9c7e",
+        "sha256_in_prefix": "a558ea2c9d07a73207a047f028ee1763cc59c9d92ec4a272c2114a2e53cf9c7e",
+        "size_in_bytes": 707
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/Control.MiniMap.js",
+        "path_type": "hardlink",
+        "sha256": "aa1b0ab147eb156b12754cc8daeeb143990e8ea783864433a0821cc4a3a5ae1a",
+        "sha256_in_prefix": "aa1b0ab147eb156b12754cc8daeeb143990e8ea783864433a0821cc4a3a5ae1a",
+        "size_in_bytes": 8591
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/layers-2x.png",
+        "path_type": "hardlink",
+        "sha256": "066daca850d8ffbef007af00b06eac0015728dee279c51f3cb6c716df7c42edf",
+        "sha256_in_prefix": "066daca850d8ffbef007af00b06eac0015728dee279c51f3cb6c716df7c42edf",
+        "size_in_bytes": 1259
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/layers.png",
+        "path_type": "hardlink",
+        "sha256": "1dbbe9d028e292f36fcba8f8b3a28d5e8932754fc2215b9ac69e4cdecf5107c6",
+        "sha256_in_prefix": "1dbbe9d028e292f36fcba8f8b3a28d5e8932754fc2215b9ac69e4cdecf5107c6",
+        "size_in_bytes": 696
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/marker-icon-2x.png",
+        "path_type": "hardlink",
+        "sha256": "2d77a2e4c2f08bbac41808324ef946b9a2fe61b6150480d011b72b379c3b238d",
+        "sha256_in_prefix": "2d77a2e4c2f08bbac41808324ef946b9a2fe61b6150480d011b72b379c3b238d",
+        "size_in_bytes": 2586
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/marker-icon.png",
+        "path_type": "hardlink",
+        "sha256": "574c3a5cca85f4114085b6841596d62f00d7c892c7b03f28cbfa301deb1dc437",
+        "sha256_in_prefix": "574c3a5cca85f4114085b6841596d62f00d7c892c7b03f28cbfa301deb1dc437",
+        "size_in_bytes": 1466
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/marker-shadow.png",
+        "path_type": "hardlink",
+        "sha256": "264f5c640339f042dd729062cfc04c17f8ea0f29882b538e3848ed8f10edb4da",
+        "sha256_in_prefix": "264f5c640339f042dd729062cfc04c17f8ea0f29882b538e3848ed8f10edb4da",
+        "size_in_bytes": 618
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/spritesheet-2x.png",
+        "path_type": "hardlink",
+        "sha256": "7c681c34e672e75b289b32d2c195639d7ccde5ff0f0ac04105e6d9f3244d4cfd",
+        "sha256_in_prefix": "7c681c34e672e75b289b32d2c195639d7ccde5ff0f0ac04105e6d9f3244d4cfd",
+        "size_in_bytes": 2078
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/spritesheet.png",
+        "path_type": "hardlink",
+        "sha256": "90f4ee94a5c364cbfc8981de4e4cbe377d17e5864c77dc2f698d3700e720ecb7",
+        "sha256_in_prefix": "90f4ee94a5c364cbfc8981de4e4cbe377d17e5864c77dc2f698d3700e720ecb7",
+        "size_in_bytes": 1056
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/images/spritesheet.svg",
+        "path_type": "hardlink",
+        "sha256": "59054ca84d19a46f4b4ba1a9b7bc007a02ff50a8224220502e8e4859656ed16b",
+        "sha256_in_prefix": "59054ca84d19a46f4b4ba1a9b7bc007a02ff50a8224220502e8e4859656ed16b",
+        "size_in_bytes": 1807
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/leaflet.draw-src.css",
+        "path_type": "hardlink",
+        "sha256": "bf7800c13d5c178b2d880042b89aea561f469d604cf29cd9a932d885580d95f9",
+        "sha256_in_prefix": "bf7800c13d5c178b2d880042b89aea561f469d604cf29cd9a932d885580d95f9",
+        "size_in_bytes": 7314
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/leaflet.draw-src.js",
+        "path_type": "hardlink",
+        "sha256": "50b19d35c5db3815c49d158ea4c149bcab39a69f1c4b5c56d6100be02b250ad6",
+        "sha256_in_prefix": "50b19d35c5db3815c49d158ea4c149bcab39a69f1c4b5c56d6100be02b250ad6",
+        "size_in_bytes": 112611
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/leaflet.draw.css",
+        "path_type": "hardlink",
+        "sha256": "7210110c08c0506755896f41acf07dd5b84dcb0e22551810c1b128539b23288f",
+        "sha256_in_prefix": "7210110c08c0506755896f41acf07dd5b84dcb0e22551810c1b128539b23288f",
+        "size_in_bytes": 5079
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/draw/leaflet.draw.js",
+        "path_type": "hardlink",
+        "sha256": "5260f81ddbd70ba75c7533c47121ce0934ae9a00611b2049229d23380f3cf3a4",
+        "sha256_in_prefix": "5260f81ddbd70ba75c7533c47121ce0934ae9a00611b2049229d23380f3cf3a4",
+        "size_in_bytes": 61017
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/eventlistener.ie6-7.js",
+        "path_type": "hardlink",
+        "sha256": "4b4cbebe661ce8ccd86cb7a4095fd3722a7fe022583515555b8bb0320517a770",
+        "sha256_in_prefix": "4b4cbebe661ce8ccd86cb7a4095fd3722a7fe022583515555b8bb0320517a770",
+        "size_in_bytes": 3532
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/eventlistener.ie8.js",
+        "path_type": "hardlink",
+        "sha256": "c6e8f89f21a2cdf41eccd154b82f3cb8f93a9c9f849ffe1fa0d310e711299f08",
+        "sha256_in_prefix": "c6e8f89f21a2cdf41eccd154b82f3cb8f93a9c9f849ffe1fa0d310e711299f08",
+        "size_in_bytes": 4099
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/layers-2x.png",
+        "path_type": "hardlink",
+        "sha256": "066daca850d8ffbef007af00b06eac0015728dee279c51f3cb6c716df7c42edf",
+        "sha256_in_prefix": "066daca850d8ffbef007af00b06eac0015728dee279c51f3cb6c716df7c42edf",
+        "size_in_bytes": 1259
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/layers.png",
+        "path_type": "hardlink",
+        "sha256": "1dbbe9d028e292f36fcba8f8b3a28d5e8932754fc2215b9ac69e4cdecf5107c6",
+        "sha256_in_prefix": "1dbbe9d028e292f36fcba8f8b3a28d5e8932754fc2215b9ac69e4cdecf5107c6",
+        "size_in_bytes": 696
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/marker-icon-2x.png",
+        "path_type": "hardlink",
+        "sha256": "00179c4c1ee830d3a108412ae0d294f55776cfeb085c60129a39aa6fc4ae2528",
+        "sha256_in_prefix": "00179c4c1ee830d3a108412ae0d294f55776cfeb085c60129a39aa6fc4ae2528",
+        "size_in_bytes": 2464
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/marker-icon.png",
+        "path_type": "hardlink",
+        "sha256": "574c3a5cca85f4114085b6841596d62f00d7c892c7b03f28cbfa301deb1dc437",
+        "sha256_in_prefix": "574c3a5cca85f4114085b6841596d62f00d7c892c7b03f28cbfa301deb1dc437",
+        "size_in_bytes": 1466
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/marker-icon@2x.png",
+        "path_type": "hardlink",
+        "sha256": "454dc479e82b487529b6b93d6a9b29ac69ca7b4f5a9d5fdf8e01871f6d216113",
+        "sha256_in_prefix": "454dc479e82b487529b6b93d6a9b29ac69ca7b4f5a9d5fdf8e01871f6d216113",
+        "size_in_bytes": 4033
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/marker-shadow.png",
+        "path_type": "hardlink",
+        "sha256": "264f5c640339f042dd729062cfc04c17f8ea0f29882b538e3848ed8f10edb4da",
+        "sha256_in_prefix": "264f5c640339f042dd729062cfc04c17f8ea0f29882b538e3848ed8f10edb4da",
+        "size_in_bytes": 618
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/reset-view.png",
+        "path_type": "hardlink",
+        "sha256": "f59e55cf950de1230e6b0247e3b893e302cc89a474b096d0e863d28d14537aa3",
+        "sha256_in_prefix": "f59e55cf950de1230e6b0247e3b893e302cc89a474b096d0e863d28d14537aa3",
+        "size_in_bytes": 159
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/toggle.png",
+        "path_type": "hardlink",
+        "sha256": "2a61a00379202bb8b61c9ec5d22c169d4feb194b8f3232de08b36d64b1f5b041",
+        "sha256_in_prefix": "2a61a00379202bb8b61c9ec5d22c169d4feb194b8f3232de08b36d64b1f5b041",
+        "size_in_bytes": 345
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/zoom-in.png",
+        "path_type": "hardlink",
+        "sha256": "e2130f7cc19003054860caba3c111abc93e6f7a58defe3063987a7cf137919dd",
+        "sha256_in_prefix": "e2130f7cc19003054860caba3c111abc93e6f7a58defe3063987a7cf137919dd",
+        "size_in_bytes": 960
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/images/zoom-out.png",
+        "path_type": "hardlink",
+        "sha256": "8ab5a1f4fef27f8a1a148508f508cdcd96e28c475fc9f4681d3e5eb5abcfde0f",
+        "sha256_in_prefix": "8ab5a1f4fef27f8a1a148508f508cdcd96e28c475fc9f4681d3e5eb5abcfde0f",
+        "size_in_bytes": 956
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet-src.js",
+        "path_type": "hardlink",
+        "sha256": "3ce885d77f6afeace0c1e6c8e788426416fbde73f301e25e8ea32b8b6ac0156a",
+        "sha256_in_prefix": "3ce885d77f6afeace0c1e6c8e788426416fbde73f301e25e8ea32b8b6ac0156a",
+        "size_in_bytes": 396928
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet.css",
+        "path_type": "hardlink",
+        "sha256": "92ed770f672ae9188c0b48a0ae352380359d2d43d8c3a933fda6d1991b8dd80d",
+        "sha256_in_prefix": "92ed770f672ae9188c0b48a0ae352380359d2d43d8c3a933fda6d1991b8dd80d",
+        "size_in_bytes": 14286
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet.extras.js",
+        "path_type": "hardlink",
+        "sha256": "79c8e2a572bbf6cca1f300b78e6616f709d7d26c50a37d9d9d1507f4101f8812",
+        "sha256_in_prefix": "79c8e2a572bbf6cca1f300b78e6616f709d7d26c50a37d9d9d1507f4101f8812",
+        "size_in_bytes": 8292
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet.forms.js",
+        "path_type": "hardlink",
+        "sha256": "11eaed3fa6d1f198643293259f573d2fdd5144103f6eaac28aed76b85796bfd0",
+        "sha256_in_prefix": "11eaed3fa6d1f198643293259f573d2fdd5144103f6eaac28aed76b85796bfd0",
+        "size_in_bytes": 9521
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet.ie.css",
+        "path_type": "hardlink",
+        "sha256": "46e7a2f5cffc16abcffdf5ad2051d1e1cbda7a707c5be45222dd961596b5f4ba",
+        "sha256_in_prefix": "46e7a2f5cffc16abcffdf5ad2051d1e1cbda7a707c5be45222dd961596b5f4ba",
+        "size_in_bytes": 1105
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/leaflet.js",
+        "path_type": "hardlink",
+        "sha256": "57173360d3cf977bd61108cce7ae9c7f72dee550f48670014358a8856baf7ea7",
+        "sha256_in_prefix": "57173360d3cf977bd61108cce7ae9c7f72dee550f48670014358a8856baf7ea7",
+        "size_in_bytes": 139643
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/proj4js.js",
+        "path_type": "hardlink",
+        "sha256": "ef7a1bec6e79e37308df5a088475d4ff382e6f99acc9d2ba87b1ab312db065e1",
+        "sha256_in_prefix": "ef7a1bec6e79e37308df5a088475d4ff382e6f99acc9d2ba87b1ab312db065e1",
+        "size_in_bytes": 68695
+      },
+      {
+        "_path": "site-packages/leaflet/static/leaflet/proj4leaflet.js",
+        "path_type": "hardlink",
+        "sha256": "a29dc7abf8c4497c296a9f16d9c0459f511760d91b81bd4812821e34eb25a5ed",
+        "sha256_in_prefix": "a29dc7abf8c4497c296a9f16d9c0459f511760d91b81bd4812821e34eb25a5ed",
+        "size_in_bytes": 7426
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/_leaflet_draw_i18n.js",
+        "path_type": "hardlink",
+        "sha256": "94790ad9bada9177944ca529dcdc6be8760168fa49cce54b52db0081051087f4",
+        "sha256_in_prefix": "94790ad9bada9177944ca529dcdc6be8760168fa49cce54b52db0081051087f4",
+        "size_in_bytes": 2708
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/_leaflet_map.html",
+        "path_type": "hardlink",
+        "sha256": "165c5eea8394ba0160d7ede6aa4639b9c2c4932704978b4788560d20ad96ba9a",
+        "sha256_in_prefix": "165c5eea8394ba0160d7ede6aa4639b9c2c4932704978b4788560d20ad96ba9a",
+        "size_in_bytes": 1140
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/admin/widget.html",
+        "path_type": "hardlink",
+        "sha256": "9442df80145dfb695aabe2c5c88470fdff91c5c28e84f32fe2a9573b0d2c8f41",
+        "sha256_in_prefix": "9442df80145dfb695aabe2c5c88470fdff91c5c28e84f32fe2a9573b0d2c8f41",
+        "size_in_bytes": 688
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/css.html",
+        "path_type": "hardlink",
+        "sha256": "335eb2f36549f5c2f8c1085027b2aee019c200e183b7f829c4a54c8451f82b04",
+        "sha256_in_prefix": "335eb2f36549f5c2f8c1085027b2aee019c200e183b7f829c4a54c8451f82b04",
+        "size_in_bytes": 406
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/js.html",
+        "path_type": "hardlink",
+        "sha256": "79b514afcb0f3a732c014b3d118fca0eff2a37d0c4b18b9322997d44a820498a",
+        "sha256_in_prefix": "79b514afcb0f3a732c014b3d118fca0eff2a37d0c4b18b9322997d44a820498a",
+        "size_in_bytes": 1142
+      },
+      {
+        "_path": "site-packages/leaflet/templates/leaflet/widget.html",
+        "path_type": "hardlink",
+        "sha256": "4360a6ab777962d440ac814c7e9af18209cd6a58488e91e6f038fff5ad04cb8c",
+        "sha256_in_prefix": "4360a6ab777962d440ac814c7e9af18209cd6a58488e91e6f038fff5ad04cb8c",
+        "size_in_bytes": 1887
+      },
+      {
+        "_path": "site-packages/leaflet/templatetags/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "site-packages/leaflet/templatetags/leaflet_tags.py",
+        "path_type": "hardlink",
+        "sha256": "4295c6b874e351ee9bf34da048b8511405ebebea7d4c45fca4d82228743a8905",
+        "sha256_in_prefix": "4295c6b874e351ee9bf34da048b8511405ebebea7d4c45fca4d82228743a8905",
+        "size_in_bytes": 5119
+      },
+      {
+        "_path": "site-packages/leaflet/tests/__init__.py",
+        "path_type": "hardlink",
+        "sha256": "228ba1c34ca3da1c3254836706613eed9dc726939c027f5bd54f6e18f226b55a",
+        "sha256_in_prefix": "228ba1c34ca3da1c3254836706613eed9dc726939c027f5bd54f6e18f226b55a",
+        "size_in_bytes": 29
+      },
+      {
+        "_path": "site-packages/leaflet/tests/tests.py",
+        "path_type": "hardlink",
+        "sha256": "42ed854d4a0067581c53662f1b48897e3b4a24ffe77a52164d70f5be9e01120d",
+        "sha256_in_prefix": "42ed854d4a0067581c53662f1b48897e3b4a24ffe77a52164d70f5be9e01120d",
+        "size_in_bytes": 12464
+      },
+      {
+        "_path": "site-packages/leaflet/utils.py",
+        "path_type": "hardlink",
+        "sha256": "d9283aff0f477ed72b07fe62900c71e951b6d3a4cf9882a2350128184b511bfe",
+        "sha256_in_prefix": "d9283aff0f477ed72b07fe62900c71e951b6d3a4cf9882a2350128184b511bfe",
+        "size_in_bytes": 2213
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/__pycache__/admin.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/__pycache__/apps.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/forms/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/forms/__pycache__/backport.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/forms/__pycache__/fields.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/forms/__pycache__/nogeos.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/forms/__pycache__/widgets.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/__pycache__/models.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/templatetags/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/templatetags/__pycache__/leaflet_tags.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/tests/__pycache__/__init__.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/tests/__pycache__/tests.cpython-37.pyc",
+        "path_type": "pyc_file"
+      },
+      {
+        "_path": "Lib/site-packages/leaflet/__pycache__/utils.cpython-37.pyc",
+        "path_type": "pyc_file"
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "django-leaflet",
+  "sha256": "e466286ec4df96dd2a0f0677027186adac7a3acd3654d459e766884f0b560d7f",
+  "size": 250159,
+  "subdir": "noarch",
+  "timestamp": 1571494110451,
+  "track_features": "",
+  "url": "https://conda.anaconda.org/conda-forge/noarch/django-leaflet-0.25.0-py_0.tar.bz2",
+  "version": "0.25.0"
+}

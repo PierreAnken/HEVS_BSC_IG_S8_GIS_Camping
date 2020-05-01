@@ -1,0 +1,13 @@
+prefix=C:/Users/Montaine/Anaconda3/envs/gis_python/Library
+exec_prefix=C:/Users/Montaine/Anaconda3/envs/gis_python/Library
+libdir=C:/Users/Montaine/Anaconda3/envs/gis_python/Library/lib
+sharedlibdir=C:/Users/Montaine/Anaconda3/envs/gis_python/Library/lib
+includedir=C:/Users/Montaine/Anaconda3/envs/gis_python/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
