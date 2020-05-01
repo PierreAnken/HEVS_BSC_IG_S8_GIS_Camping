@@ -11,3 +11,5 @@ from . import views
 #    path('cantons.json', views.cantonsjson, name='cantonsjson'),
 #    path('cantons', views.cantons, name='cantons'),
 # ]
+
+urlpatterns = []

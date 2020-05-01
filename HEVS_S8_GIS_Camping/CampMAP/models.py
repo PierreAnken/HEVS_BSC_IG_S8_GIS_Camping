@@ -1,19 +1,42 @@
-from django.db import models
-# *** EXAMPLE ***
-# from django.contrib.gis.db import models
+from django.contrib.gis.db import models
 
 
-# Create your models here.
+# All models from the database
+class Area(models.Model):
+    gid = models.PositiveIntegerField(primary_key=True)
+    geom = models.PolygonField(srid=4326, null=True)
+
+    class Meta:
+        db_table = "areas"
 
 
-# *** EXAMPLE ***
-# class Canton(models.Model):
-#     gid = models.PositiveIntegerField(primary_key=True)
-#     name = models.CharField(max_length=200)
-#     geom = models.MultiPolygonField(srid=4326, null=True)
-#
-#     class Meta:
-#         db_table = "cantons"
-#
-#     def __str__(self):
-#         return self.name
+class Building(models.Model):
+    gid = models.PositiveIntegerField(primary_key=True)
+    geom = models.PolygonField(srid=4326, null=True)
+
+    class Meta:
+        db_table = "buildings"
+
+
+class CampingArea(models.Model):
+    gid = models.PositiveIntegerField(primary_key=True)
+    geom = models.PolygonField(srid=4326, null=True)
+
+    class Meta:
+        db_table = "camping_areas"
+
+
+class Pool(models.Model):
+    gid = models.PositiveIntegerField(primary_key=True)
+    geom = models.PolygonField(srid=4326, null=True)
+
+    class Meta:
+        db_table = "pools"
+
+
+class Tree(models.Model):
+    gid = models.PositiveIntegerField(primary_key=True)
+    geom = models.PolygonField(srid=4326, null=True)
+
+    class Meta:
+        db_table = "trees"
