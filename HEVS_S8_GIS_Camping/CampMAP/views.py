@@ -2,25 +2,42 @@ from django.shortcuts import render
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from .models import *
-from itertools import chain
 
 
 # Create your views here.
-def campingjson(request):
-    areas = Area.objects.all()
-    buildings = Building.objects.all()
-    camping_areas = CampingArea.objects.all()
-    pools = Pool.objects.all()
-    trees = Tree.objects.all()
-
-    camping = list(chain(areas, buildings, camping_areas, pools, trees))
-    ser = serialize('geojson', camping, geometry_field='geom', fields=('gid',))
-    return HttpResponse(ser)
-
-
 def index(request):
     context = {}
     return render(request, 'index.html', context)
+
+
+def areasjson(request):
+    areas = Area.objects.all()
+    ser = serialize('geojson', areas, geometry_field='geom', fields=('gid',))
+    return HttpResponse(ser)
+
+
+def buildingsjson(request):
+    buildings = Building.objects.all()
+    ser = serialize('geojson', buildings, geometry_field='geom', fields=('gid',))
+    return HttpResponse(ser)
+
+
+def campingareasjson(request):
+    camping_areas = CampingArea.objects.all()
+    ser = serialize('geojson', camping_areas, geometry_field='geom', fields=('gid',))
+    return HttpResponse(ser)
+
+
+def poolsjson(request):
+    pools = Pool.objects.all()
+    ser = serialize('geojson', pools, geometry_field='geom', fields=('gid',))
+    return HttpResponse(ser)
+
+
+def treesjson(request):
+    trees = Tree.objects.all()
+    ser = serialize('geojson', trees, geometry_field='geom', fields=('gid',))
+    return HttpResponse(ser)
 
 
 # *** EXAMPLE ***

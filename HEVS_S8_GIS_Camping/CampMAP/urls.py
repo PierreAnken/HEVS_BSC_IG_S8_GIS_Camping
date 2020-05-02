@@ -3,7 +3,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('camping.json', views.campingjson, name='campingjson'),
+    path('areas.json', views.areasjson, name='areasjson'),
+    path('buildings.json', views.buildingsjson, name='buildingsjson'),
+    path('campingareas.json', views.campingareasjson, name='campingareasjson'),
+    path('pools.json', views.poolsjson, name='poolsjson'),
+    path('trees.json', views.treesjson, name='treesjson'),
 ]
 
 # *** EXAMPLES ***

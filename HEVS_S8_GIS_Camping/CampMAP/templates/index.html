@@ -1,4 +1,122 @@
+{% load leaflet_tags %}
 <head>
+    <!-- TODO: find a name to our camping! -->
+    <title>Camping of I don't know yet</title>
+
+    <!-- **** Add the leaflet components **** -->
+    {% leaflet_js %}
+    {% leaflet_css %}
+
+    <!-- **** Add the jquery javascript **** -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
-<body>
+
+<body onload="initialize()">
+    <!-- **** Tag for the map **** -->
+    <div id="campingmap" style="width:100%; height:100%"></div>
 </body>
+
+<!-- **** Javascript to draw the map **** -->
+<script type="text/javascript">
+    function initialize() {
+
+        // **** Define the base tile layer ****
+        var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+
+        // **** Define the overlays ****
+        var areas = L.layerGroup();
+        var buildings = L.layerGroup();
+        var camping_areas = L.layerGroup();
+        var pools = L.layerGroup();
+        var trees = L.layerGroup();
+
+        var overlays = {
+            "Areas": areas,
+            "Buildings": buildings,
+            "Camping Areas": camping_areas,
+            "Pools": pools,
+            "Trees": trees
+        };
+
+
+        // **** Create the leaflet map ****
+        // TODO: modify the setView
+        var map = L.map('campingmap').setView([46.8,8],8);
+        OpenStreetMap_Mapnik.addTo(map);
+
+
+        // **** Create the elements on the map ****
+        var areasfile = '{% url "areasjson" %}'
+        $.getJSON(areasfile, function(data) {
+            L.geoJson(data, { onEachFeature: addPopup, highlightSelection }).addTo(areas);
+        });
+
+        var buildingsfile = '{% url "buildingsjson" %}'
+        $.getJSON(buildingsfile, function(data) {
+            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(buildings);
+        });
+
+        var campingareasfile = '{% url "campingareasjson" %}'
+        $.getJSON(campingareasfile, function(data) {
+            L.geoJson(data, { onEachFeature: addPopup, highlightSelection }).addTo(camping_areas);
+        });
+
+        var poolsfile = '{% url "poolsjson" %}'
+        $.getJSON(poolsfile, function(data) {
+            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(pools);
+        });
+
+        var treesfile = '{% url "treesjson" %}'
+        $.getJSON(treesfile, function(data) {
+            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(trees);
+        });
+
+        // **** Add the layers to the map ****
+        L.control.layers(overlays).addTo(map);
+
+        // **** Define the popup function ****
+        function addPopup(feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(feature.properties);
+            }
+        }
+
+        // **** Define the highlight functions ****
+        // TODO: change the colors depending on the state
+        function highlightSelection(feature, layer) {
+            layer.on({ mouseover: highlight,
+                       mouseout: reset,
+                       click: zoom
+            });
+        }
+
+        function highlight(e) {
+            var layer = e.target;
+            layer.setStyle({ weight: 5, color: "#00ae09", dashArray: "", fillOpacity: 0.7 });
+            layer.bringToFront();
+        }
+
+        function reset(e) {
+            camping.resetStyle(e.target);
+        }
+
+        // **** Define the zoom feature ****
+        function zoom(e) {
+            map.fitBounds(e.target.getBounds());
+        }
+
+
+        // **** Add popup with the location ****
+        // TODO: modify the function, just temporary
+        function displayLocation(e) {
+            popup.setLatLng(e.latlng)
+                .setContent("The current location is: " + e.latlng.toString())
+                .openOn(map);
+        }
+
+        map.on("click", displayLocation);
+    }
+</script>
