@@ -92,8 +92,8 @@ DATABASES = {
         'NAME': 'campMap',
         'USER': 'admin',
         'PASSWORD': 'adminPWD',
-        'HOST':'127.0.0.1',
-        'PORT':'5432',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 

@@ -4,7 +4,7 @@ from django.contrib.gis.db import models
 # All models from the database
 class Area(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
-    geom = models.PolygonField(srid=4326, null=True)
+    geom = models.MultiPolygonField(srid=4326, null=True)
 
     class Meta:
         db_table = "areas"
@@ -12,7 +12,7 @@ class Area(models.Model):
 
 class Building(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
-    geom = models.PolygonField(srid=4326, null=True)
+    geom = models.MultiPolygonField(srid=4326, null=True)
 
     class Meta:
         db_table = "buildings"
@@ -20,7 +20,7 @@ class Building(models.Model):
 
 class CampingArea(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
-    geom = models.PolygonField(srid=4326, null=True)
+    geom = models.MultiPolygonField(srid=4326, null=True)
 
     class Meta:
         db_table = "camping_areas"
@@ -28,7 +28,7 @@ class CampingArea(models.Model):
 
 class Pool(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
-    geom = models.PolygonField(srid=4326, null=True)
+    geom = models.MultiPolygonField(srid=4326, null=True)
 
     class Meta:
         db_table = "pools"
@@ -36,7 +36,7 @@ class Pool(models.Model):
 
 class Tree(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
-    geom = models.PolygonField(srid=4326, null=True)
+    geom = models.PointField(srid=4326, null=True)
 
     class Meta:
         db_table = "trees"

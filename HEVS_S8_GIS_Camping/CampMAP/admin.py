@@ -1,6 +1,6 @@
-from django.contrib import admin
+from django.contrib.gis import admin
+
 # *** EXAMPLES ***
-# from django.contrib.gis import admin
 # from .models import City, Hospital, Canton
 
 
