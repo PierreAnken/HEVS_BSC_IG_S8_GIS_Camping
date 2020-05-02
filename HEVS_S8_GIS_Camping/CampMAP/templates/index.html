@@ -48,7 +48,7 @@
 
         // **** Create the leaflet map ****
         // TODO: modify the setView
-        var map = L.map('campingmap').setView([46.8,8],8);
+        var map = L.map('campingmap').setView([46.20,7.5],10);
         OpenStreetMap_Mapnik.addTo(map);
 
 
@@ -115,6 +115,8 @@
 
         // **** Add popup with the location ****
         // TODO: modify the function, just temporary
+        var popup = L.popup();
+
         function displayLocation(e) {
             popup.setLatLng(e.latlng)
                 .setContent("The current location is: " + e.latlng.toString())
