@@ -12,31 +12,31 @@ def index(request):
 
 def areasjson(request):
     areas = Area.objects.all()
-    ser = serialize('geojson', areas, geometry_field='geom', fields=('gid',))
+    ser = serialize('geojson', areas, geometry_field='geom')
     return HttpResponse(ser)
 
 
 def buildingsjson(request):
     buildings = Building.objects.all()
-    ser = serialize('geojson', buildings, geometry_field='geom', fields=('gid',))
+    ser = serialize('geojson', buildings, geometry_field='geom')
     return HttpResponse(ser)
 
 
 def campingareasjson(request):
     camping_areas = CampingArea.objects.all()
-    ser = serialize('geojson', camping_areas, geometry_field='geom', fields=('gid',))
+    ser = serialize('geojson', camping_areas, geometry_field='geom')
     return HttpResponse(ser)
 
 
 def poolsjson(request):
     pools = Pool.objects.all()
-    ser = serialize('geojson', pools, geometry_field='geom', fields=('gid',))
+    ser = serialize('geojson', pools, geometry_field='geom')
     return HttpResponse(ser)
 
 
 def treesjson(request):
     trees = Tree.objects.all()
-    ser = serialize('geojson', trees, geometry_field='geom', fields=('gid',))
+    ser = serialize('geojson', trees, geometry_field='geom')
     return HttpResponse(ser)
 
 
