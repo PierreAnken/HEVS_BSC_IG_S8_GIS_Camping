@@ -31,18 +31,18 @@
         };
 
         // **** Define the overlays ****
-        var areas = L.layerGroup();
-        var buildings = L.layerGroup();
-        var camping_areas = L.layerGroup();
-        var pools = L.layerGroup();
-        var trees = L.layerGroup();
+        var areaslayer = L.layerGroup();
+        var buildingslayer = L.layerGroup();
+        var camping_areaslayer = L.layerGroup();
+        var poolslayer = L.layerGroup();
+        var treeslayer = L.layerGroup();
 
         var overlays = {
-            "Areas": areas,
-            "Buildings": buildings,
-            "Camping Areas": camping_areas,
-            "Pools": pools,
-            "Trees": trees
+            "Areas": areaslayer,
+            "Buildings": buildingslayer,
+            "Camping Areas": camping_areaslayer,
+            "Pools": poolslayer,
+            "Trees": treeslayer
         };
 
 
@@ -55,28 +55,39 @@
         // **** Create the elements on the map ****
         var areasfile = '{% url "areasjson" %}'
         $.getJSON(areasfile, function(data) {
-            L.geoJson(data, { onEachFeature: addPopup, highlightSelection }).addTo(areas);
+            areas = L.geoJson(data,
+                { onEachFeature: addPopup, highlightSelection });
+            areas.addTo(areaslayer);
         });
 
         var buildingsfile = '{% url "buildingsjson" %}'
         $.getJSON(buildingsfile, function(data) {
-            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(buildings);
+            buildings = L.geoJson(data,
+                { onEachFeature: highlightSelection });
+            buildings.addTo(buildingslayer);
         });
 
         var campingareasfile = '{% url "campingareasjson" %}'
         $.getJSON(campingareasfile, function(data) {
-            L.geoJson(data, { onEachFeature: addPopup, highlightSelection }).addTo(camping_areas);
+            campingareas = L.geoJson(data,
+                { onEachFeature: addPopup, highlightSelection });
+            campingareas.addTo(camping_areaslayer);
         });
 
         var poolsfile = '{% url "poolsjson" %}'
         $.getJSON(poolsfile, function(data) {
-            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(pools);
+            pools = L.geoJson(data,
+                { onEachFeature: highlightSelection });
+            pools.addTo(poolslayer);
         });
 
         var treesfile = '{% url "treesjson" %}'
         $.getJSON(treesfile, function(data) {
-            L.geoJson(data, { onEachFeature: highlightSelection }).addTo(trees);
+            trees = L.geoJson(data,
+                { onEachFeature: highlightSelection });
+            trees.addTo(treeslayer);
         });
+
 
         // **** Add the layers to the map ****
         L.control.layers(bases, overlays).addTo(map);
@@ -104,7 +115,11 @@
         }
 
         function reset(e) {
-            camping.resetStyle(e.target);
+            areas.resetStyle(e.target);
+            buildings.resetStyle(e.target);
+            campingareas.resetStyle(e.target);
+            pools.resetStyle(e.target);
+            trees.resetStyle(e.target);
         }
 
         // **** Define the zoom feature ****
