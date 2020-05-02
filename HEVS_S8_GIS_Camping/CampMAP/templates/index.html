@@ -48,7 +48,7 @@
 
         // **** Create the leaflet map ****
         // TODO: modify the setView
-        var map = L.map('campingmap').setView([46.20,7.5],10);
+        var map = L.map('campingmap', { minZoom: 10}).setView([46.20,7.5],10);
         OpenStreetMap_Mapnik.addTo(map);
 
 
