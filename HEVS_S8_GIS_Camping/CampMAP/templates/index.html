@@ -26,6 +26,10 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
 
+        var bases = {
+            "Map": OpenStreetMap_Mapnik,
+        };
+
         // **** Define the overlays ****
         var areas = L.layerGroup();
         var buildings = L.layerGroup();
@@ -75,7 +79,7 @@
         });
 
         // **** Add the layers to the map ****
-        L.control.layers(overlays).addTo(map);
+        L.control.layers(bases, overlays).addTo(map);
 
         // **** Define the popup function ****
         function addPopup(feature, layer) {
