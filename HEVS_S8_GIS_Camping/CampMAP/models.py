@@ -7,9 +7,9 @@ class Area(models.Model):
     geom = models.MultiPolygonField(srid=4326, null=True)
 
     class Meta:
-        db_table = "areas"
+        db_table = "places"
 
-    def __str__(self):
+    def __int__(self):
         return self.gid
 
 
@@ -20,7 +20,7 @@ class Building(models.Model):
     class Meta:
         db_table = "buildings"
 
-    def __str__(self):
+    def __int__(self):
         return self.gid
 
 
@@ -31,7 +31,7 @@ class CampingArea(models.Model):
     class Meta:
         db_table = "camping_areas"
 
-    def __str__(self):
+    def __int__(self):
         return self.gid
 
 
@@ -42,7 +42,7 @@ class Pool(models.Model):
     class Meta:
         db_table = "pools"
 
-    def __str__(self):
+    def __int__(self):
         return self.gid
 
 
@@ -53,5 +53,5 @@ class Tree(models.Model):
     class Meta:
         db_table = "trees"
 
-    def __str__(self):
+    def __int__(self):
         return self.gid
