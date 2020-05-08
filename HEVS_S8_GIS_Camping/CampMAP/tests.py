@@ -17,6 +17,8 @@ class TestCampMap(TestCase):
         self.assertEqual(distance, 8.611048612839674)
 
     def testPlaceNearTree(self):
+        trees = Tree.objects.all()
+        places = Place.objects.all()
 
-        places_near_tree = CampDistances.CampDistances.get_places_at_distance_from(ObjectType.ObjectType.TREE, 0, 30)
-        self.assertEqual(places_near_tree.count(), 3)
+        places_near_tree = CampDistances.CampDistances.get_shapes_in_range_from(places, trees, 10, 30)
+        self.assertEqual(places_near_tree[0].gid, 4)
