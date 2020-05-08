@@ -1,10 +1,8 @@
-SELECT * FROM public.camping_area 
+SELECT * FROM public.camping_areas
 union 
-select * from public.areas
+select * from public.places
 union 
 select * from public.buildings
-union 
-select * from public.camping_area
 union
 select * from public.pools
 union
