@@ -21,7 +21,7 @@ if os.name == 'nt':
     os.environ['OSGEO4W_ROOT'] = OSGEO4W
     os.environ['GDAL_DATA'] = "C:\OSGeo4W64\share\epsg_csv"
     os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
-    GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal204'
+    GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal300'
     os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

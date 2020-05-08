@@ -10,9 +10,9 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def areasjson(request):
-    areas = Area.objects.all()
-    ser = serialize('geojson', areas, geometry_field='geom')
+def placesjson(request):
+    places = Place.objects.all()
+    ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
 
 

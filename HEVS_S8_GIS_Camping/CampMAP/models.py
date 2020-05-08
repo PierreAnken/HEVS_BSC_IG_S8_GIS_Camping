@@ -1,8 +1,13 @@
 from django.contrib.gis.db import models
 
 
-# All models from the database
-class Area(models.Model):
+# **** Model for the authentication part ****
+
+
+
+
+# **** All models from the database ****
+class Place(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
     geom = models.MultiPolygonField(srid=4326, null=True)
 

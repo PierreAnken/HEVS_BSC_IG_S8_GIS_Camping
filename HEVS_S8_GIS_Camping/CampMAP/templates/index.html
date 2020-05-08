@@ -31,14 +31,14 @@
         };
 
         // **** Define the overlays ****
-        var areaslayer = L.layerGroup();
+        var placeslayer = L.layerGroup();
         var buildingslayer = L.layerGroup();
         var camping_areaslayer = L.layerGroup();
         var poolslayer = L.layerGroup();
         var treeslayer = L.layerGroup();
 
         var overlays = {
-            "Areas": areaslayer,
+            "Places": placeslayer,
             "Buildings": buildingslayer,
             "Camping Areas": camping_areaslayer,
             "Pools": poolslayer,
@@ -53,11 +53,11 @@
 
 
         // **** Create the elements on the map ****
-        var areasfile = '{% url "areasjson" %}'
-        $.getJSON(areasfile, function(data) {
+        var placesfile = '{% url "placesjson" %}'
+        $.getJSON(placesfile, function(data) {
             areas = L.geoJson(data,
                 { onEachFeature: addPopup, highlightSelection });
-            areas.addTo(areaslayer);
+            areas.addTo(placeslayer);
         });
 
         var buildingsfile = '{% url "buildingsjson" %}'

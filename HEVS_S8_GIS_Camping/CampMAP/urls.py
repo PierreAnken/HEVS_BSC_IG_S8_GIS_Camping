@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('areas.json', views.areasjson, name='areasjson'),
+    path('places.json', views.placesjson, name='placesjson'),
     path('buildings.json', views.buildingsjson, name='buildingsjson'),
     path('campingareas.json', views.campingareasjson, name='campingareasjson'),
     path('pools.json', views.poolsjson, name='poolsjson'),
