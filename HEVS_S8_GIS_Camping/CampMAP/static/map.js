@@ -33,35 +33,35 @@ function initialize() {
 
 
     // **** Create the elements on the map ****
-    var placesfile = '{% url "placesjson" %}'
+    var placesfile = '/places.json';
     $.getJSON(placesfile, function(data) {
         areas = L.geoJson(data,
             { onEachFeature: addPopup, highlightSelection });
         areas.addTo(placeslayer);
     });
 
-    var buildingsfile = '{% url "buildingsjson" %}'
+    var buildingsfile = '/buildings.json';
     $.getJSON(buildingsfile, function(data) {
         buildings = L.geoJson(data,
             { onEachFeature: highlightSelection });
         buildings.addTo(buildingslayer);
     });
 
-    var campingareasfile = '{% url "campingareasjson" %}'
+    var campingareasfile = '/campingareas.json';
     $.getJSON(campingareasfile, function(data) {
         campingareas = L.geoJson(data,
             { onEachFeature: addPopup, highlightSelection });
         campingareas.addTo(camping_areaslayer);
     });
 
-    var poolsfile = '{% url "poolsjson" %}'
+    var poolsfile = '/pools.json';
     $.getJSON(poolsfile, function(data) {
         pools = L.geoJson(data,
             { onEachFeature: highlightSelection });
         pools.addTo(poolslayer);
     });
 
-    var treesfile = '{% url "treesjson" %}'
+    var treesfile = '/trees.json';
     $.getJSON(treesfile, function(data) {
         trees = L.geoJson(data,
             { onEachFeature: highlightSelection });
