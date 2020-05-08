@@ -130,4 +130,6 @@ dmypy.json
 
 # JetBrains
 HEVS_S8_GIS_Camping/.idea/*
+
+# Personal settings
 HEVS_S8_GIS_Camping/HEVS_S8_GIS_Camping/settings.py
