@@ -4,8 +4,6 @@ from django.contrib.gis.db import models
 # **** Model for the authentication part ****
 
 
-
-
 # **** All models from the database ****
 class Place(models.Model):
     gid = models.PositiveIntegerField(primary_key=True)
