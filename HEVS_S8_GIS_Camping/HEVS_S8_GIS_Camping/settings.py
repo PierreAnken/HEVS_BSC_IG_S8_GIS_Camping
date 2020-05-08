@@ -19,7 +19,7 @@ if os.name == 'nt':
         OSGEO4W += "64"
     assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
     os.environ['OSGEO4W_ROOT'] = OSGEO4W
-    os.environ['GDAL_DATA'] = "C:\OSGeo4W64\share\epsg_csv"
+    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
     os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
     GDAL_LIBRARY_PATH = r'C:\OSGeo4W64\bin\gdal300'
     os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']

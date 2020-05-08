@@ -1,7 +1,80 @@
 {% load leaflet_tags %}
 <head>
+    <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        crossorigin="anonymous"
+    >
+    <style>
+    * {
+      box-sizing: border-box;
+
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    /* Style the header */
+    header {
+      background-color: #87ba59;
+      height: 5vh;
+      padding: 10px;
+      text-align: left;
+      font-size: 12px;
+      color: white;
+    }
+
+    /* Container for flexboxes */
+    section {
+      display: -webkit-flex;
+      display: flex;
+    }
+
+    /* Style the navigation menu */
+    nav {
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      background: #ccc;
+      padding: 20px;
+      height:90vh
+    }
+
+    /* Style the list inside the menu */
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    /* Style the content */
+    article {
+      -webkit-flex: 3;
+      -ms-flex: 3;
+      flex: 3;
+      background-color: #f1f1f1;
+      padding: 5px;
+    }
+
+    /* Style the footer */
+    footer {
+      background-color: #545454;
+         height: 5vh;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
+
+    /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+    @media (max-width: 600px) {
+      section {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+      }
+    }
+    </style>
     <!-- TODO: find a name to our camping! -->
-    <title>Camping of I don't know yet</title>
+    <title>Camp Manager</title>
 
     <!-- **** Add the leaflet components **** -->
     {% leaflet_js %}
@@ -12,8 +85,27 @@
 </head>
 
 <body onload="initialize()">
-    <!-- **** Tag for the map **** -->
-    <div id="campingmap" style="width:100%; height:100%"></div>
+<header>
+  <h2>CampMAP</h2>
+</header>
+<section>
+
+
+  <article>
+       <div id="campingmap" style="width:100%; height:100%"></div>
+  </article>
+      <nav>
+    <ul>
+      <li><a href="#">Menu Item</a></li>
+      <li><a href="#">Menu Item</a></li>
+      <li><a href="#">Menu Item</a></li>
+    </ul>
+  </nav>
+</section>
+    <footer>
+  <a href="https://renkulab.io/gitlab/jean.paul.ik/gis-python" style="color:white">Link to course's repository</a>
+</footer>
+
 </body>
 
 <!-- **** Javascript to draw the map **** -->
@@ -48,7 +140,7 @@
 
         // **** Create the leaflet map ****
         // TODO: modify the setView
-        var map = L.map('campingmap', { minZoom: 10}).setView([46.20,7.5],10);
+        var map = L.map('campingmap', { minZoom: 9}).setView([46.20,7.5],10);
         OpenStreetMap_Mapnik.addTo(map);
 
 
