@@ -1,7 +1,13 @@
 from django.contrib.gis.db import models
+from django.contrib.auth.models import User
 
 
 # **** Model for the authentication part ****
+class Camper(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    adults = models.PositiveIntegerField()
+    kids = models.PositiveIntegerField()
+    pets = models.PositiveIntegerField()
 
 
 # **** All models from the database ****
@@ -58,3 +64,10 @@ class Tree(models.Model):
 
     def __int__(self):
         return self.gid
+
+
+# **** Relational table ****
+class Reservation(models.Model):
+    camper = models.OneToOneField(User, on_delete=models.DO_NOTHING)
+    place = models.OneToOneField(Place, on_delete=models.DO_NOTHING)
+    status = models.PositiveIntegerField()
