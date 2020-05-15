@@ -35,6 +35,7 @@ function initialize() {
     // **** Create the elements on the map ****
     var placesfile = '/places.json';
     $.getJSON(placesfile, function(data) {
+        console.log(data);
         areas = L.geoJson(data,
             { onEachFeature: addPopup, highlightSelection });
         areas.addTo(placeslayer);
