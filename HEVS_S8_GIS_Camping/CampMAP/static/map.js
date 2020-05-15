@@ -11,11 +11,11 @@ function initialize() {
     };
 
     // **** Define the overlays ****
-    var placeslayer = L.layerGroup();
-    var buildingslayer = L.layerGroup();
-    var camping_areaslayer = L.layerGroup();
-    var poolslayer = L.layerGroup();
-    var treeslayer = L.layerGroup();
+    let placeslayer = L.layerGroup();
+    let buildingslayer = L.layerGroup();
+    let camping_areaslayer = L.layerGroup();
+    let poolslayer = L.layerGroup();
+    let treeslayer = L.layerGroup();
 
     var overlays = {
         "Places": placeslayer,
@@ -27,64 +27,70 @@ function initialize() {
 
     // **** Create the leaflet map ****
     // TODO: modify the setView
-    var map = L.map('campingmap', {minZoom: 1}).setView([46.20, 7.5], 10);
-    OpenStreetMap_Mapnik.addTo(map);
+    var map = L.map('campingmap', {minZoom: 9}).setView([46.211606, 7.3167], 18);
+
 
     let placesfile = '/places.json'
     $.getJSON(placesfile, function (data) {
-        places = L.geoJSON(data,
+        places = L.geoJson(data,
             {
-                onEachFeature: addPopup, highlightSelection, coordsToLatLng: function (coords) {
-                    return new L.LatLng(coords[0], coords[1], coords[2]);
-                }
+                onEachFeature: onEachFeature
             });
-        places.addTo(map);
+        places.addTo(placeslayer);
     })
+
 
     let buildingsfile = '/buildings.json'
     $.getJSON(buildingsfile, function (data) {
-        buildings = L.geoJSON(data,
+        buildings = L.geoJson(data,
             {
-                onEachFeature: addPopup, highlightSelection, coordsToLatLng: function (coords) {
-                    return new L.LatLng(coords[0], coords[1], coords[2]);
-                }
+                onEachFeature: onEachFeature
             });
-        buildings.addTo(map);
+        buildings.addTo(buildingslayer);
     })
 
     let campingareasfile = '/campingareas.json';
     $.getJSON(campingareasfile, function (data) {
-        campingareas = L.geoJSON(data,
+        campingareas = L.geoJson(data,
             {
-                onEachFeature: addPopup, highlightSelection, coordsToLatLng: function (coords) {
-                    return new L.LatLng(coords[0], coords[1], coords[2]);
-                }
+                onEachFeature: onEachFeature
             });
-        campingareas.addTo(map);
+        campingareas.addTo(camping_areaslayer);
     })
 
-   let poolsfile = '/pools.json';
+    let poolsfile = '/pools.json';
     $.getJSON(poolsfile, function (data) {
-        pools = L.geoJSON(data,
+        pools = L.geoJson(data,
             {
-                onEachFeature: addPopup, highlightSelection, coordsToLatLng: function (coords) {
-                    return new L.LatLng(coords[0], coords[1], coords[2]);
-                }
+                onEachFeature: onEachFeature
             });
-        pools.addTo(map);
+        pools.addTo(poolslayer);
     })
 
     let treesfile = '/trees.json';
     $.getJSON(treesfile, function (data) {
-        trees = L.geoJSON(data,
+        trees = L.geoJson(data,
             {
-                onEachFeature: addPopup, highlightSelection, coordsToLatLng: function (coords) {
-                    return new L.LatLng(coords[0], coords[1], coords[2]);
-                }
+                onEachFeature: onEachFeature
             });
-        trees.addTo(map);
+        trees.addTo(treeslayer);
     })
-    function highlightSelection(feature, layer) {
+
+    // **** Assemble layers ****
+    placeslayer.addTo(map);
+    buildingslayer.addTo(map);
+    camping_areaslayer.addTo(map);
+    poolslayer.addTo(map);
+    treeslayer.addTo(map);
+    OpenStreetMap_Mapnik.addTo(map);
+    L.control.layers(bases, overlays).addTo(map);
+
+
+    // **** Decorate feature ****
+    function onEachFeature(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.pk);
+        }
         layer.on({
             mouseover: highlight,
             mouseout: reset,
@@ -92,23 +98,18 @@ function initialize() {
         });
     }
 
-
-    // **** Define the popup function ****
-    function addPopup(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
-    }
-
     // **** Define the highlight functions ****
     // TODO: change the colors depending on the state
 
 
     function highlight(e) {
+        // console.log(e.target);
         let layer = e.target;
-        layer.setStyle({weight: 5, color: "#00ae09", dashArray: "", fillOpacity: 0.7});
+        if (e.target.feature.geometry.type === "Point") return;
+        layer.setStyle({weight: 5, color: "#66ff66", backgroundColor: "#66ff66", dashArray: "", fillOpacity: 0.7});
         layer.bringToFront();
     }
+    
 
     function reset(e) {
         places.resetStyle(e.target);
