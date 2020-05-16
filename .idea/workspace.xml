@@ -3,44 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d506aab3-e23f-4c7c-b87c-0ff51bdbf51e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Scripts/getAllShapes.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.cpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.qpj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/buildings.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.cpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.qpj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/camping_areas.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/desktop.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.cpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.qpj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/places.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.cpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.qpj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/pools.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.cpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.dbf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.qpj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.shp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Database/Shapes/trees.shx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Doc/CampMapUML.drawio" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Doc/CampMapUML.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Doc/envvars.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/Doc/spec-list.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +25,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -103,7 +68,10 @@
       <updated>1588921348803</updated>
       <workItem from="1588921355244" duration="89000" />
       <workItem from="1588922474298" duration="438000" />
-      <workItem from="1589497537246" duration="3662000" />
+      <workItem from="1589497537246" duration="13793000" />
+      <workItem from="1589529624041" duration="2397000" />
+      <workItem from="1589536704911" duration="1369000" />
+      <workItem from="1589545364127" duration="16061000" />
     </task>
     <servers />
   </component>
@@ -119,28 +87,28 @@
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
     <state x="619" y="267" key="FileChooserDialogImpl/0.0.1680.1020@0.0.1680.1020" timestamp="1588922618266" />
-    <state width="1637" height="735" key="GridCell.Tab.0.bottom" timestamp="1589500699967">
+    <state width="1637" height="48" key="GridCell.Tab.0.bottom" timestamp="1589589930624">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="735" key="GridCell.Tab.0.bottom/0.0.1680.1020@0.0.1680.1020" timestamp="1589500699967" />
-    <state width="1637" height="735" key="GridCell.Tab.0.center" timestamp="1589500699967">
+    <state width="1637" height="48" key="GridCell.Tab.0.bottom/0.0.1680.1020@0.0.1680.1020" timestamp="1589589930624" />
+    <state width="1637" height="48" key="GridCell.Tab.0.center" timestamp="1589589930624">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="735" key="GridCell.Tab.0.center/0.0.1680.1020@0.0.1680.1020" timestamp="1589500699967" />
-    <state width="1637" height="735" key="GridCell.Tab.0.left" timestamp="1589500699966">
+    <state width="1637" height="48" key="GridCell.Tab.0.center/0.0.1680.1020@0.0.1680.1020" timestamp="1589589930624" />
+    <state width="1637" height="48" key="GridCell.Tab.0.left" timestamp="1589589930624">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="735" key="GridCell.Tab.0.left/0.0.1680.1020@0.0.1680.1020" timestamp="1589500699966" />
-    <state width="1637" height="735" key="GridCell.Tab.0.right" timestamp="1589500699967">
+    <state width="1637" height="48" key="GridCell.Tab.0.left/0.0.1680.1020@0.0.1680.1020" timestamp="1589589930624" />
+    <state width="1637" height="48" key="GridCell.Tab.0.right" timestamp="1589589930624">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="735" key="GridCell.Tab.0.right/0.0.1680.1020@0.0.1680.1020" timestamp="1589500699967" />
-    <state x="343" y="155" key="SettingsEditor" timestamp="1589499649407">
+    <state width="1637" height="48" key="GridCell.Tab.0.right/0.0.1680.1020@0.0.1680.1020" timestamp="1589589930624" />
+    <state x="343" y="155" key="SettingsEditor" timestamp="1589584247647">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state x="343" y="155" key="SettingsEditor/0.0.1680.1020@0.0.1680.1020" timestamp="1589499649407" />
+    <state x="343" y="155" key="SettingsEditor/0.0.1680.1020@0.0.1680.1020" timestamp="1589584247647" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/HEVS_S8_GIS_Camping$manage.coverage" NAME="manage Coverage Results" MODIFIED="1589500699956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/HEVS_S8_GIS_Camping" />
+    <SUITE FILE_PATH="coverage/HEVS_S8_GIS_Camping$manage.coverage" NAME="manage Coverage Results" MODIFIED="1589589930611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/HEVS_S8_GIS_Camping" />
   </component>
 </project>

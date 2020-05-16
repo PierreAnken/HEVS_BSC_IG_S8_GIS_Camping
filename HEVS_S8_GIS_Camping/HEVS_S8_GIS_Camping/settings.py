@@ -58,9 +58,9 @@ INSTALLED_APPS = [
 # TODO: configure the center with the camping
 LEAFLET_CONFIG = {
     'MIN_ZOOM': 3,
-    'MAX_ZOOM': 15,
-    'DEFAULT_ZOOM': 7,
-    'DEFAULT_CENTER': (46.7, 8),
+    'MAX_ZOOM': 20,
+    'DEFAULT_ZOOM': 8,
+    'DEFAULT_CENTER': (46.21192857601482, 7.316541562304803),
 }
 
 MIDDLEWARE = [

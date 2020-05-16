@@ -1,8 +1,10 @@
 {% load leaflet_tags %}
 {% load static %}
+
 <head>
     <!-- **** Bootstrap library **** -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
     <!-- **** Customized styles **** -->
     <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
 
@@ -19,22 +21,59 @@
 </head>
 
 <body onload="initialize()">
-<header>
-  <h2>CampMAP</h2>
-</header>
-<section>
-  <article>
-       <div id="campingmap" style="width:100%; height:100%"></div>
-  </article>
-  <nav>
-      <ul>
-          <li><a href="#">Menu Item</a></li>
-          <li><a href="#">Menu Item</a></li>
-          <li><a href="#">Menu Item</a></li>
-      </ul>
-  </nav>
-</section>
-<footer>
-    <a href="https://renkulab.io/gitlab/jean.paul.ik/gis-python" style="color:white">Link to course's repository</a>
-</footer>
+<!-- **** Navbar **** -->
+<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camp Manager</a>
+    <ul class="navbar-nav px-3" id="navItems">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+        </li>
+    </ul>
+</nav>
+<!-- **** Main content **** -->
+<div class="container-fluid m-0 p-0">
+    <!-- **** Map **** -->
+    <div class="col-md-10 m-0 p-0">
+        <div id="campingmap" style="width:100%; height:100%"></div>
+    </div>
+    <!-- **** Sidebar **** -->
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ml-0 pl-0 ">
+        <div class="sidebar-sticky p-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <form>
+                        <label for="filter">Filter by</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="poolFilter"
+                                   value="pools" checked>
+                            <label class="form-check-label" for="poolFilter">
+                                Near pools
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="treesFilter"
+                                   value="trees">
+                            <label class="form-check-label" for="treesFilter">
+                                Near trees
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="petsFilter"
+                                   value="pets">
+                            <label class="form-check-label" for="petsFilter">
+                                Near pets
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- **** Bootstrap CDN **** -->
+<script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
 </body>

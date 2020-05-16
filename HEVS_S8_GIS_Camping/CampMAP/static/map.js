@@ -2,7 +2,7 @@ function initialize() {
 
     // **** Define the base tile layer ****
     var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        maxZoom: 20,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
@@ -11,11 +11,11 @@ function initialize() {
     };
 
     // **** Define the overlays ****
-    var placeslayer = L.layerGroup();
-    var buildingslayer = L.layerGroup();
-    var camping_areaslayer = L.layerGroup();
-    var poolslayer = L.layerGroup();
-    var treeslayer = L.layerGroup();
+    let placeslayer = L.layerGroup();
+    let buildingslayer = L.layerGroup();
+    let camping_areaslayer = L.layerGroup();
+    let poolslayer = L.layerGroup();
+    let treeslayer = L.layerGroup();
 
     var overlays = {
         "Places": placeslayer,
@@ -25,78 +25,94 @@ function initialize() {
         "Trees": treeslayer
     };
 
-
     // **** Create the leaflet map ****
     // TODO: modify the setView
-    var map = L.map('campingmap', { minZoom: 9}).setView([46.20,7.5],10);
-    OpenStreetMap_Mapnik.addTo(map);
+    var map = L.map('campingmap', {minZoom: 9}).setView([46.211606, 7.3167], 18);
 
 
-    // **** Create the elements on the map ****
-    var placesfile = '/places.json';
-    $.getJSON(placesfile, function(data) {
-        console.log(data);
-        areas = L.geoJson(data,
-            { onEachFeature: addPopup, highlightSelection });
-        areas.addTo(placeslayer);
-    });
+    let placesfile = '/places.json'
+    $.getJSON(placesfile, function (data) {
+        places = L.geoJson(data,
+            {
+                onEachFeature: onEachFeature
+            });
+        places.addTo(placeslayer);
+    })
 
-    var buildingsfile = '/buildings.json';
-    $.getJSON(buildingsfile, function(data) {
+
+    let buildingsfile = '/buildings.json'
+    $.getJSON(buildingsfile, function (data) {
         buildings = L.geoJson(data,
-            { onEachFeature: highlightSelection });
+            {
+                onEachFeature: onEachFeature
+            });
         buildings.addTo(buildingslayer);
-    });
+    })
 
-    var campingareasfile = '/campingareas.json';
-    $.getJSON(campingareasfile, function(data) {
+    let campingareasfile = '/campingareas.json';
+    $.getJSON(campingareasfile, function (data) {
         campingareas = L.geoJson(data,
-            { onEachFeature: addPopup, highlightSelection });
+            {
+                onEachFeature: onEachFeature
+            });
         campingareas.addTo(camping_areaslayer);
-    });
+    })
 
-    var poolsfile = '/pools.json';
-    $.getJSON(poolsfile, function(data) {
+    let poolsfile = '/pools.json';
+    $.getJSON(poolsfile, function (data) {
         pools = L.geoJson(data,
-            { onEachFeature: highlightSelection });
+            {
+                onEachFeature: onEachFeature
+            });
         pools.addTo(poolslayer);
-    });
+    })
 
-    var treesfile = '/trees.json';
-    $.getJSON(treesfile, function(data) {
+    let treesfile = '/trees.json';
+    $.getJSON(treesfile, function (data) {
         trees = L.geoJson(data,
-            { onEachFeature: highlightSelection });
+            {
+                onEachFeature: onEachFeature
+            });
         trees.addTo(treeslayer);
-    });
+    })
 
-
-    // **** Add the layers to the map ****
+    // **** Assemble layers ****
+    placeslayer.addTo(map);
+    buildingslayer.addTo(map);
+    camping_areaslayer.addTo(map);
+    poolslayer.addTo(map);
+    treeslayer.addTo(map);
+    OpenStreetMap_Mapnik.addTo(map);
     L.control.layers(bases, overlays).addTo(map);
 
-    // **** Define the popup function ****
-    function addPopup(feature, layer) {
+
+    // **** Decorate feature ****
+    function onEachFeature(feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(feature.properties);
+            layer.bindPopup(feature.properties.pk);
         }
+        layer.on({
+            mouseover: highlight,
+            mouseout: reset,
+            click: zoom
+        });
     }
 
     // **** Define the highlight functions ****
     // TODO: change the colors depending on the state
-    function highlightSelection(feature, layer) {
-        layer.on({ mouseover: highlight,
-                   mouseout: reset,
-                   click: zoom
-        });
-    }
+
 
     function highlight(e) {
-        var layer = e.target;
-        layer.setStyle({ weight: 5, color: "#00ae09", dashArray: "", fillOpacity: 0.7 });
+        console.log(e.target);
+        let layer = e.target;
+        if (e.target.feature.geometry.type === "Point") return;
+        layer.setStyle({weight: 5, color: "#66ff66", backgroundColor: "#66ff66", dashArray: "", fillOpacity: 0.7});
         layer.bringToFront();
     }
 
+
     function reset(e) {
-        areas.resetStyle(e.target);
+        places.resetStyle(e.target);
         buildings.resetStyle(e.target);
         campingareas.resetStyle(e.target);
         pools.resetStyle(e.target);
