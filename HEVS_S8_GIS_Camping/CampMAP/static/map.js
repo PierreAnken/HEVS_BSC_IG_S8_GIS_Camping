@@ -103,13 +103,13 @@ function initialize() {
 
 
     function highlight(e) {
-        // console.log(e.target);
+        console.log(e.target);
         let layer = e.target;
         if (e.target.feature.geometry.type === "Point") return;
         layer.setStyle({weight: 5, color: "#66ff66", backgroundColor: "#66ff66", dashArray: "", fillOpacity: 0.7});
         layer.bringToFront();
     }
-    
+
 
     function reset(e) {
         places.resetStyle(e.target);
