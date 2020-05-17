@@ -1,0 +1,92 @@
+{% load leaflet_tags %}
+{% load static %}
+
+<head>
+    <!-- **** Bootstrap library **** -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <!-- **** Customized styles **** -->
+    <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
+    <title>Camper Home Page</title>
+
+    <!-- **** Add the leaflet components **** -->
+    {% leaflet_js %}
+    {% leaflet_css %}
+
+    <!-- **** Add the javascripts (jquery and to draw the map) **** -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "map.js" %}"></script>
+</head>
+<body onload="initialize()">
+<!-- **** Connected as superuser **** -->
+{% if user.is_superuser %}
+<!-- **** Navbar **** -->
+<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Manager Home Page</a>
+    <ul class="navbar-nav px-3" id="navItems">
+        <li class="nav-item text-nowrap">
+            <text>Welcome back, {{ user.username }}!</text>
+        </li>
+    </ul>
+</nav>
+<!-- **** Connected as standard user **** -->
+{% else %}
+<!-- **** Navbar **** -->
+<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camper Home Page</a>
+    <ul class="navbar-nav px-3" id="navItems">
+        <li class="nav-item text-nowrap">
+            <text>Welcome, {{ user.username }}!</text>
+        </li>
+    </ul>
+</nav>
+{% endif %}
+
+<!-- **** Main content **** -->
+<div class="container-fluid m-0 p-0">
+    <!-- **** Map **** -->
+    <div class="col-md-10 m-0 p-0">
+        <div id="campingmap" style="width:100%; height:100%"></div>
+    </div>
+
+    <!-- **** Sidebar **** -->
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ml-0 pl-0 ">
+        <div class="sidebar-sticky p-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <form>
+                        <label for="filter">Filter by</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="poolFilter"
+                                   value="pools" checked>
+                            <label class="form-check-label" for="poolFilter">
+                                Near pools
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="treesFilter"
+                                   value="trees">
+                            <label class="form-check-label" for="treesFilter">
+                                Near trees
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="filter" id="petsFilter"
+                                   value="pets">
+                            <label class="form-check-label" for="petsFilter">
+                                Near pets
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- **** Bootstrap CDN **** -->
+<script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+</body>
