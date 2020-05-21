@@ -1,5 +1,4 @@
 /**** General ****/
-
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -13,9 +12,7 @@ body {
     }
 }
 
-
 /**** Sidebar ****/
-
 .sidebar {
     position: fixed;
     top: 0;
@@ -70,4 +67,49 @@ body {
 .sidebar-heading {
     font-size: .75rem;
     text-transform: uppercase;
+}
+
+/**** Index page ****/
+.btn-index {
+    background-color: #ffeb01;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 14px;
+    float: right;
+}
+
+.label-index {
+    font-weight: bold;
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+}
+
+.form-index {
+    font-family: 'Times New Roman', serif;
+    font-size: 14px;
+}
+
+.popup-index-title {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.popup-index-text {
+    font-family: 'Times New Roman', serif;
+    font-size: 12px;
+}
+
+.leaflet-popup-content {
+    width: auto;
+    height: 150px;
+}
+
+.btn-popup-index {
+    background-color: #ffeb01;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 12px;
+    float: right;
+    margin-top: 10px;
 }
