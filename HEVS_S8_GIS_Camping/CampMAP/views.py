@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.serializers import serialize
 from django.http import HttpResponse
 from .models import *
-
+from .Classes import *
 
 # Create your views here.
 def index(request):
@@ -15,6 +15,19 @@ def placesjson(request):
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
 
+def treesfilterjson(request):
+    trees = Tree.objects.all();
+    places = Place.objects.all();
+    places_near_trees = CampDistances.CampDistances.get_shapes_in_range_from(places, trees, 10, 30)
+    ser = serialize('geojson', places_near_trees, geometry_field='geom')
+    return HttpResponse(ser)
+
+def poolsfilterjson(request):
+    pools = Pool.objects.all();
+    places = Place.objects.all();
+    places_near_pools = CampDistances.CampDistances.get_shapes_in_range_from(places, pools, 5, 80)
+    ser = serialize('geojson', places_near_pools, geometry_field='geom')
+    return HttpResponse(ser)
 
 def buildingsjson(request):
     buildings = Building.objects.all()

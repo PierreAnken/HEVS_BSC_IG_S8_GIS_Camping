@@ -36,7 +36,7 @@ function initialize() {
             {
                 onEachFeature: onEachFeature
             });
-        places.addTo(placeslayer);
+        //places.addTo(placeslayer);
     })
 
 
@@ -46,7 +46,7 @@ function initialize() {
             {
                 onEachFeature: onEachFeature
             });
-        buildings.addTo(buildingslayer);
+        //buildings.addTo(buildingslayer);
     })
 
     let campingareasfile = '/campingareas.json';
@@ -55,7 +55,7 @@ function initialize() {
             {
                 onEachFeature: onEachFeature
             });
-        campingareas.addTo(camping_areaslayer);
+        //campingareas.addTo(camping_areaslayer);
     })
 
     let poolsfile = '/pools.json';
@@ -73,7 +73,27 @@ function initialize() {
             {
                 onEachFeature: onEachFeature
             });
-        trees.addTo(treeslayer);
+        //trees.addTo(treeslayer);
+    })
+
+    let treesfilter = '/treesfilter.json';
+    $.getJSON(treesfilter, function (data) {
+        trees_filter_places = L.geoJson(data,
+            {
+                onEachFeature: onEachFeature
+            });
+        //trees_filter_places.addTo(placeslayer);
+        console.log(data);
+    })
+
+    let poolsfilter = '/poolsfilter.json';
+    $.getJSON(poolsfilter, function (data) {
+        pools_filter_places = L.geoJson(data,
+            {
+                onEachFeature: onEachFeature
+            });
+        pools_filter_places.addTo(placeslayer);
+        console.log(data);
     })
 
     // **** Assemble layers ****
@@ -103,7 +123,7 @@ function initialize() {
 
 
     function highlight(e) {
-        console.log(e.target);
+        //console.log(e.target);
         let layer = e.target;
         if (e.target.feature.geometry.type === "Point") return;
         layer.setStyle({weight: 5, color: "#66ff66", backgroundColor: "#66ff66", dashArray: "", fillOpacity: 0.7});
@@ -112,11 +132,12 @@ function initialize() {
 
 
     function reset(e) {
-        places.resetStyle(e.target);
+
         buildings.resetStyle(e.target);
         campingareas.resetStyle(e.target);
         pools.resetStyle(e.target);
         trees.resetStyle(e.target);
+
     }
 
     // **** Define the zoom feature ****

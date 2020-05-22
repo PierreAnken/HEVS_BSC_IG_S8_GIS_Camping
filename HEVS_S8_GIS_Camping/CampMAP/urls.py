@@ -8,6 +8,8 @@ urlpatterns = [
     path('campingareas.json', views.campingareasjson, name='campingareasjson'),
     path('pools.json', views.poolsjson, name='poolsjson'),
     path('trees.json', views.treesjson, name='treesjson'),
+    path('treesfilter.json', views.treesfilterjson, name='treesfilterjson'),
+    path('poolsfilter.json', views.poolsfilterjson, name='poolsfilterjson'),
 ]
 
 # *** EXAMPLES ***
