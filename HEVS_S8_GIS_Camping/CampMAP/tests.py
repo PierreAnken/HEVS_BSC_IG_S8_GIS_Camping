@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from CampMAP.Classes import *
+from CampMAP.classes import *
 from CampMAP.models import *
 
 
