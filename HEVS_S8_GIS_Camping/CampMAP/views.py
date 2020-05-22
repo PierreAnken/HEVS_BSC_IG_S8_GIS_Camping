@@ -8,7 +8,9 @@ from .Classes import *
 def index(request):
     context = {}
     return render(request, 'index.html', context)
-
+def homepage(request):
+    context = {}
+    return render(request, 'homePage.html', context)
 
 def placesjson(request):
     places = Place.objects.all()
