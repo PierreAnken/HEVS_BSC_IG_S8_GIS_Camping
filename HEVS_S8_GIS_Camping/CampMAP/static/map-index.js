@@ -6,7 +6,6 @@ function initialize() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
-
     // **** Define the overlay ****
     var camping_areaslayer = L.layerGroup();
 
@@ -14,17 +13,15 @@ function initialize() {
     // **** Create the leaflet map ****
     var map = L.map('campingmap', { minZoom: 10, maxZoom: 18 }).setView([46.211606, 7.3167], 18);
 
-    var campingareasfile = '/campingareas.json';
+    var campingareasfile = '/campingareas.json/';
     $.getJSON(campingareasfile, function (data) {
         campingareas = L.geoJson(data, { onEachFeature: onEachFeature });
         campingareas.addTo(camping_areaslayer);
     });
 
-
     // **** Assemble layers ****
     OpenStreetMap_Mapnik.addTo(map);
     camping_areaslayer.addTo(map);
-
 
     // **** Decorate feature ****
     function onEachFeature(feature, layer) {
@@ -57,7 +54,7 @@ function initialize() {
                 '<text class="popup-index-title">You are not authorized to access</text><br/><br/>' +
                 '<text class="popup-index-text">Please login with authenticated account to perform some action.<br/>' +
                 'Or register your account by clicking the button below.</text>' +
-                '<button type="button" class="btn-sm btn-popup-index">Register ></button>' +
+                '<button type="button" onclick="window.location.href=\'/signup\'" class="btn-sm btn-popup-index">Register &gt;</button>' +
                 '</div>')
             .openOn(map);
     }
