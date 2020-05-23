@@ -14,13 +14,17 @@ def signup_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
+            # create user
             user = form.save()
             # create camper
+            adults = form.cleaned_data.get('adults')
+            kids = form.cleaned_data.get('kids')
+            pets = form.cleaned_data.get('pets')
+            camper = Camper(adults=adults, kids=kids, pets=pets, user_id=user.id)
+            camper.save()
+            # log the user in
             login(request, user)
             return redirect('homepage')
-            # username = form.cleaned_data.get('username')
-            # raw_password = form.cleaned_data.get('password1')
-            # user = authenticate(username=username, password=raw_password)
     else:
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
