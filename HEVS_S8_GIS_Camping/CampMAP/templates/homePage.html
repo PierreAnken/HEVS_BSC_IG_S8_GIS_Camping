@@ -18,72 +18,87 @@
     <script type="text/javascript" src="{% static "map.js" %}"></script>
 </head>
 <body onload="initialize()">
-<!-- **** Connected as superuser **** -->
-{% if user.is_superuser %}
-<!-- **** Navbar **** -->
-<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Manager Home Page</a>
-    <ul class="navbar-nav px-3" id="navItems">
-        <li class="nav-item text-nowrap">
-            <text>Welcome back, {{ user.username }}!</text>
-        </li>
-    </ul>
-</nav>
-<!-- **** Connected as standard user **** -->
-{% else %}
-<!-- **** Navbar **** -->
-<nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camper Home Page</a>
-    <ul class="navbar-nav px-3" id="navItems">
-        <li class="nav-item text-nowrap">
-            <text>Welcome, {{ user.username }}!</text>
-        </li>
-    </ul>
-</nav>
-{% endif %}
+<!-- **** Check if user is connected **** -->
+{% if user.is_authenticated %}
 
-<!-- **** Main content **** -->
-<div class="container-fluid m-0 p-0">
-    <!-- **** Map **** -->
-    <div class="col-md-10 m-0 p-0">
-        <div id="campingmap" style="width:100%; height:100%"></div>
+    <!-- **** Connected as superuser **** -->
+    {% if user.is_superuser %}
+    <!-- **** Navbar **** -->
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Manager Home Page</a>
+        <ul class="navbar-nav px-3" id="navItems">
+            <li class="nav-item text-nowrap">
+                <text>Welcome back, {{ user.username }}!</text>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- **** Connected as standard user **** -->
+    {% else %}
+    <!-- **** Navbar **** -->
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camper Home Page</a>
+        <ul class="navbar-nav px-3" id="navItems">
+            <li class="nav-item text-nowrap">
+                <text>Welcome, {{ user.username }}!</text>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    <!-- **** Main content **** -->
+    <div class="container-fluid m-0 p-0">
+        <!-- **** Map **** -->
+        <div class="col-md-10 m-0 p-0">
+            <div id="campingmap" style="width:100%; height:100%"></div>
+        </div>
+
+        <!-- **** Sidebar **** -->
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ml-0 pl-0 ">
+            <div class="sidebar-sticky p-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <form>
+                            <label for="filter">Filter by</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="filter" id="poolFilter"
+                                       value="pools" checked>
+                                <label class="form-check-label" for="poolFilter">
+                                    Near pools
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="filter" id="treesFilter"
+                                       value="trees">
+                                <label class="form-check-label" for="treesFilter">
+                                    Near trees
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="filter" id="petsFilter"
+                                       value="pets">
+                                <label class="form-check-label" for="petsFilter">
+                                    Near pets
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 
-    <!-- **** Sidebar **** -->
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ml-0 pl-0 ">
-        <div class="sidebar-sticky p-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <form>
-                        <label for="filter">Filter by</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="filter" id="poolFilter"
-                                   value="pools" checked>
-                            <label class="form-check-label" for="poolFilter">
-                                Near pools
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="filter" id="treesFilter"
-                                   value="trees">
-                            <label class="form-check-label" for="treesFilter">
-                                Near trees
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="filter" id="petsFilter"
-                                   value="pets">
-                            <label class="form-check-label" for="petsFilter">
-                                Near pets
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-success">Search</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<!-- **** If user is not connected (url access by typing) **** -->
+{% else %}
+<div class="fullscreen" style="background-color: #fffed6">
+    <div class="container" style="text-align:center; font-family: 'Times New Roman', serif; margin-top: 50px;">
+        <text style="font-size: 60pt; font-weight: bold">Oops, sorry!</text><br/>
+        <text style="font-size: 24pt; font-weight: bold">You are not authorized to access this page, please log in.</text><br/>
+        <button type="button" onclick="window.location.href='/'" class="btn btn-signup" style="font-size: 20pt; width: 40%; margin-top: 25px;">Go to homepage</button>
+    </div>
 </div>
+{% endif %}
 
 <!-- **** Bootstrap CDN **** -->
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
