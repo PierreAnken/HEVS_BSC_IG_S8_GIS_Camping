@@ -113,3 +113,35 @@ body {
     float: right;
     margin-top: 10px;
 }
+
+/**** Signup page ****/
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background: #ffeb01;
+}
+
+.center-div {
+    background-color: rgb(254, 255, 239);
+    width: 40%;
+    border: 3px solid #5d2e13;
+    border-radius: 25px;
+    font-family: 'Times New Roman', serif;
+    color: #5d2e13;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.btn-signup {
+    background-color: #ffeb01;
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10px;
+    width: 100%;
+}

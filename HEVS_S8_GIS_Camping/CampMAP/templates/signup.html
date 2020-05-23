@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+<!-- **** Custom <head> contents **** -->
+{% block title %}Sign up{% endblock %}
+
+<!-- **** Page <body> proper contents **** -->
+{% block contents %}
+<div class="fullscreen">
+    <div class="container center-div">
+        <div class="container">
+            <h1 style="margin-top: 15px; margin-bottom: 25px;">Register</h1>
+            <form class="site-form" action="/signup/" method="post" style="font-size:11pt;">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="id_first_name" name="first_name" class="form-control form-control-sm" type="text" maxlength="32" placeholder="First name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input id="id_last_name" name="last_name" class="form-control form-control-sm" type="text" maxlength="32" placeholder="Last name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="id_email" name="email" class="form-control form-control-sm" type="email" maxlength="64" placeholder="example@email.com" required>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input id="id_adults" name="adults" class="form-control form-control-sm" type="number" min="0" max="10" placeholder="Adults" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input id="id_kids" name="kids" class="form-control form-control-sm" type="number" min="0" max="10" placeholder="Kids" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check-inline">
+                            <label class="form-check-label" style="font-size: 12pt;">
+                                Do you have any pet?<input id="id_pets" name="pets" type="checkbox" class="form-check-input" style="height: 15px; width: 15px; margin-top: 5px; margin-left: 20px;" required>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="id_username" name="username" class="form-control form-control-sm" type="text" maxlength="150" autofocus="" placeholder="Username" required>
+                    <div class="alert alert-warning" role="alert" style="margin-top: 5px;">
+                        Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="id_password1" name="password1" class="form-control form-control-sm" type="password" placeholder="Password" required>
+                    <div class="alert alert-warning" role="alert" style="margin-top: 5px;">
+                        <li>Your password can't be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can't be a commonly used password.</li>
+                        <li>Your password can't be entirely numeric.</li>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="id_password2" name="password2" class="form-control form-control-sm" type="password" placeholder="Password confirmation" required>
+                    <div class="alert alert-warning" role="alert" style="margin-top: 5px;">
+                        Enter the same password as before, for verification.
+                    </div>
+                </div>
+                <!-- **** Manage any error inside the form **** -->
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% if field.errors %}
+                        <div class="form-error alert alert-danger" style="font-size: 11px;" role="alert">
+                            {% for err in field.errors %}
+                                <li>{{ err }}</li>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <button type="submit" class="btn-sm btn-signup">Create an account</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
