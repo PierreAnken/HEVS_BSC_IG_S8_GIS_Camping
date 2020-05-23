@@ -7,7 +7,7 @@ class Camper(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     adults = models.PositiveIntegerField()
     kids = models.PositiveIntegerField()
-    pets = models.PositiveIntegerField()
+    pets = models.BooleanField()
 
 
 # **** All models from the database ****
