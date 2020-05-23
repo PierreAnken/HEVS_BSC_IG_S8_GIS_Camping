@@ -1,35 +1,62 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from .classes.RegisterForm import RegisterForm
+from .classes.CampDistances import CampDistances
 from .models import *
-from .Classes import *
 
-# Create your views here.
-def index(request):
-    context = {}
-    return render(request, 'index.html', context)
+
+# **** Manage users views below ****
+def signup_user(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # create camper
+            login(request, user)
+            return redirect('homepage')
+            # username = form.cleaned_data.get('username')
+            # raw_password = form.cleaned_data.get('password1')
+            # user = authenticate(username=username, password=raw_password)
+    else:
+        form = RegisterForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('homepage')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'index.html', {'form': form})
+
+
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('login')
+
+
+# **** App views below ****
+@login_required(login_url='/')
 def homepage(request):
     context = {}
     return render(request, 'homePage.html', context)
 
+
+# **** Json views below ****
 def placesjson(request):
     places = Place.objects.all()
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
 
-def treesfilterjson(request):
-    trees = Tree.objects.all();
-    places = Place.objects.all();
-    places_near_trees = CampDistances.CampDistances.get_shapes_in_range_from(places, trees, 10, 30)
-    ser = serialize('geojson', places_near_trees, geometry_field='geom')
-    return HttpResponse(ser)
-
-def poolsfilterjson(request):
-    pools = Pool.objects.all();
-    places = Place.objects.all();
-    places_near_pools = CampDistances.CampDistances.get_shapes_in_range_from(places, pools, 5, 80)
-    ser = serialize('geojson', places_near_pools, geometry_field='geom')
-    return HttpResponse(ser)
 
 def buildingsjson(request):
     buildings = Building.objects.all()
@@ -49,16 +76,23 @@ def poolsjson(request):
     return HttpResponse(ser)
 
 
+def poolsfilterjson(request):
+    pools = Pool.objects.all()
+    places = Place.objects.all()
+    places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 5, 80)
+    ser = serialize('geojson', places_near_pools, geometry_field='geom')
+    return HttpResponse(ser)
+
+
 def treesjson(request):
     trees = Tree.objects.all()
     ser = serialize('geojson', trees, geometry_field='geom')
     return HttpResponse(ser)
 
 
-# *** EXAMPLE ***
-# def city(request, city_id):
-#     try:
-#         city = City.objects.get(pk=city_id)
-#     except City.DoesNotExist:
-#         raise Http404("City not found!")
-#     return render(request, 'city.html', {'city': city})
+def treesfilterjson(request):
+    trees = Tree.objects.all()
+    places = Place.objects.all()
+    places_near_trees = CampDistances.get_shapes_in_range_from(places, trees, 10, 30)
+    ser = serialize('geojson', places_near_trees, geometry_field='geom')
+    return HttpResponse(ser)
