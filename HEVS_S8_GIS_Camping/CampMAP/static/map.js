@@ -10,73 +10,49 @@ function initialize() {
         "Map": OpenStreetMap_Mapnik,
     };
 
+
     // **** Define the overlays ****
-    let placeslayer = L.layerGroup();
-    let buildingslayer = L.layerGroup();
-    let camping_areaslayer = L.layerGroup();
-    let poolslayer = L.layerGroup();
-    let treeslayer = L.layerGroup();
+    var placeslayer = L.layerGroup();
+    var buildingslayer = L.layerGroup();
+    var poolslayer = L.layerGroup();
+    var treeslayer = L.layerGroup();
 
     var overlays = {
         "Places": placeslayer,
         "Buildings": buildingslayer,
-        "Camping Areas": camping_areaslayer,
         "Pools": poolslayer,
         "Trees": treeslayer
     };
 
+
     // **** Create the leaflet map ****
-    // TODO: modify the setView
-    var map = L.map('campingmap', {minZoom: 9}).setView([46.211606, 7.3167], 18);
+    var map = L.map('campingmap', { minZoom: 10, maxZoom: 18 }).setView([46.211606, 7.3167], 18);
 
-
-    let placesfile = '/places.json'
+    var placesfile = '/places.json/';
     $.getJSON(placesfile, function (data) {
-        places = L.geoJson(data,
-            {
-                onEachFeature: onEachFeature
-            });
-        //places.addTo(placeslayer);
-    })
+        places = L.geoJson(data, { onEachFeature: onEachFeature });
+        places.addTo(placeslayer);
+    });
 
-
-    let buildingsfile = '/buildings.json'
+    var buildingsfile = '/buildings.json/';
     $.getJSON(buildingsfile, function (data) {
-        buildings = L.geoJson(data,
-            {
-                onEachFeature: onEachFeature
-            });
-        //buildings.addTo(buildingslayer);
-    })
+        buildings = L.geoJson(data, { onEachFeature: onEachFeature });
+        buildings.addTo(buildingslayer);
+    });
 
-    let campingareasfile = '/campingareas.json';
-    $.getJSON(campingareasfile, function (data) {
-        campingareas = L.geoJson(data,
-            {
-                onEachFeature: onEachFeature
-            });
-        //campingareas.addTo(camping_areaslayer);
-    })
-
-    let poolsfile = '/pools.json';
+    var poolsfile = '/pools.json/';
     $.getJSON(poolsfile, function (data) {
-        pools = L.geoJson(data,
-            {
-                onEachFeature: onEachFeature
-            });
+        pools = L.geoJson(data, { onEachFeature: onEachFeature });
         pools.addTo(poolslayer);
-    })
+    });
 
-    let treesfile = '/trees.json';
+    var treesfile = '/trees.json/';
     $.getJSON(treesfile, function (data) {
-        trees = L.geoJson(data,
-            {
-                onEachFeature: onEachFeature
-            });
-        //trees.addTo(treeslayer);
-    })
+        trees = L.geoJson(data, { onEachFeature: onEachFeature });
+        trees.addTo(treeslayer);
+    });
 
-    let treesfilter = '/treesfilter.json';
+    let treesfilter = '/treesfilter.json/';
     $.getJSON(treesfilter, function (data) {
         trees_filter_places = L.geoJson(data,
             {
@@ -84,9 +60,9 @@ function initialize() {
             });
         //trees_filter_places.addTo(placeslayer);
         console.log(data);
-    })
+    });
 
-    let poolsfilter = '/poolsfilter.json';
+    let poolsfilter = '/poolsfilter.json/';
     $.getJSON(poolsfilter, function (data) {
         pools_filter_places = L.geoJson(data,
             {
@@ -94,12 +70,12 @@ function initialize() {
             });
         pools_filter_places.addTo(placeslayer);
         console.log(data);
-    })
+    });
+
 
     // **** Assemble layers ****
     placeslayer.addTo(map);
     buildingslayer.addTo(map);
-    camping_areaslayer.addTo(map);
     poolslayer.addTo(map);
     treeslayer.addTo(map);
     OpenStreetMap_Mapnik.addTo(map);
@@ -118,10 +94,9 @@ function initialize() {
         });
     }
 
+
     // **** Define the highlight functions ****
     // TODO: change the colors depending on the state
-
-
     function highlight(e) {
         //console.log(e.target);
         let layer = e.target;
@@ -130,14 +105,10 @@ function initialize() {
         layer.bringToFront();
     }
 
-
     function reset(e) {
-
         buildings.resetStyle(e.target);
-        campingareas.resetStyle(e.target);
         pools.resetStyle(e.target);
         trees.resetStyle(e.target);
-
     }
 
     // **** Define the zoom feature ****

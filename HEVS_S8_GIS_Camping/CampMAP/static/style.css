@@ -100,18 +100,13 @@ body {
     font-size: 12px;
 }
 
-.leaflet-popup-content {
-    width: auto;
-    height: 150px;
-}
-
 .btn-popup-index {
     background-color: #ffeb01;
     font-family: 'Times New Roman', serif;
     font-weight: bold;
     font-size: 12px;
-    float: right;
     margin-top: 10px;
+    width: 100%;
 }
 
 /**** Signup page ****/
