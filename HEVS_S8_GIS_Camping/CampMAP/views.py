@@ -4,8 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .classes.RegisterForm import RegisterForm
-from .classes.CampDistances import CampDistances
+from .Classes.RegisterForm import RegisterForm
+from .Classes.CampDistances import CampDistances
 from .models import *
 
 
