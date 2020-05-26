@@ -84,6 +84,7 @@ def poolsfilterjson(request):
     pools = Pool.objects.all()
     places = Place.objects.all()
     places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 5, 80)
+
     ser = serialize('geojson', places_near_pools, geometry_field='geom')
     return HttpResponse(ser)
 

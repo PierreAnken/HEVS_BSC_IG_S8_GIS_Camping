@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d506aab3-e23f-4c7c-b87c-0ff51bdbf51e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/static/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/homePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/homePage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/HEVS_S8_GIS_Camping/CampMAP/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +75,7 @@
       <workItem from="1589545364127" duration="16919000" />
       <workItem from="1589630888471" duration="5459000" />
       <workItem from="1590155309083" duration="671000" />
-      <workItem from="1590506562932" duration="578000" />
+      <workItem from="1590506562932" duration="11542000" />
     </task>
     <servers />
   </component>
@@ -89,26 +91,30 @@
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
     <state x="619" y="267" key="FileChooserDialogImpl/0.0.1680.1020@0.0.1680.1020" timestamp="1588922618266" />
-    <state width="1637" height="191" key="GridCell.Tab.0.bottom" timestamp="1590506898719">
+    <state width="1637" height="334" key="GridCell.Tab.0.bottom" timestamp="1590531981880">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="191" key="GridCell.Tab.0.bottom/0.0.1680.1020@0.0.1680.1020" timestamp="1590506898719" />
-    <state width="1637" height="191" key="GridCell.Tab.0.center" timestamp="1590506898719">
+    <state width="1637" height="334" key="GridCell.Tab.0.bottom/0.0.1680.1020@0.0.1680.1020" timestamp="1590531981880" />
+    <state width="1637" height="334" key="GridCell.Tab.0.center" timestamp="1590531981879">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="191" key="GridCell.Tab.0.center/0.0.1680.1020@0.0.1680.1020" timestamp="1590506898719" />
-    <state width="1637" height="191" key="GridCell.Tab.0.left" timestamp="1590506898718">
+    <state width="1637" height="334" key="GridCell.Tab.0.center/0.0.1680.1020@0.0.1680.1020" timestamp="1590531981879" />
+    <state width="1637" height="334" key="GridCell.Tab.0.left" timestamp="1590531981879">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="191" key="GridCell.Tab.0.left/0.0.1680.1020@0.0.1680.1020" timestamp="1590506898718" />
-    <state width="1637" height="191" key="GridCell.Tab.0.right" timestamp="1590506898719">
+    <state width="1637" height="334" key="GridCell.Tab.0.left/0.0.1680.1020@0.0.1680.1020" timestamp="1590531981879" />
+    <state width="1637" height="334" key="GridCell.Tab.0.right" timestamp="1590531981879">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
-    <state width="1637" height="191" key="GridCell.Tab.0.right/0.0.1680.1020@0.0.1680.1020" timestamp="1590506898719" />
+    <state width="1637" height="334" key="GridCell.Tab.0.right/0.0.1680.1020@0.0.1680.1020" timestamp="1590531981879" />
     <state x="343" y="155" key="SettingsEditor" timestamp="1589649933271">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
     <state x="343" y="155" key="SettingsEditor/0.0.1680.1020@0.0.1680.1020" timestamp="1589649933271" />
+    <state x="547" y="144" width="586" height="732" key="find.popup" timestamp="1590523297613">
+      <screen x="0" y="0" width="1680" height="1020" />
+    </state>
+    <state x="547" y="144" width="586" height="732" key="find.popup/0.0.1680.1020@0.0.1680.1020" timestamp="1590523297613" />
     <state x="503" y="220" width="672" height="678" key="search.everywhere.popup" timestamp="1589653252655">
       <screen x="0" y="0" width="1680" height="1020" />
     </state>
@@ -125,6 +131,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/HEVS_S8_GIS_Camping$manage.coverage" NAME="manage Coverage Results" MODIFIED="1590506898705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/HEVS_S8_GIS_Camping" />
+    <SUITE FILE_PATH="coverage/HEVS_S8_GIS_Camping$manage.coverage" NAME="manage Coverage Results" MODIFIED="1590531981868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/HEVS_S8_GIS_Camping" />
   </component>
 </project>
