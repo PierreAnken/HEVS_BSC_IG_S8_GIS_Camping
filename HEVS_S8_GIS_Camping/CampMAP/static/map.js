@@ -1,4 +1,5 @@
 // **** Define the overlays ****
+//to do : reformat map.js
 var map;
 var placeslayer = L.layerGroup();
 var buildingslayer = L.layerGroup();
@@ -13,14 +14,14 @@ var overlays = {
     "Pools": poolslayer,
     "Trees": treeslayer
 };
-var filterCheck = {"poolfilter":false, "treefilter":false}
+var filterCheck = {"poolFilterOn": false, "treeFilterOn": false}
 // Styles for places marked as near pool/trees
 var stylePool = () => {
-    return {fillColor: '#00b88a', fillOpacity: 0.8};
+    return {fillColor: '#00b88a', fillOpacity: 0.7, stroke: false};
     //cyan fill
 }
 var styleTrees = () => {
-    return {color: '#db8000', weight: 4, fill:false};
+    return {color: '#db8000', weight: 4, fill: true};
     //orange outline
 }
 
@@ -42,7 +43,7 @@ function initialize() {
 
     var placesfile = '/places.json/';
     $.getJSON(placesfile, function (data) {
-        places = L.geoJson(data, {onEachFeature: onEachFeature});
+        places = L.geoJson(data, {onEachFeature: onEachPlace});
         places.addTo(placeslayer);
     });
 
@@ -77,6 +78,21 @@ function initialize() {
         });
     }
 
+    function onEachPlace(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.pk);
+        }
+        layer.on({
+            mouseover: highlight,
+            mouseout: reset,
+            click: zoom
+        });
+        //display popup to book slot
+        layer.on("click", function () {
+            displayPopup(feature.geometry.coordinates[0][0][0], feature.properties.pk);
+        });
+    }
+
     function reset(e) {
         places.resetStyle(e.target);
         buildings.resetStyle(e.target);
@@ -92,6 +108,17 @@ function initialize() {
             .openOn(map);
     }
 
+    function displayPopup(coordinates, slotId) {
+        //change to [0] [1] if popup shows up at wrong continent
+        var latlng = {"lat": coordinates[1], "lng": coordinates[0]}
+        var popup = L.popup();
+
+        popup.setLatLng(latlng)
+            .setContent(`<button class="btn btn-success" onclick="window.location.href='/reserve';">Reserve slot ${slotId}</button>`)
+            .openOn(map);
+    }
+
+
     // **** Assemble layers ****
     placeslayer.addTo(map);
     buildingslayer.addTo(map);
@@ -105,6 +132,12 @@ function initialize() {
 
 }
 
+//To do : finish reserve feature
+function reserve(slot) {
+    var userId = document.getElementById('user-id');
+    alert(`Todo: Reserving slot ${slot} for ${userId.dataset.userName}(${userId.dataset.userId})`);
+}
+
 function filterPool() {
     let poolsfilter = '/poolsfilter.json/';
     $.getJSON(poolsfilter, function (data) {
@@ -115,7 +148,7 @@ function filterPool() {
             });
         pools_filter_places.addTo(poolfilterlayer);
         poolfilterlayer.addTo(map)
-        filterCheck.poolfilter = true;
+        filterCheck.poolFilterOn = true;
     });
 
     function onEachPoolFilterFeature(feature, layer) {
@@ -137,12 +170,12 @@ function filterPool() {
 
 function removePoolFilter() {
     poolfilterlayer.removeFrom(map);
-    filterCheck.poolfilter = false;
+    filterCheck.poolFilterOn = false;
     poolfilterlayer = L.layerGroup();
 }
 
 function filterTrees() {
-      let treesfilter = '/treesfilter.json/';
+    let treesfilter = '/treesfilter.json/';
     $.getJSON(treesfilter, function (data) {
         trees_filter_places = L.geoJson(data,
             {
@@ -151,7 +184,7 @@ function filterTrees() {
             });
         trees_filter_places.addTo(treesfilterlayer);
         treesfilterlayer.addTo(map);
-        filterCheck.treefilter = true;
+        filterCheck.treeFilterOn = true;
     });
 
 
@@ -174,21 +207,22 @@ function filterTrees() {
 
 function removeTreeFilter() {
     treesfilterlayer.removeFrom(map);
+    filterCheck.treeFilterOn = false;
     treesfilterlayer = L.layerGroup();
-    filterCheck.treefilter = false;
+
 }
 
-function submitForm() {
+async function submitForm() {
     var form = document.getElementById("filter-form");
     var poolCheckbox = form.elements["pool-filter"].checked;
     var treeCheckbox = form.elements["trees-filter"].checked;
-    if (poolCheckbox === true && filterCheck.poolfilter === false) {
+    if (poolCheckbox === true && filterCheck.poolFilterOn === false) {
         filterPool();
     } else if (poolCheckbox === false) {
         removePoolFilter();
     }
-    if (treeCheckbox === true && filterCheck.treefilter === false) {
-        filterTrees();
+    if (treeCheckbox === true && filterCheck.treeFilterOn === false) {
+        filterTrees()
     } else if (treeCheckbox === false) {
         removeTreeFilter();
     }
@@ -200,7 +234,14 @@ function highlight(e) {
     //console.log(e.target);
     let layer = e.target;
     if (e.target.feature.geometry.type === "Point") return;
-    layer.setStyle({weight: 5, color: "#66ff66", backgroundColor: "#66ff66", dashArray: "", fillOpacity: 0.7});
+    layer.setStyle({
+        weight: 5,
+        color: "#66ff66",
+        backgroundColor: "#66ff66",
+        dashArray: "",
+        fillOpacity: 0.7,
+        stroke: true
+    });
     layer.bringToFront();
 }
 

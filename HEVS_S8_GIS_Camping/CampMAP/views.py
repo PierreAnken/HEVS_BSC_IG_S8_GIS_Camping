@@ -47,7 +47,8 @@ def logout_user(request):
         logout(request)
         return redirect('login')
 
-
+def reserve_slot(request, user_id, place_id):
+    return 'hey'
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
@@ -98,6 +99,6 @@ def treesjson(request):
 def treesfilterjson(request):
     trees = Tree.objects.all()
     places = Place.objects.all()
-    places_near_trees = CampDistances.get_shapes_in_range_from(places, trees, 10, 30)
+    places_near_trees = CampDistances.get_shapes_in_range_from(places, trees, 1, 15)
     ser = serialize('geojson', places_near_trees, geometry_field='geom')
     return HttpResponse(ser)

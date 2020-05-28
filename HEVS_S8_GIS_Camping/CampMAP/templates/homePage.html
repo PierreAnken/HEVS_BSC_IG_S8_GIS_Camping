@@ -20,12 +20,14 @@
 <body onload="initialize()">
     <!-- **** Connected as superuser **** -->
     {% if user.is_superuser %}
+
     <!-- **** Navbar **** -->
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Manager Home Page</a>
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
                 <text>Welcome back, {{ user.username }}!</text>
+                <text id='user-id' style="display: none" > {{ user.id }}</text>
                 <form class="logout-link" action="{% url 'logout' %}" method="post" style="display: inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-link">Logout</button>
@@ -42,6 +44,7 @@
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
                 <text>Welcome, {{ user.username }}!</text>
+                <text id='user-id' style="display: none"  data-user-name="{{ user.username }}" data-user-id="{{ user.id }}"></text>
                 <form class="logout-link" action="{% url 'logout' %}" method="post" style="display: inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-link">Logout</button>
