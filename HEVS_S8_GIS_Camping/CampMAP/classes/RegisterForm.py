@@ -7,8 +7,8 @@ class RegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=32)
     last_name = forms.CharField(max_length=32)
     email = forms.EmailField(max_length=64, help_text="Enter a valid email address")
-    adults = forms.IntegerField(help_text="Indicate the number of adults")
-    kids = forms.IntegerField(help_text="Indicate the number of children")
+    adults = forms.IntegerField(help_text="Indicate the number of adults", required=False)
+    kids = forms.IntegerField(help_text="Indicate the number of children", required=False)
     pets = forms.BooleanField(required=False)
 
     class Meta(UserCreationForm.Meta):
