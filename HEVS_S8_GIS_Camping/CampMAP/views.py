@@ -47,8 +47,11 @@ def logout_user(request):
         logout(request)
         return redirect('login')
 
+
 def reserve_slot(request, user_id, place_id):
     return 'hey'
+
+
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
