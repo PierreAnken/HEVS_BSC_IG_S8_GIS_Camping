@@ -9,7 +9,7 @@ class RegisterForm(UserCreationForm):
     email = forms.EmailField(max_length=64, help_text="Enter a valid email address")
     adults = forms.IntegerField(help_text="Indicate the number of adults")
     kids = forms.IntegerField(help_text="Indicate the number of children")
-    pets = forms.BooleanField()
+    pets = forms.BooleanField(required=False)
 
     class Meta(UserCreationForm.Meta):
         model = User
