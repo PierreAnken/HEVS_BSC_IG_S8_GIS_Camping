@@ -34,9 +34,9 @@ class CampDistances:
     @staticmethod
     def get_shapes_into_other_shapes(container_shapes,  other_shapes):
 
-        shapes_within = []
+        container_with_other_in = []
         for container_shape in container_shapes:
             for other_shape in other_shapes:
                 if other_shape.geom.within(container_shape.geom):
-                    shapes_within.append(other_shape)
-        return shapes_within
+                    container_with_other_in.append(container_shape)
+        return container_with_other_in

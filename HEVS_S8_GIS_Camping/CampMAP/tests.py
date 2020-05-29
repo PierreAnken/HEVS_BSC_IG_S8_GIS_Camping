@@ -26,6 +26,5 @@ class TestCampMap(TestCase):
     def testPlaceWithTree(self):
         trees = Tree.objects.all()
         places = Place.objects.all()
-
         places_with_trees = CampDistances.CampDistances.get_shapes_into_other_shapes(places,  trees)
-        self.assertEqual(places_with_trees[2].gid, 4)
+        self.assertEqual(len(places_with_trees), 93)
