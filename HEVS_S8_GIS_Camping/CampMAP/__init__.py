@@ -1,1 +1,1 @@
-from . import Classes
+from . import classes
