@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse
@@ -16,9 +18,14 @@ def signup_user(request):
         if form.is_valid():
             # create user
             user = form.save()
+
             # create camper
             adults = form.cleaned_data.get('adults')
+            if not adults:
+                adults = 0
             kids = form.cleaned_data.get('kids')
+            if not kids:
+                kids = 0
             pets = form.cleaned_data.get('pets')
             camper = Camper(adults=adults, kids=kids, pets=pets, user_id=user.id)
             camper.save()
