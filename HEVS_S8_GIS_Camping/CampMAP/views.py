@@ -30,6 +30,15 @@ def signup_user(request):
     return render(request, 'signup.html', {'form': form})
 
 
+def reserve_slot(request, id_camper, id_place):
+    print('reserve!')
+    user = User.objects.get(id = id_camper)
+    place = Place.objects.get(gid = id_place)
+    reservation = Reservation(camper = user, place = place, status = 1)
+    reservation.save()
+    return redirect('homepage')
+
+
 def login_user(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -47,8 +56,7 @@ def logout_user(request):
         logout(request)
         return redirect('login')
 
-def reserve_slot(request, user_id, place_id):
-    return 'hey'
+
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
@@ -102,3 +110,5 @@ def treesfilterjson(request):
     places_near_trees = CampDistances.get_shapes_in_range_from(places, trees, 1, 15)
     ser = serialize('geojson', places_near_trees, geometry_field='geom')
     return HttpResponse(ser)
+
+# change checkbox to slider

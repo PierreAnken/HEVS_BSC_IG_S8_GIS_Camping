@@ -71,3 +71,4 @@ class Reservation(models.Model):
     camper = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     place = models.OneToOneField(Place, on_delete=models.DO_NOTHING)
     status = models.PositiveIntegerField()
+

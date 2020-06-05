@@ -110,11 +110,14 @@ function initialize() {
 
     function displayPopup(coordinates, slotId) {
         //change to [0] [1] if popup shows up at wrong continent
+        var userId = document.getElementById('user-id').dataset.userId;
+        console.log(userId)
         var latlng = {"lat": coordinates[1], "lng": coordinates[0]}
         var popup = L.popup();
-
+        var url = "/reserve/" + userId + "/" + slotId;
+        console.log(url)
         popup.setLatLng(latlng)
-            .setContent(`<button class="btn btn-success" onclick="window.location.href='/reserve';">Reserve slot ${slotId}</button>`)
+            .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${userId}/${slotId}'" >Reserve slot ${slotId}</button>`)
             .openOn(map);
     }
 
@@ -133,9 +136,10 @@ function initialize() {
 }
 
 //To do : finish reserve feature
-function reserve(slot) {
+function reserve(slotId) {
+    console.log('oi')
     var userId = document.getElementById('user-id');
-    alert(`Todo: Reserving slot ${slot} for ${userId.dataset.userName}(${userId.dataset.userId})`);
+    alert(`Todo: Reserving slot ${slotId} for ${userId.dataset.userName}(${userId.dataset.userId})`);
 }
 
 function filterPool() {
