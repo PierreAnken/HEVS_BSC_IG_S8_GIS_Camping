@@ -141,8 +141,9 @@ function reserve(slot) {
 function filterPool(poolMaxRange) {
     let poolsfilter = '/poolsfilter.json/'+poolMaxRange+'/';
     console.log(poolsfilter)
+    let pools_filter_places
     $.getJSON(poolsfilter, function (data) {
-        let pools_filter_places = L.geoJson(data,
+        pools_filter_places = L.geoJson(data,
             {
                 onEachFeature: onEachPoolFilterFeature,
                 style: stylePool
@@ -226,7 +227,7 @@ async function submitForm() {
 
 // **** Universal highlight ****
 function highlight(e) {
-    //console.log(e.target);
+    console.log(e.target);
     let layer = e.target;
     if (e.target.feature.geometry.type === "Point") return;
     layer.setStyle({
