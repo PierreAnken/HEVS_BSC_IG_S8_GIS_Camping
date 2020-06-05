@@ -1,5 +1,3 @@
-import datetime
-
 from django.shortcuts import render, redirect
 from django.core.serializers import serialize
 from django.http import HttpResponse
@@ -18,7 +16,6 @@ def signup_user(request):
         if form.is_valid():
             # create user
             user = form.save()
-
             # create camper
             adults = form.cleaned_data.get('adults')
             if not adults:
@@ -62,8 +59,8 @@ def reserve_slot(request, user_id, place_id):
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
-    context = {}
-    return render(request, 'homePage.html', context)
+    reservations = Reservation.objects.all()
+    return render(request, 'homePage.html', {'reservations': reservations})
 
 
 # **** Json views below ****
