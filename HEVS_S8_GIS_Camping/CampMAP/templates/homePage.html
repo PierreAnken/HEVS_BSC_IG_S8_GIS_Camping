@@ -82,10 +82,10 @@
                             <label for="filter">Filter by</label>
                             <div class="form-check">
                                  <label class="form-check-label" for="pool-max-range">
-                                    Pool max. distance (30-300m)
+                                    Pool max. distance (<span id="pool-max-range-value">30m</span>)
                                 </label>
                                 <input type="range" min="30" max="300" value="30" class="slider" id="pool-max-range" onchange="displayPoolRange(this.value);">
-                                <span id="pool-max-range-value">30m</span>
+
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="trees-filter" id="trees-filter"

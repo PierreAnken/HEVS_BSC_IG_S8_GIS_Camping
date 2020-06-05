@@ -1,28 +1,27 @@
 // **** Define the overlays ****
 //to do : reformat map.js
-var map;
-var placeslayer = L.layerGroup();
-var buildingslayer = L.layerGroup();
-var poolslayer = L.layerGroup();
-var treeslayer = L.layerGroup();
+let map;
+let placeslayer = L.layerGroup();
+let buildingslayer = L.layerGroup();
+let poolslayer = L.layerGroup();
+let treeslayer = L.layerGroup();
 
-var poolfilterlayer = L.layerGroup();
-var treesfilterlayer = L.layerGroup();
-var overlays = {
+let poolfilterlayer = L.layerGroup();
+let treesfilterlayer = L.layerGroup();
+let overlays = {
     "Places": placeslayer,
     "Buildings": buildingslayer,
     "Pools": poolslayer,
     "Trees": treeslayer
 };
 var filterCheck = {"treeFilterOn": false}
+
 // Styles for places marked as near pool/trees
-var stylePool = () => {
-    return {fillColor: '#00b88a', fillOpacity: 0.7, stroke: false};
-    //cyan fill
+let stylePool = () => {
+    return {fillColor: '#4caec4', fillOpacity: 0.7, stroke: false};
 }
-var styleTrees = () => {
-    return {color: '#db8000', weight: 4, fill: true};
-    //orange outline
+let styleTrees = () => {
+    return {color: '#57a54a', weight: 4, fill: true};
 }
 
 function initialize() {
@@ -175,8 +174,8 @@ function removePoolFilter() {
 }
 
 function filterTrees() {
-    let treesfilter = '/treesfilter.json/';
-    $.getJSON(treesfilter, function (data) {
+    let treefilter = '/treesfilter.json/';
+    $.getJSON(treefilter, function (data) {
         trees_filter_places = L.geoJson(data,
             {
                 onEachFeature: onEachTreeFilterFeature,
