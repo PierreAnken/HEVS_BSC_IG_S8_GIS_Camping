@@ -54,15 +54,31 @@ def logout_user(request):
         return redirect('login')
 
 
-def reserve_slot(request, user_id, place_id):
-    return 'hey'
+def reserve_slot(request, id_camper, id_place):
+    print('reserve!')
+    camper = Camper.objects.get(user_id = id_camper)
+    place = Place.objects.get(gid = id_place)
+    reservation = Reservation(camper = camper, place = place, status = 1)
+    reservation.save()
+    return redirect('homepage')
 
 
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
-    reservations = Reservation.objects.all()
+    # retrieve only asked reservations
+    reservations = Reservation.objects.filter(status=1)
     return render(request, 'homePage.html', {'reservations': reservations})
+
+
+def delete_reservation(request):
+    # delete // id = request.get('decline')
+    return redirect('homepage')
+
+
+def update_reservation(request):
+    # change status // id = request.get('accept')
+    return redirect('homepage')
 
 
 # **** Json views below ****
