@@ -4,8 +4,6 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from geojson import Point
-
 from .classes.RegisterForm import RegisterForm
 from .classes.CampDistances import CampDistances
 from .models import *
