@@ -35,15 +35,18 @@ def signup_user(request):
 
 
 def login_user(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('homepage')
+    if request.user.is_authenticated:
+        return redirect('homepage')
     else:
-        form = AuthenticationForm()
-    return render(request, 'index.html', {'form': form})
+        if request.method == 'POST':
+            form = AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('homepage')
+        else:
+            form = AuthenticationForm()
+        return render(request, 'index.html', {'form': form})
 
 
 def logout_user(request):
@@ -111,21 +114,21 @@ def poolsfilterjson(request, pool_max_range):
     pools = Pool.objects.all()
     places = Place.objects.all()
     places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 0, pool_max_range)
-
+    # create the json
     ser = serialize('geojson', places_near_pools, geometry_field='geom')
     return HttpResponse(ser)
 
 
 def neighbourfilterjson(request, max_neighbour):
-
+    # get all objects
     places = Place.objects.all()
-
+    # filter the objects
     places_within_max_neighbour = []
     for place in places:
         intersect_shapes = CampDistances.get_shapes_intersects_other_shape(place, places)
         if len(intersect_shapes) <= max_neighbour:
             places_within_max_neighbour.append(place)
-
+    # create the json
     ser = serialize('geojson', places_within_max_neighbour, geometry_field='geom')
     return HttpResponse(ser)
 
