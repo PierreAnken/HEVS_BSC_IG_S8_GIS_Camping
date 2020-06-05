@@ -39,7 +39,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <div class="container" style="margin-top: 45px; width: 80%;">
+            <div class="container" style="margin-top: 45px; width: 80%; font-family: 'Times New Roman', serif;">
                 <!-- For each reservation, create a card -->
                 {% for reservation in reservations %}
                 <div class="card" style="margin-bottom: 15px;">
@@ -75,9 +75,19 @@
         <div class="col-md-4">
             <div class="container" style="margin-top: 45px; width: 80%">
                 <table style="width: 100%">
-                    <tr><th>Slots already booked</th></tr>
+                    <tr><th colspan="2">Slots already booked</th></tr>
                     {% for reservation in booked %}
-                        <tr><td>Slot number {{ reservation.place.gid }}</td></tr>
+                        <tr>
+                            <td>Slot number {{ reservation.place.gid }}</td>
+                            <td>
+                                <form action="{% url 'decline' %}" method="post" style="display: inline">
+                                    {% csrf_token %}
+                                    <button type="submit" name="decline" value="{{ reservation.id }}" class="btn btn-link empty" style="float: right;">
+                                        <i class="fas fa-times-circle"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                     {% endfor %}
                 </table>
             </div>

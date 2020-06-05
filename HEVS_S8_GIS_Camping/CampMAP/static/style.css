@@ -150,9 +150,17 @@ body {
     color: white;
 }
 
+.empty {
+    color: rgba(255, 109, 101, 0.6);
+}
+
+.empty:hover {
+    color: #ff3e2a;
+}
+
 table {
-  font-family: 'Times New Roman', serif;
-  border-collapse: collapse;
+    font-family: 'Times New Roman', serif;
+    border: 1px solid #440f0d;
 }
 
 th {
@@ -161,12 +169,15 @@ th {
 }
 
 td, th {
-  border: 1px solid #440f0d;
-  padding: 8px;
+    border-top: 1px solid #440f0d;
+    border-bottom: 1px solid #440f0d;
+    border-left: none;
+    border-right: none;
+    padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #ffceca;
+    background-color: #ffceca;
 }
 
 .card {
