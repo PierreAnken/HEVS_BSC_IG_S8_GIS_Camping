@@ -5,9 +5,10 @@ let placeslayer = L.layerGroup();
 let buildingslayer = L.layerGroup();
 let poolslayer = L.layerGroup();
 let treeslayer = L.layerGroup();
-
 let poolfilterlayer = L.layerGroup();
 let treesfilterlayer = L.layerGroup();
+let neighbourfilterlayer = L.layerGroup();
+
 let overlays = {
     "Places": placeslayer,
     "Buildings": buildingslayer,
@@ -21,7 +22,11 @@ let stylePool = () => {
     return {fillColor: '#4caec4', fillOpacity: 0.7, stroke: false};
 }
 let styleTrees = () => {
-    return {color: '#57a54a', weight: 4, fill: true};
+    return {color: '#57a54a', weight: 4, fill: false};
+}
+
+let styleNeighbour= () => {
+    return {fillColor: '#000000'};
 }
 
 function initialize() {
@@ -139,7 +144,6 @@ function reserve(slot) {
 
 function filterPool(poolMaxRange) {
     let poolsfilter = '/poolsfilter.json/'+poolMaxRange+'/';
-    console.log(poolsfilter)
     let pools_filter_places
     $.getJSON(poolsfilter, function (data) {
         pools_filter_places = L.geoJson(data,
@@ -171,6 +175,40 @@ function filterPool(poolMaxRange) {
 function removePoolFilter() {
     poolfilterlayer.removeFrom(map);
     poolfilterlayer = L.layerGroup();
+}
+
+function filterNeighbours(maxNeighbour) {
+    let neighbourfilter = '/neighbourfilter.json/'+maxNeighbour+'/';
+    $.getJSON(neighbourfilter, function (data) {
+        neighbour_filter_places = L.geoJson(data,
+            {
+                onEachFeature: onEachNeighbourFilterFeature,
+                style: styleNeighbour()
+            });
+        neighbour_filter_places.addTo(neighbourfilterlayer);
+        neighbourfilterlayer.addTo(map);
+    });
+
+    function onEachNeighbourFilterFeature(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.pk);
+        }
+        layer.on({
+            mouseover: highlight,
+            mouseout: resetNeighbour,
+            click: zoom
+        });
+    }
+
+    function resetNeighbour(e) {
+        neighbour_filter_places.resetStyle(e.target);
+        neighbour_filter_places.setStyle(styleNeighbour());
+    }
+}
+
+function removeNeighbourFilter() {
+    neighbourfilterlayer.removeFrom(map);
+    neighbourfilterlayer = L.layerGroup();
 }
 
 function filterTrees() {
@@ -213,9 +251,17 @@ function removeTreeFilter() {
 async function submitForm() {
     let form = document.getElementById("filter-form");
     let poolMaxRange = form.elements["pool-max-range"].value;
+    let maxNeighbour = form.elements["max-neighbour"].value;
     let treeCheckbox = form.elements["trees-filter"].checked;
+
     removePoolFilter()
+    removeNeighbourFilter()
+
     filterPool(poolMaxRange);
+    if (maxNeighbour>0){
+        filterNeighbours(maxNeighbour);
+    }
+
     if (treeCheckbox === true && filterCheck.treeFilterOn === false) {
         filterTrees()
     } else if (treeCheckbox === false) {

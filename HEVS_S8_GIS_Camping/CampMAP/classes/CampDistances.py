@@ -3,8 +3,6 @@ class CampDistances:
 
     @staticmethod
     def get_min_distance_from_objects(shapes, other_shape):
-        if shapes.count() < 1:
-            raise ValueError("gis_multi_polygons is empty")
 
         if shapes[0].geom.geom_type not in ['MultiPolygon', 'Point']:
             raise ValueError("gis_multi_polygons object type must be MultiPolygon or Point")
@@ -40,3 +38,12 @@ class CampDistances:
                 if other_shape.geom.within(container_shape.geom):
                     container_with_other_in.append(container_shape)
         return container_with_other_in
+
+    @staticmethod
+    def get_shapes_intersects_other_shape(shape, other_shapes):
+        shapes_touching = []
+        for other_shape in other_shapes:
+            if other_shape.gid != shape.gid:
+                if other_shape.geom.envelope.intersects(shape.geom.envelope):
+                    shapes_touching.append(other_shape)
+        return shapes_touching

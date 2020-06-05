@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from geojson import Point
+
 from .classes.RegisterForm import RegisterForm
 from .classes.CampDistances import CampDistances
 from .models import *
@@ -88,12 +90,26 @@ def poolsjson(request):
     return HttpResponse(ser)
 
 
-def poolsfilterjson(request, poolMaxRange):
+def poolsfilterjson(request, pool_max_range):
     pools = Pool.objects.all()
     places = Place.objects.all()
-    places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 0, poolMaxRange)
+    places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 0, pool_max_range)
 
     ser = serialize('geojson', places_near_pools, geometry_field='geom')
+    return HttpResponse(ser)
+
+
+def neighbourfilterjson(request, max_neighbour):
+
+    places = Place.objects.all()
+
+    places_within_max_neighbour = []
+    for place in places:
+        intersect_shapes = CampDistances.get_shapes_intersects_other_shape(place, places)
+        if len(intersect_shapes) <= max_neighbour:
+            places_within_max_neighbour.append(place)
+
+    ser = serialize('geojson', places_within_max_neighbour, geometry_field='geom')
     return HttpResponse(ser)
 
 
