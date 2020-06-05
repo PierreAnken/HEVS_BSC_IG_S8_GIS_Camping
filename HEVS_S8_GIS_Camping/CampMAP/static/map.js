@@ -14,7 +14,7 @@ var overlays = {
     "Pools": poolslayer,
     "Trees": treeslayer
 };
-var filterCheck = {"poolFilterOn": false, "treeFilterOn": false}
+var filterCheck = {"treeFilterOn": false}
 // Styles for places marked as near pool/trees
 var stylePool = () => {
     return {fillColor: '#00b88a', fillOpacity: 0.7, stroke: false};
@@ -138,17 +138,17 @@ function reserve(slot) {
     alert(`Todo: Reserving slot ${slot} for ${userId.dataset.userName}(${userId.dataset.userId})`);
 }
 
-function filterPool() {
-    let poolsfilter = '/poolsfilter.json/';
+function filterPool(poolMaxRange) {
+    let poolsfilter = '/poolsfilter.json/'+poolMaxRange+'/';
+    console.log(poolsfilter)
     $.getJSON(poolsfilter, function (data) {
-        pools_filter_places = L.geoJson(data,
+        let pools_filter_places = L.geoJson(data,
             {
                 onEachFeature: onEachPoolFilterFeature,
                 style: stylePool
             });
         pools_filter_places.addTo(poolfilterlayer);
         poolfilterlayer.addTo(map)
-        filterCheck.poolFilterOn = true;
     });
 
     function onEachPoolFilterFeature(feature, layer) {
@@ -170,7 +170,6 @@ function filterPool() {
 
 function removePoolFilter() {
     poolfilterlayer.removeFrom(map);
-    filterCheck.poolFilterOn = false;
     poolfilterlayer = L.layerGroup();
 }
 
@@ -209,18 +208,14 @@ function removeTreeFilter() {
     treesfilterlayer.removeFrom(map);
     filterCheck.treeFilterOn = false;
     treesfilterlayer = L.layerGroup();
-
 }
 
 async function submitForm() {
-    var form = document.getElementById("filter-form");
-    var poolCheckbox = form.elements["pool-filter"].checked;
-    var treeCheckbox = form.elements["trees-filter"].checked;
-    if (poolCheckbox === true && filterCheck.poolFilterOn === false) {
-        filterPool();
-    } else if (poolCheckbox === false) {
-        removePoolFilter();
-    }
+    let form = document.getElementById("filter-form");
+    let poolMaxRange = form.elements["pool-max-range"].value;
+    let treeCheckbox = form.elements["trees-filter"].checked;
+    removePoolFilter()
+    filterPool(poolMaxRange);
     if (treeCheckbox === true && filterCheck.treeFilterOn === false) {
         filterTrees()
     } else if (treeCheckbox === false) {

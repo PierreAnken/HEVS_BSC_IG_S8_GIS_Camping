@@ -91,10 +91,10 @@ def poolsjson(request):
     return HttpResponse(ser)
 
 
-def poolsfilterjson(request):
+def poolsfilterjson(request, poolMaxRange):
     pools = Pool.objects.all()
     places = Place.objects.all()
-    places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 5, 80)
+    places_near_pools = CampDistances.get_shapes_in_range_from(places, pools, 0, poolMaxRange)
 
     ser = serialize('geojson', places_near_pools, geometry_field='geom')
     return HttpResponse(ser)
@@ -109,6 +109,6 @@ def treesjson(request):
 def treesfilterjson(request):
     trees = Tree.objects.all()
     places = Place.objects.all()
-    places_near_trees = CampDistances.get_shapes_in_range_from(places, trees, 1, 15)
-    ser = serialize('geojson', places_near_trees, geometry_field='geom')
+    places_with_trees = CampDistances.get_shapes_into_other_shapes(places, trees)
+    ser = serialize('geojson', places_with_trees, geometry_field='geom')
     return HttpResponse(ser)

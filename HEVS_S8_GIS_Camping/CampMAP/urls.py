@@ -16,5 +16,5 @@ urlpatterns = [
     path('pools.json/', views.poolsjson, name='poolsjson'),
     path('trees.json/', views.treesjson, name='treesjson'),
     path('treesfilter.json/', views.treesfilterjson, name='treesfilterjson'),
-    path('poolsfilter.json/', views.poolsfilterjson, name='poolsfilterjson'),
+    path('poolsfilter.json/<int:poolMaxRange>/', views.poolsfilterjson, name='poolsfilterjson'),
 ]
