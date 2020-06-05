@@ -64,18 +64,21 @@ def reserve_slot(request, id_camper, id_place):
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
-    # retrieve only asked reservations
+    # retrieve reservations
     reservations = Reservation.objects.filter(status=1)
-    return render(request, 'homePage.html', {'reservations': reservations})
+    booked = Reservation.objects.filter(status=2)
+    return render(request, 'homePage.html', {'reservations': reservations, 'booked': booked})
 
 
 def delete_reservation(request):
-    # delete // id = request.get('decline')
+    id = request.POST.get('decline')
+    Reservation.objects.filter(id=id).delete()
     return redirect('homepage')
 
 
 def update_reservation(request):
-    # change status // id = request.get('accept')
+    id = request.POST.get('accept')
+    Reservation.objects.filter(id=id).update(status=2)
     return redirect('homepage')
 
 
