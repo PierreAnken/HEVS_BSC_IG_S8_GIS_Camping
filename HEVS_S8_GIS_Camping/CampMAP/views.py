@@ -59,8 +59,19 @@ def reserve_slot(request, user_id, place_id):
 # **** App views below ****
 @login_required(login_url='/')
 def homepage(request):
-    reservations = Reservation.objects.all()
+    # retrieve only asked reservations
+    reservations = Reservation.objects.filter(status=1)
     return render(request, 'homePage.html', {'reservations': reservations})
+
+
+def delete_reservation(request):
+    # delete // id = request.get('decline')
+    return redirect('homepage')
+
+
+def update_reservation(request):
+    # change status // id = request.get('accept')
+    return redirect('homepage')
 
 
 # **** Json views below ****

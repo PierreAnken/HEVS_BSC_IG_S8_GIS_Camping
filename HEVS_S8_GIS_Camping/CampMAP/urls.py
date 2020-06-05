@@ -9,6 +9,8 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     # **** App urls ****
     path('homepage/', views.homepage, name='homepage'),
+    path('accept/', views.update_reservation, name='accept'),
+    path('decline/', views.delete_reservation, name='decline'),
     # **** Json files ****
     path('places.json/', views.placesjson, name='placesjson'),
     path('buildings.json/', views.buildingsjson, name='buildingsjson'),
