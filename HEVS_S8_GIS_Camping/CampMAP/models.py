@@ -68,6 +68,6 @@ class Tree(models.Model):
 
 # **** Relational table ****
 class Reservation(models.Model):
-    camper = models.OneToOneField(Camper, on_delete=models.DO_NOTHING)
-    place = models.OneToOneField(Place, on_delete=models.DO_NOTHING)
+    camper = models.ForeignKey('Camper', related_name='camper_id', on_delete=models.DO_NOTHING)
+    place = models.ForeignKey('Place', related_name='place_id', on_delete=models.DO_NOTHING)
     status = models.PositiveIntegerField()
