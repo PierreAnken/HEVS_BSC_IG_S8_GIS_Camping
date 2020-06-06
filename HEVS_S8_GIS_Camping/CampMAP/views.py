@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from .classes.RegisterForm import RegisterForm
 from .classes.CampDistances import CampDistances
 from .models import *
@@ -60,12 +59,12 @@ def logout_user(request):
 
 
 def reserve_slot(request, id_place):
-    if(request.user.is_superuser):
+    if request.user.is_superuser:
         return HttpResponse('Admins can only approved reservations, not reserve.')
     camper = Camper.objects.get(user_id = request.user.id)
     place = Place.objects.get(gid = id_place)
     existingReservation = Reservation.objects.filter(camper = camper, place = place)
-    if(len(existingReservation)>0):
+    if len(existingReservation)>0:
         return HttpResponse('You already booked this')
     else:
         reservation = Reservation(camper = camper, place = place, status = 1)
@@ -159,6 +158,7 @@ def treesfilterjson(request):
     ser = serialize('geojson', places_with_trees, geometry_field='geom')
     return HttpResponse(ser)
 
+
 def reservedplacesjson(request):
     reservations = Reservation.objects.filter(status = 1)
     unavailable_ids = []
@@ -167,6 +167,7 @@ def reservedplacesjson(request):
     places = Place.objects.filter(gid__in=unavailable_ids)
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
+
 
 def bookedplacesjson(request):
     bookings = Reservation.objects.filter(status = 2)
