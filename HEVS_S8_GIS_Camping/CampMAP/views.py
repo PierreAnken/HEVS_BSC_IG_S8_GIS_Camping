@@ -12,27 +12,30 @@ from .models import *
 
 # **** Manage users views below ****
 def signup_user(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            # create user
-            user = form.save()
-            # create camper
-            adults = form.cleaned_data.get('adults')
-            if not adults:
-                adults = 0
-            kids = form.cleaned_data.get('kids')
-            if not kids:
-                kids = 0
-            pets = form.cleaned_data.get('pets')
-            camper = Camper(adults=adults, kids=kids, pets=pets, user_id=user.id)
-            camper.save()
-            # log the user in
-            login(request, user)
-            return redirect('homepage')
+    if request.user.is_authenticated:
+        return redirect('homepage')
     else:
-        form = RegisterForm()
-    return render(request, 'signup.html', {'form': form})
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                # create user
+                user = form.save()
+                # create camper
+                adults = form.cleaned_data.get('adults')
+                if not adults:
+                    adults = 0
+                kids = form.cleaned_data.get('kids')
+                if not kids:
+                    kids = 0
+                pets = form.cleaned_data.get('pets')
+                camper = Camper(adults=adults, kids=kids, pets=pets, user_id=user.id)
+                camper.save()
+                # log the user in
+                login(request, user)
+                return redirect('homepage')
+        else:
+            form = RegisterForm()
+        return render(request, 'signup.html', {'form': form})
 
 
 def login_user(request):
