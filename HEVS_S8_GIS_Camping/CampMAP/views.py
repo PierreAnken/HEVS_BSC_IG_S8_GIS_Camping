@@ -201,9 +201,20 @@ def childrenfilterjson(request):
     for booking in bookings:
         if booking.camper.kids > 0:
             places_with_kids.append(booking.place)
-
-    places_near_kids = CampDistances.get_shapes_in_range_from(places, places_with_kids, 0, 10)
-    print('hwy')
+    places_near_kids = []
+    for place in places_with_kids:
+        intersect_shapes = CampDistances.get_shapes_intersects_other_shape(place, places)
+        places_near_kids.extend(intersect_shapes)
     ser = serialize('geojson', places_near_kids, geometry_field='geom')
+    return HttpResponse(ser)
 
+def userbookingjson(request):
+    camper = Camper.objects.get(user_id=request.user.id)
+    print(camper)
+    bookings = Reservation.objects.filter(status=2, camper = camper) | Reservation.objects.filter(status=1, camper = camper)
+    user_places = []
+    for booking in bookings:
+        place = Place.objects.get(gid = booking.place_id)
+        user_places.append(place)
+    ser = serialize('geojson', user_places, geometry_field='geom')
     return HttpResponse(ser)

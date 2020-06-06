@@ -25,4 +25,6 @@ urlpatterns = [
     path('neighbourfilter.json/<int:max_neighbour>/', views.neighbourfilterjson, name='neighbourfilterjson'),
     path('petfilter.json/', views.petfilterjson, name='petfilterjson'),
     path('childrenfilter.json/', views.childrenfilterjson, name='childrenfilterjson'),
+    path('userbookings.json/', views.userbookingjson, name='userbookingjson'),
+
 ]

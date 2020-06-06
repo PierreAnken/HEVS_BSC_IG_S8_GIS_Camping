@@ -8,7 +8,8 @@ let treeslayer = L.layerGroup();
 let poolfilterlayer = L.layerGroup();
 let treesfilterlayer = L.layerGroup();
 let neighbourfilterlayer = L.layerGroup();
-
+let petsfilterlayer = L.layerGroup();
+let childrenfilterlayer = L.layerGroup();
 
 let overlays = {
     "Places": placeslayer,
@@ -16,7 +17,7 @@ let overlays = {
     "Pools": poolslayer,
     "Trees": treeslayer
 };
-var filterCheck = {"treeFilterOn": false}
+var filterCheck = {"treeFilterOn": false, "petFilterOn": false, "childrenFilterOn": false}
 
 // Styles for places marked as near pool/trees
 let styleFreePlaces = () => {
@@ -27,7 +28,7 @@ let stylePool = () => {
     return {fillColor: '#4caec4', fillOpacity: 0.7, stroke: false};
 }
 let styleReserved = () => {
-    return {fillColor: '#fcd32f', fillOpacity: 0.8, stroke: false};
+    return {fillColor: '#fcd32f', fillOpacity: 0.8, stroke: true};
 }
 let styleBooked = () => {
     return {fillColor: '#fc3d2f', fillOpacity: 0.8, stroke: true};
@@ -35,20 +36,36 @@ let styleBooked = () => {
 let styleTrees = () => {
     return {color: '#57a54a', weight: 4, fill: false};
 }
-
 let styleNeighbour = () => {
     return {fillColor: '#000000'};
 }
-  var greenIcon = L.icon({
+let stylePet = () => {
+    return {fillColor: '#570afc', fillOpacity: 0.6, stroke: false};
+}
+let styleChildren = () => {
+    return {color: '#fc00bd', weight: 4, fill: false};
+}
+let styleUserBooking = () => {
+    return {fill:false, stroke: false};
+}
+var greenIcon = L.icon({
     iconUrl: 'https://image.flaticon.com/icons/svg/616/616541.svg',
 
-
-    iconSize:     [45, 110], // size of the icon
-    shadowSize:   [30, 50], // size of the shadow
-    iconAnchor:   [23, 75], // point of the icon which will correspond to marker's location
+    iconSize: [45, 110], // size of the icon
+    shadowSize: [30, 50], // size of the shadow
+    iconAnchor: [23, 75], // point of the icon which will correspond to marker's location
     shadowAnchor: [-6, 70],  // the same for the shadow
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-    });
+    popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+var humanIcon = L.icon({
+    iconUrl: 'https://image.flaticon.com/icons/svg/2921/2921147.svg',
+
+    iconSize: [23, 55], // size of the icon
+    shadowSize: [30, 50], // size of the shadow
+    iconAnchor: [12, 35], // point of the icon which will correspond to marker's location
+    shadowAnchor: [-6, 70],  // the same for the shadow
+    popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+});
 
 function initialize() {
 
@@ -81,6 +98,11 @@ function initialize() {
         booked_places = L.geoJson(data, {onEachFeature: onEachBookedPlace, style: styleBooked});
         booked_places.addTo(placeslayer);
     });
+    var userbookingsfile = '/userbookings.json/';
+    $.getJSON(userbookingsfile, function (data) {
+        user_bookings_places = L.geoJson(data, {onEachFeature: onEachUserBookings, style: styleUserBooking});
+        user_bookings_places.addTo(placeslayer);
+    });
 
     var buildingsfile = '/buildings.json/';
     $.getJSON(buildingsfile, function (data) {
@@ -96,13 +118,14 @@ function initialize() {
 
     var treesfile = '/trees.json/';
     $.getJSON(treesfile, function (data) {
-        trees = L.geoJson(data, {onEachFeature: onEachFeature, pointToLayer:pointToLayer});
+        trees = L.geoJson(data, {onEachFeature: onEachFeature, pointToLayer: pointToLayer});
         trees.addTo(treeslayer);
     });
 
-    function pointToLayer (feature, latlng) {
-            L.marker(latlng, {icon: greenIcon}).addTo(map);
+    function pointToLayer(feature, latlng) {
+        L.marker(latlng, {icon: greenIcon}).addTo(map);
     }
+
     // **** Decorate feature ****
     function onEachFeature(feature, layer) {
         // if (feature.properties) {
@@ -115,6 +138,10 @@ function initialize() {
         });
     }
 
+    function onEachUserBookings(feature, layer) {
+        L.marker((layer.getBounds().getCenter()), {icon: humanIcon}).addTo(map);
+    }
+
     function onEachBookedPlace(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(feature.properties.pk);
@@ -125,16 +152,13 @@ function initialize() {
             click: zoom
         });
         layer.on("click", function () {
-            var latlng = {
-                "lat": feature.geometry.coordinates[0][0][0][1],
-                "lng": feature.geometry.coordinates[0][0][0][0]
-            }
             var popup = L.popup();
-            popup.setLatLng(latlng)
+            popup.setLatLng(layer.getBounds().getCenter())
                 .setContent(`<button class="btn btn-danger">Slot ${feature.properties.pk} booked</button>`)
                 .openOn(map);
         });
     }
+
     function resetBooked(e) {
         booked_places.resetStyle(e.target);
         booked_places.setStyle(styleBooked);
@@ -151,7 +175,10 @@ function initialize() {
         });
         //display popup to book slot
         layer.on("click", function () {
-            displayPopup(feature.geometry.coordinates[0][0][0], feature.properties.pk);
+            var popup = L.popup();
+            popup.setLatLng(layer.getBounds().getCenter())
+                .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${feature.properties.pk}'" >Reserve slot ${feature.properties.pk}</button>`)
+                .openOn(map);
         });
     }
 
@@ -163,22 +190,11 @@ function initialize() {
     }
 
 
-
     // **** Add popup with the location ****
     function displayLocation(e) {
         var popup = L.popup();
         popup.setLatLng(e.latlng)
             .setContent("The current location is: " + e.latlng.toString())
-            .openOn(map);
-    }
-
-    function displayPopup(coordinates, slotId) {
-        //change to [0] [1] if popup shows up at wrong continent
-        var userId = document.getElementById('user-id').dataset.userId;
-        var latlng = {"lat": coordinates[1], "lng": coordinates[0]}
-        var popup = L.popup();
-        popup.setLatLng(latlng)
-            .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${slotId}'" >Reserve slot ${slotId}</button>`)
             .openOn(map);
     }
 
@@ -196,11 +212,6 @@ function initialize() {
 
 }
 
-//To do : finish reserve feature
-function reserve(slot) {
-    var userId = document.getElementById('user-id');
-    alert(`Todo: Reserving slot ${slot} for ${userId.dataset.userName}(${userId.dataset.userId})`);
-}
 
 function filterPool(poolMaxRange) {
     let poolsfilter = '/poolsfilter.json/' + poolMaxRange + '/';
@@ -308,6 +319,81 @@ function removeTreeFilter() {
     treesfilterlayer = L.layerGroup();
 }
 
+function filterPets() {
+    let petfilter = '/petfilter.json/';
+    $.getJSON(petfilter, function (data) {
+        pets_filter_places = L.geoJson(data,
+            {
+                onEachFeature: onEachPetFilterFeature,
+                style: stylePet
+            });
+        pets_filter_places.addTo(petsfilterlayer);
+        petsfilterlayer.addTo(map);
+        filterCheck.petFilterOn = true;
+    });
+
+
+    function onEachPetFilterFeature(feature, layer) {
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
+        layer.on({
+            mouseover: highlight,
+            mouseout: resetPet,
+            click: zoom
+        });
+    }
+
+    function resetPet(e) {
+        pets_filter_places.resetStyle(e.target);
+        pets_filter_places.setStyle(stylePet);
+    }
+}
+
+function removePetFilter() {
+    petsfilterlayer.removeFrom(map);
+    filterCheck.petFilterOn = false;
+    petsfilterlayer = L.layerGroup();
+}
+
+function filterChildren() {
+    let childrenfilter = '/childrenfilter.json/';
+    $.getJSON(childrenfilter, function (data) {
+        children_filter_places = L.geoJson(data,
+            {
+                onEachFeature: onEachChildrenFilterFeature,
+                style: styleChildren
+            });
+        children_filter_places.addTo(childrenfilterlayer);
+        childrenfilterlayer.addTo(map);
+        filterCheck.childrenFilterOn = true;
+    });
+
+
+    function onEachChildrenFilterFeature(feature, layer) {
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
+        layer.on({
+            mouseover: highlight,
+            mouseout: resetChildren,
+            click: zoom
+        });
+    }
+
+    function resetChildren(e) {
+        children_filter_places.resetStyle(e.target);
+        children_filter_places.setStyle(styleChildren);
+    }
+}
+
+function removeChildrenFilter() {
+    childrenfilterlayer.removeFrom(map);
+    filterCheck.childrenFilterOn = false;
+    childrenfilterlayer = L.layerGroup();
+}
+
+
 async function submitForm() {
     let form = document.getElementById("filter-form");
     let poolMaxRange = form.elements["pool-max-range"].value;
@@ -329,16 +415,21 @@ async function submitForm() {
     } else if (treeCheckbox === false) {
         removeTreeFilter();
     }
-    if (petCheckbox === true) {
-        alert('pets')
+    if (petCheckbox === true && filterCheck.petFilterOn === false) {
+        filterPets()
     } else if (petCheckbox === false) {
-        alert('pets no')
+        removePetFilter()
     }
-    if (childrenCheckbox === true) {
-        alert('children')
+    if (childrenCheckbox === true && filterCheck.childrenFilterOn === false) {
+        filterChildren()
     } else if (childrenCheckbox === false) {
-        alert('children no')
+        removeChildrenFilter()
     }
+    // if (childrenCheckbox === true) {
+    //     alert('children')
+    // } else if (childrenCheckbox === false) {
+    //     alert('children no')
+    // }
 }
 
 
