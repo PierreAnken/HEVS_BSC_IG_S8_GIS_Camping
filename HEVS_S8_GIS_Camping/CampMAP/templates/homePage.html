@@ -38,11 +38,13 @@
     </nav>
 
     <div class="row">
-        <div class="row-md-4"></div>
         <div class="row-md-8"></div>
         <div class="col-md-8">
             <div class="container" style="margin-top: 45px; width: 80%; font-family: 'Times New Roman', serif;">
              <text id='user-id' style="display: none"  data-user-name="{{ user.username }}" data-user-id="{{ user.id }}"></text>
+                <div class="warning alert-warning">
+                    <h3 style="font-style: italic; margin-bottom: 25px; padding-left: 20px; background-color: #ff6d65; color: black;">Hello {{ user.username }}, below you will find the current pending bookings!</h3>
+                </div>
                 <!-- For each reservation, create a card -->
                 {% for reservation in reservations %}
                 <div class="card" style="margin-bottom: 15px;">
