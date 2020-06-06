@@ -216,9 +216,9 @@ function filterPool(poolMaxRange) {
     });
 
     function onEachPoolFilterFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.pk);
+        }
         layer.on({
             mouseover: highlight,
             mouseout: resetPool,
@@ -313,6 +313,8 @@ async function submitForm() {
     let poolMaxRange = form.elements["pool-max-range"].value;
     let maxNeighbour = form.elements["max-neighbour"].value;
     let treeCheckbox = form.elements["trees-filter"].checked;
+    let petCheckbox = form.elements["pets-filter"].checked;
+    let childrenCheckbox = form.elements["children-filter"].checked;
 
     removePoolFilter()
     removeNeighbourFilter()
@@ -326,6 +328,16 @@ async function submitForm() {
         filterTrees()
     } else if (treeCheckbox === false) {
         removeTreeFilter();
+    }
+    if (petCheckbox === true) {
+        alert('pets')
+    } else if (petCheckbox === false) {
+        alert('pets no')
+    }
+    if (childrenCheckbox === true) {
+        alert('children')
+    } else if (childrenCheckbox === false) {
+        alert('children no')
     }
 }
 

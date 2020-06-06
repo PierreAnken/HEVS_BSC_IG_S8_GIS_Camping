@@ -173,3 +173,33 @@ def bookedplacesjson(request):
     places = Place.objects.filter(gid__in=unavailable_ids)
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
+
+
+def petfilterjson(request):
+    bookings = Reservation.objects.filter(status=2)
+    places = Place.objects.all()
+    places_with_pets = []
+    for booking in bookings:
+        if booking.camper.pets:
+            places_with_pets.append(booking.place)
+    places_near_pets=[]
+    for place in places_with_pets:
+        intersect_shapes = CampDistances.get_shapes_intersects_other_shape(place, places)
+        places_near_pets.extend(intersect_shapes)
+    ser = serialize('geojson', places_near_pets, geometry_field='geom')
+    return HttpResponse(ser)
+
+
+def childrenfilterjson(request):
+    bookings = Reservation.objects.filter(status=2)
+    places = Place.objects.all()
+    places_with_kids = []
+    for booking in bookings:
+        if booking.camper.kids > 0:
+            places_with_kids.append(booking.place)
+
+    places_near_kids = CampDistances.get_shapes_in_range_from(places, places_with_kids, 0, 10)
+    print('hwy')
+    ser = serialize('geojson', places_near_kids, geometry_field='geom')
+
+    return HttpResponse(ser)
