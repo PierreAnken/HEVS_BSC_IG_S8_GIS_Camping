@@ -9,6 +9,7 @@ let poolfilterlayer = L.layerGroup();
 let treesfilterlayer = L.layerGroup();
 let neighbourfilterlayer = L.layerGroup();
 
+
 let overlays = {
     "Places": placeslayer,
     "Buildings": buildingslayer,
@@ -18,16 +19,36 @@ let overlays = {
 var filterCheck = {"treeFilterOn": false}
 
 // Styles for places marked as near pool/trees
+let styleFreePlaces = () => {
+    return {fillColor: 'green', fillOpacity: 0.7, stroke: false};
+}
+
 let stylePool = () => {
     return {fillColor: '#4caec4', fillOpacity: 0.7, stroke: false};
+}
+let styleReserved = () => {
+    return {fillColor: '#fcd32f', fillOpacity: 0.8, stroke: false};
+}
+let styleBooked = () => {
+    return {fillColor: '#fc3d2f', fillOpacity: 0.8, stroke: true};
 }
 let styleTrees = () => {
     return {color: '#57a54a', weight: 4, fill: false};
 }
 
-let styleNeighbour= () => {
+let styleNeighbour = () => {
     return {fillColor: '#000000'};
 }
+  var greenIcon = L.icon({
+    iconUrl: 'https://image.flaticon.com/icons/svg/616/616541.svg',
+
+
+    iconSize:     [45, 110], // size of the icon
+    shadowSize:   [30, 50], // size of the shadow
+    iconAnchor:   [23, 75], // point of the icon which will correspond to marker's location
+    shadowAnchor: [-6, 70],  // the same for the shadow
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+    });
 
 function initialize() {
 
@@ -38,17 +59,27 @@ function initialize() {
     });
 
     var bases = {
-        "Map": OpenStreetMap_Mapnik,
+        "Map": OpenStreetMap_Mapnik
     };
 
 
     // **** Create the leaflet map ****
-    map = L.map('campingmap', {minZoom: 10, maxZoom: 18}).setView([46.211606, 7.3167], 18);
+    map = L.map('campingmap', {minZoom: 10, maxZoom: 19}).setView([46.211606, 7.3167], 18);
 
     var placesfile = '/places.json/';
     $.getJSON(placesfile, function (data) {
         places = L.geoJson(data, {onEachFeature: onEachPlace});
         places.addTo(placeslayer);
+    });
+    var reservedfile = '/reservedplaces.json/';
+    $.getJSON(reservedfile, function (data) {
+        places = L.geoJson(data, {style: styleReserved});
+        places.addTo(placeslayer);
+    });
+    var bookedfile = '/bookedplaces.json/';
+    $.getJSON(bookedfile, function (data) {
+        booked_places = L.geoJson(data, {onEachFeature: onEachBookedPlace, style: styleBooked});
+        booked_places.addTo(placeslayer);
     });
 
     var buildingsfile = '/buildings.json/';
@@ -65,21 +96,48 @@ function initialize() {
 
     var treesfile = '/trees.json/';
     $.getJSON(treesfile, function (data) {
-        trees = L.geoJson(data, {onEachFeature: onEachFeature});
+        trees = L.geoJson(data, {onEachFeature: onEachFeature, pointToLayer:pointToLayer});
         trees.addTo(treeslayer);
     });
 
-
+    function pointToLayer (feature, latlng) {
+            L.marker(latlng, {icon: greenIcon}).addTo(map);
+    }
     // **** Decorate feature ****
     function onEachFeature(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
         layer.on({
             mouseover: highlight,
             mouseout: reset,
             click: zoom
         });
+    }
+
+    function onEachBookedPlace(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(feature.properties.pk);
+        }
+        layer.on({
+            mouseover: highlight,
+            mouseout: resetBooked,
+            click: zoom
+        });
+        layer.on("click", function () {
+            var latlng = {
+                "lat": feature.geometry.coordinates[0][0][0][1],
+                "lng": feature.geometry.coordinates[0][0][0][0]
+            }
+            var popup = L.popup();
+            popup.setLatLng(latlng)
+                .setContent(`<button class="btn btn-danger">Slot ${feature.properties.pk} booked</button>`)
+                .openOn(map);
+        });
+    }
+    function resetBooked(e) {
+        booked_places.resetStyle(e.target);
+        booked_places.setStyle(styleBooked);
     }
 
     function onEachPlace(feature, layer) {
@@ -104,6 +162,8 @@ function initialize() {
         trees.resetStyle(e.target);
     }
 
+
+
     // **** Add popup with the location ****
     function displayLocation(e) {
         var popup = L.popup();
@@ -117,10 +177,8 @@ function initialize() {
         var userId = document.getElementById('user-id').dataset.userId;
         var latlng = {"lat": coordinates[1], "lng": coordinates[0]}
         var popup = L.popup();
-        var url = "/reserve/" + userId + "/" + slotId;
-        console.log(url)
         popup.setLatLng(latlng)
-            .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${userId}/${slotId}'" >Reserve slot ${slotId}</button>`)
+            .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${slotId}'" >Reserve slot ${slotId}</button>`)
             .openOn(map);
     }
 
@@ -134,7 +192,7 @@ function initialize() {
     L.control.layers(bases, overlays).addTo(map);
 
 
-    map.on("click", displayLocation);
+    // map.on("click", displayLocation);
 
 }
 
@@ -145,7 +203,7 @@ function reserve(slot) {
 }
 
 function filterPool(poolMaxRange) {
-    let poolsfilter = '/poolsfilter.json/'+poolMaxRange+'/';
+    let poolsfilter = '/poolsfilter.json/' + poolMaxRange + '/';
     let pools_filter_places
     $.getJSON(poolsfilter, function (data) {
         pools_filter_places = L.geoJson(data,
@@ -158,9 +216,9 @@ function filterPool(poolMaxRange) {
     });
 
     function onEachPoolFilterFeature(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
         layer.on({
             mouseover: highlight,
             mouseout: resetPool,
@@ -180,7 +238,7 @@ function removePoolFilter() {
 }
 
 function filterNeighbours(maxNeighbour) {
-    let neighbourfilter = '/neighbourfilter.json/'+maxNeighbour+'/';
+    let neighbourfilter = '/neighbourfilter.json/' + maxNeighbour + '/';
     $.getJSON(neighbourfilter, function (data) {
         neighbour_filter_places = L.geoJson(data,
             {
@@ -192,9 +250,9 @@ function filterNeighbours(maxNeighbour) {
     });
 
     function onEachNeighbourFilterFeature(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
         layer.on({
             mouseover: highlight,
             mouseout: resetNeighbour,
@@ -228,9 +286,9 @@ function filterTrees() {
 
 
     function onEachTreeFilterFeature(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
+        // if (feature.properties) {
+        //     layer.bindPopup(feature.properties.pk);
+        // }
         layer.on({
             mouseover: highlight,
             mouseout: resetTree,
@@ -260,7 +318,7 @@ async function submitForm() {
     removeNeighbourFilter()
 
     filterPool(poolMaxRange);
-    if (maxNeighbour>0){
+    if (maxNeighbour > 0) {
         filterNeighbours(maxNeighbour);
     }
 
@@ -274,7 +332,7 @@ async function submitForm() {
 
 // **** Universal highlight ****
 function highlight(e) {
-    console.log(e.target);
+    var userName = document.getElementById('user-id').dataset.userName;
     let layer = e.target;
     if (e.target.feature.geometry.type === "Point") return;
     layer.setStyle({

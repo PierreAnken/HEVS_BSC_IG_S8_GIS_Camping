@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from .classes.RegisterForm import RegisterForm
 from .classes.CampDistances import CampDistances
 from .models import *
@@ -55,13 +56,18 @@ def logout_user(request):
         return redirect('login')
 
 
-def reserve_slot(request, id_camper, id_place):
-    print('reserve!')
-    camper = Camper.objects.get(user_id = id_camper)
+def reserve_slot(request, id_place):
+    if(request.user.is_superuser):
+        return HttpResponse('Admins can only approved reservations, not reserve.')
+    camper = Camper.objects.get(user_id = request.user.id)
     place = Place.objects.get(gid = id_place)
-    reservation = Reservation(camper = camper, place = place, status = 1)
-    reservation.save()
-    return redirect('homepage')
+    existingReservation = Reservation.objects.filter(camper = camper, place = place)
+    if(len(existingReservation)>0):
+        return HttpResponse('You already booked this')
+    else:
+        reservation = Reservation(camper = camper, place = place, status = 1)
+        reservation.save()
+        return redirect('homepage')
 
 
 # **** App views below ****
@@ -87,7 +93,11 @@ def update_reservation(request):
 
 # **** Json views below ****
 def placesjson(request):
-    places = Place.objects.all()
+    bookings = Reservation.objects.filter(status = 2)
+    unavailable_ids = []
+    for booking in bookings:
+        unavailable_ids.append(booking.place_id)
+    places = Place.objects.all().exclude(gid__in=unavailable_ids)
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
 
@@ -144,4 +154,22 @@ def treesfilterjson(request):
     places = Place.objects.all()
     places_with_trees = CampDistances.get_shapes_into_other_shapes(places, trees)
     ser = serialize('geojson', places_with_trees, geometry_field='geom')
+    return HttpResponse(ser)
+
+def reservedplacesjson(request):
+    reservations = Reservation.objects.filter(status = 1)
+    unavailable_ids = []
+    for res in reservations:
+        unavailable_ids.append(res.place_id)
+    places = Place.objects.filter(gid__in=unavailable_ids)
+    ser = serialize('geojson', places, geometry_field='geom')
+    return HttpResponse(ser)
+
+def bookedplacesjson(request):
+    bookings = Reservation.objects.filter(status = 2)
+    unavailable_ids = []
+    for booking in bookings:
+        unavailable_ids.append(booking.place_id)
+    places = Place.objects.filter(gid__in=unavailable_ids)
+    ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
