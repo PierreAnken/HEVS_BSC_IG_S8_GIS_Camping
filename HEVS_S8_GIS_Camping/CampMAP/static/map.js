@@ -5,11 +5,8 @@ let placeslayer = L.layerGroup();
 let buildingslayer = L.layerGroup();
 let poolslayer = L.layerGroup();
 let treeslayer = L.layerGroup();
-let poolfilterlayer = L.layerGroup();
-let treesfilterlayer = L.layerGroup();
-let neighbourfilterlayer = L.layerGroup();
-let petsfilterlayer = L.layerGroup();
-let childrenfilterlayer = L.layerGroup();
+
+let placesmatchingfilterlayer = L.layerGroup();
 
 let overlays = {
     "Places": placeslayer,
@@ -17,38 +14,24 @@ let overlays = {
     "Pools": poolslayer,
     "Trees": treeslayer
 };
-var filterCheck = {"treeFilterOn": false, "petFilterOn": false, "childrenFilterOn": false}
 
 // Styles for places marked as near pool/trees
-let styleFreePlaces = () => {
+let styleMatchFilterPlaces = () => {
     return {fillColor: 'green', fillOpacity: 0.7, stroke: false};
 }
 
-let stylePool = () => {
-    return {fillColor: '#4caec4', fillOpacity: 0.7, stroke: false};
-}
 let styleReserved = () => {
     return {fillColor: '#fcd32f', fillOpacity: 0.8, stroke: true};
 }
 let styleBooked = () => {
     return {fillColor: '#fc3d2f', fillOpacity: 0.8, stroke: true};
 }
-let styleTrees = () => {
-    return {color: '#57a54a', weight: 4, fill: false};
-}
-let styleNeighbour = () => {
-    return {fillColor: '#000000'};
-}
-let stylePet = () => {
-    return {fillColor: '#570afc', fillOpacity: 0.6, stroke: false};
-}
-let styleChildren = () => {
-    return {color: '#fc00bd', weight: 4, fill: false};
-}
 let styleUserBooking = () => {
     return {fill:false, stroke: false};
 }
-var greenIcon = L.icon({
+
+
+let greenIcon = L.icon({
     iconUrl: 'https://image.flaticon.com/icons/svg/616/616541.svg',
 
     iconSize: [45, 110], // size of the icon
@@ -57,7 +40,8 @@ var greenIcon = L.icon({
     shadowAnchor: [-6, 70],  // the same for the shadow
     popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
 });
-var humanIcon = L.icon({
+
+let humanIcon = L.icon({
     iconUrl: 'https://image.flaticon.com/icons/svg/2921/2921147.svg',
 
     iconSize: [23, 55], // size of the icon
@@ -212,230 +196,57 @@ function initialize() {
 
 }
 
+async function applyFilters() {
 
-function filterPool(poolMaxRange) {
-    let poolsfilter = '/poolsfilter.json/' + poolMaxRange + '/';
-    let pools_filter_places
-    $.getJSON(poolsfilter, function (data) {
-        pools_filter_places = L.geoJson(data,
+    console.log("applying filters")
+
+    //remove filter layer
+    placesmatchingfilterlayer.removeFrom(map);
+    placesmatchingfilterlayer = L.layerGroup();
+
+    //get form data
+    let form = document.getElementById("filter-form");
+    let poolMaxRange = form.elements["pool-max-range"].value;
+    let maxNeighbour = form.elements["max-neighbour"].value;
+    let withTree = form.elements["trees-filter"].checked;
+    let petMinRange = form.elements["pets-min-range"].value;
+    let childrenMinRange = form.elements["children-min-range"].value;
+
+    //get filtered places
+    let filtered_places_url = '/applyfilters.json/' + poolMaxRange + '/'+ maxNeighbour + '/'+ withTree + '/'+ petMinRange + '/'+ childrenMinRange + '/';
+    let filtered_places
+
+    $.getJSON(filtered_places_url, function (data) {
+        filtered_places = L.geoJson(data,
             {
-                onEachFeature: onEachPoolFilterFeature,
-                style: stylePool
+                onEachFeature: onEachPlaceMatchingFilter,
+                style: styleMatchFilterPlaces()
             });
-        pools_filter_places.addTo(poolfilterlayer);
-        poolfilterlayer.addTo(map)
+        filtered_places.addTo(placesmatchingfilterlayer);
+        placesmatchingfilterlayer.addTo(map)
     });
 
-    function onEachPoolFilterFeature(feature, layer) {
+    function onEachPlaceMatchingFilter(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(feature.properties.pk);
         }
         layer.on({
             mouseover: highlight,
-            mouseout: resetPool,
+            mouseout: resetPlaceMatchingFilter,
             click: zoom
         });
     }
 
-    function resetPool(e) {
-        pools_filter_places.resetStyle(e.target);
-        pools_filter_places.setStyle(stylePool);
+    function resetPlaceMatchingFilter(e) {
+        if(typeof filtered_places !== 'undefined'){
+            filtered_places.resetStyle(e.target);
+            filtered_places.setStyle(styleMatchFilterPlaces);
+        }
     }
 }
-
-function removePoolFilter() {
-    poolfilterlayer.removeFrom(map);
-    poolfilterlayer = L.layerGroup();
-}
-
-function filterNeighbours(maxNeighbour) {
-    let neighbourfilter = '/neighbourfilter.json/' + maxNeighbour + '/';
-    $.getJSON(neighbourfilter, function (data) {
-        neighbour_filter_places = L.geoJson(data,
-            {
-                onEachFeature: onEachNeighbourFilterFeature,
-                style: styleNeighbour()
-            });
-        neighbour_filter_places.addTo(neighbourfilterlayer);
-        neighbourfilterlayer.addTo(map);
-    });
-
-    function onEachNeighbourFilterFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
-        layer.on({
-            mouseover: highlight,
-            mouseout: resetNeighbour,
-            click: zoom
-        });
-    }
-
-    function resetNeighbour(e) {
-        neighbour_filter_places.resetStyle(e.target);
-        neighbour_filter_places.setStyle(styleNeighbour());
-    }
-}
-
-function removeNeighbourFilter() {
-    neighbourfilterlayer.removeFrom(map);
-    neighbourfilterlayer = L.layerGroup();
-}
-
-function filterTrees() {
-    let treefilter = '/treesfilter.json/';
-    $.getJSON(treefilter, function (data) {
-        trees_filter_places = L.geoJson(data,
-            {
-                onEachFeature: onEachTreeFilterFeature,
-                style: styleTrees
-            });
-        trees_filter_places.addTo(treesfilterlayer);
-        treesfilterlayer.addTo(map);
-        filterCheck.treeFilterOn = true;
-    });
-
-
-    function onEachTreeFilterFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
-        layer.on({
-            mouseover: highlight,
-            mouseout: resetTree,
-            click: zoom
-        });
-    }
-
-    function resetTree(e) {
-        trees_filter_places.resetStyle(e.target);
-        trees_filter_places.setStyle(styleTrees);
-    }
-}
-
-function removeTreeFilter() {
-    treesfilterlayer.removeFrom(map);
-    filterCheck.treeFilterOn = false;
-    treesfilterlayer = L.layerGroup();
-}
-
-function filterPets() {
-    let petfilter = '/petfilter.json/';
-    $.getJSON(petfilter, function (data) {
-        pets_filter_places = L.geoJson(data,
-            {
-                onEachFeature: onEachPetFilterFeature,
-                style: stylePet
-            });
-        pets_filter_places.addTo(petsfilterlayer);
-        petsfilterlayer.addTo(map);
-        filterCheck.petFilterOn = true;
-    });
-
-
-    function onEachPetFilterFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
-        layer.on({
-            mouseover: highlight,
-            mouseout: resetPet,
-            click: zoom
-        });
-    }
-
-    function resetPet(e) {
-        pets_filter_places.resetStyle(e.target);
-        pets_filter_places.setStyle(stylePet);
-    }
-}
-
-function removePetFilter() {
-    petsfilterlayer.removeFrom(map);
-    filterCheck.petFilterOn = false;
-    petsfilterlayer = L.layerGroup();
-}
-
-function filterChildren() {
-    let childrenfilter = '/childrenfilter.json/';
-    $.getJSON(childrenfilter, function (data) {
-        children_filter_places = L.geoJson(data,
-            {
-                onEachFeature: onEachChildrenFilterFeature,
-                style: styleChildren
-            });
-        children_filter_places.addTo(childrenfilterlayer);
-        childrenfilterlayer.addTo(map);
-        filterCheck.childrenFilterOn = true;
-    });
-
-
-    function onEachChildrenFilterFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
-        layer.on({
-            mouseover: highlight,
-            mouseout: resetChildren,
-            click: zoom
-        });
-    }
-
-    function resetChildren(e) {
-        children_filter_places.resetStyle(e.target);
-        children_filter_places.setStyle(styleChildren);
-    }
-}
-
-function removeChildrenFilter() {
-    childrenfilterlayer.removeFrom(map);
-    filterCheck.childrenFilterOn = false;
-    childrenfilterlayer = L.layerGroup();
-}
-
-
-async function submitForm() {
-    let form = document.getElementById("filter-form");
-    let poolMaxRange = form.elements["pool-max-range"].value;
-    let maxNeighbour = form.elements["max-neighbour"].value;
-    let treeCheckbox = form.elements["trees-filter"].checked;
-    let petCheckbox = form.elements["pets-filter"].checked;
-    let childrenCheckbox = form.elements["children-filter"].checked;
-
-    removePoolFilter()
-    removeNeighbourFilter()
-
-    filterPool(poolMaxRange);
-    if (maxNeighbour > 0) {
-        filterNeighbours(maxNeighbour);
-    }
-
-    if (treeCheckbox === true && filterCheck.treeFilterOn === false) {
-        filterTrees()
-    } else if (treeCheckbox === false) {
-        removeTreeFilter();
-    }
-    if (petCheckbox === true && filterCheck.petFilterOn === false) {
-        filterPets()
-    } else if (petCheckbox === false) {
-        removePetFilter()
-    }
-    if (childrenCheckbox === true && filterCheck.childrenFilterOn === false) {
-        filterChildren()
-    } else if (childrenCheckbox === false) {
-        removeChildrenFilter()
-    }
-    // if (childrenCheckbox === true) {
-    //     alert('children')
-    // } else if (childrenCheckbox === false) {
-    //     alert('children no')
-    // }
-}
-
 
 // **** Universal highlight ****
 function highlight(e) {
-    var userName = document.getElementById('user-id').dataset.userName;
     let layer = e.target;
     if (e.target.feature.geometry.type === "Point") return;
     layer.setStyle({

@@ -19,8 +19,8 @@
     <script type="text/javascript" src="{% static "map.js" %}"></script>
 </head>
 <body onload="initialize()">
-    <!-- **** Connected as superuser **** -->
-    {% if user.is_superuser %}
+<!-- **** Connected as superuser **** -->
+{% if user.is_superuser %}
 
     <!-- **** Navbar **** -->
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
@@ -28,7 +28,7 @@
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
                 <text class="navbar-brand px-3">Welcome back, {{ user.username }}!</text>
-                <text id='user-id' style="display: none" > {{ user.id }}</text>
+                <text id='user-id' style="display: none"> {{ user.id }}</text>
                 <form class="logout-link" action="{% url 'logout' %}" method="post" style="display: inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-link logout px-3"><i class="fas fa-sign-out-alt"></i></button>
@@ -41,53 +41,64 @@
         <div class="row-md-8"></div>
         <div class="col-md-8">
             <div class="container" style="margin-top: 45px; width: 80%; font-family: 'Times New Roman', serif;">
-             <text id='user-id' style="display: none"  data-user-name="{{ user.username }}" data-user-id="{{ user.id }}"></text>
+                <text id='user-id' style="display: none" data-user-name="{{ user.username }}"
+                      data-user-id="{{ user.id }}"></text>
                 <div class="warning alert-warning">
-                    <h3 style="font-style: italic; margin-bottom: 25px; padding-left: 20px; background-color: #ff6d65; color: black;">Hello {{ user.username }}, below you will find the current pending bookings!</h3>
+                    <h3 style="font-style: italic; margin-bottom: 25px; padding-left: 20px; background-color: #ff6d65; color: black;">
+                        Hello {{ user.username }}, below you will find the current pending bookings!</h3>
                 </div>
                 <!-- For each reservation, create a card -->
                 {% for reservation in reservations %}
-                <div class="card" style="margin-bottom: 15px;">
-                    <h5 class="card-header" style="text-transform: uppercase; font-weight: bold;">Reservation for the place number {{ reservation.place.gid }}</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h5 class="card-title" style="font-weight: bold;">Camper informations</h5>
-                                <p class="card-text">
-                                    <span>Camper name: </span>{{ reservation.camper.user.first_name}} {{ reservation.camper.user.last_name }}<br />
-                                    <span>Email address: </span>{{ reservation.camper.user.email }}<br />
-                                    <span>Number of adults: </span>{{ reservation.camper.adults }}<br />
-                                    <span>Number of kids: </span>{{ reservation.camper.kids }}<br />
-                                    <span>Does this camper have any pet? </span>{% if reservation.camper.pets %}Yes{% else %}No{% endif %}
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <form action="{% url 'accept' %}" method="post" style="display: inline">
-                                    {% csrf_token %}
-                                    <button type="submit" name="accept" value="{{ reservation.id }}" class="btn btn-success">Accept</button>
-                                </form>
-                                <form action="{% url 'decline' %}" method="post" style="display: inline">
-                                    {% csrf_token %}
-                                    <button type="submit" name="decline" value="{{ reservation.id }}" class="btn btn-danger">Decline</button>
-                                </form>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <h5 class="card-header" style="text-transform: uppercase; font-weight: bold;">Reservation for
+                            the place number {{ reservation.place.gid }}</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h5 class="card-title" style="font-weight: bold;">Camper informations</h5>
+                                    <p class="card-text">
+                                        <span>Camper name: </span>{{ reservation.camper.user.first_name }} {{ reservation.camper.user.last_name }}<br/>
+                                        <span>Email address: </span>{{ reservation.camper.user.email }}<br/>
+                                        <span>Number of adults: </span>{{ reservation.camper.adults }}<br/>
+                                        <span>Number of kids: </span>{{ reservation.camper.kids }}<br/>
+                                        <span>Does this camper have any pet? </span>{% if reservation.camper.pets %}
+                                        Yes{% else %}No{% endif %}
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <form action="{% url 'accept' %}" method="post" style="display: inline">
+                                        {% csrf_token %}
+                                        <button type="submit" name="accept" value="{{ reservation.id }}"
+                                                class="btn btn-success">Accept
+                                        </button>
+                                    </form>
+                                    <form action="{% url 'decline' %}" method="post" style="display: inline">
+                                        {% csrf_token %}
+                                        <button type="submit" name="decline" value="{{ reservation.id }}"
+                                                class="btn btn-danger">Decline
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
         <div class="col-md-4">
             <div class="container" style="margin-top: 45px; width: 80%">
                 <table style="width: 100%">
-                    <tr><th colspan="2">Slots already booked</th></tr>
+                    <tr>
+                        <th colspan="2">Slots already booked</th>
+                    </tr>
                     {% for reservation in booked %}
                         <tr>
                             <td>Slot number {{ reservation.place.gid }}</td>
                             <td>
                                 <form action="{% url 'decline' %}" method="post" style="display: inline">
                                     {% csrf_token %}
-                                    <button type="submit" name="decline" value="{{ reservation.id }}" class="btn btn-link empty" style="float: right;">
+                                    <button type="submit" name="decline" value="{{ reservation.id }}"
+                                            class="btn btn-link empty" style="float: right;">
                                         <i class="fas fa-times-circle"></i>
                                     </button>
                                 </form>
@@ -97,20 +108,21 @@
                 </table>
             </div>
             <div class="container" style="margin-top: 45px; width: 80%; height : 300px">
-               <div id="campingmap" style="width:100%; height:100%"></div>
+                <div id="campingmap" style="width:100%; height:100%"></div>
             </div>
         </div>
     </div>
 
     <!-- **** Connected as standard user **** -->
-    {% else %}
+{% else %}
     <!-- **** Navbar **** -->
     <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camper Home Page</a>
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
                 <text class="navbar-brand px-3">Welcome, {{ user.username }}!</text>
-                <text id='user-id' style="display: none"  data-user-name="{{ user.username }}" data-user-id="{{ user.id }}"></text>
+                <text id='user-id' style="display: none" data-user-name="{{ user.username }}"
+                      data-user-id="{{ user.id }}"></text>
                 <form class="logout-link" action="{% url 'logout' %}" method="post" style="display: inline">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-link logout px-3"><i class="fas fa-sign-out-alt"></i></button>
@@ -129,50 +141,49 @@
         <!-- **** Sidebar **** -->
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ml-0 pl-0 ">
             <div class="sidebar-sticky p-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <form id="filter-form">
-                            <label for="filter">Filter by</label>
-                            <div class="form-check">
-                                 <label class="form-check-label" for="pool-max-range">
-                                    Pool distance (<span id="pool-max-range-value">30m</span>)
-                                </label>
-                                <input type="range" min="30" max="300" value="30" class="slider" id="pool-max-range" onchange="displayPoolRange(this.value)">
-                            </div>
-                            <div class="form-check">
-                                 <label class="form-check-label" for="max-neighbour">
-                                    Max Neighbour (<span id="max-neighbour-value">0</span>)
-                                </label>
-                                <input type="range" min="0" max="10" value="0" class="slider" id="max-neighbour" onchange="displayMaxNeighbour(this.value)">
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="trees-filter" id="trees-filter"
-                                       value="trees" onchange="submitForm()">
-                                <label class="form-check-label" for="trees-filter">
-                                    With trees
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="pets-filter" id="pets-filter"
-                                       value="pets" onchange="submitForm()">
-                                <label class="form-check-label" for="pets-filter">
-                                    Near campers with pets
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="children-filter" id="children-filter"
-                                       value="chidlren" onchange="submitForm()">
-                                <label class="form-check-label" for="children-filter">
-                                    Near campers with children
-                                </label>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
+                <form id="filter-form">
+
+                    <label for="filter">Filter by</label>
+                    <div class="form-check">
+                        <label class="form-check-label" for="pool-max-range">
+                            Pool distance (<span id="pool-max-range-value">300</span>m)
+                        </label>
+                        <input type="range" min="30" max="300" value="300" class="slider" id="pool-max-range"
+                               onchange="displayPoolRange(this.value)">
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="max-neighbour">
+                            Max Neighbour (<span id="max-neighbour-value">8</span>)
+                        </label>
+                        <input type="range" min="0" max="8" value="8" class="slider" id="max-neighbour"
+                               onchange="displayMaxNeighbour(this.value)">
+                    </div>
+                    <div class="form-check">
+                        <input type="range" min="0" max="300" value="0" class="slider" id="pets-min-range"
+                               onchange="displayPetRange(this.value)">
+                        <label class="form-check-label" for="pets-min-range">
+                            Pets min. distance (<span id="pets-min-range-value">0</span>m)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="range" min="0" max="300" value="0" class="slider" id="children-min-range"
+                               onchange="displayChildrenRange(this.value)">
+                        <label class="form-check-label" for="children-min-range">
+                            Pets min. distance (<span id="children-min-range-value">0</span>m)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="trees-filter" id="trees-filter"
+                               value="trees" onchange="applyFilters()">
+                        <label class="form-check-label" for="trees-filter">
+                            With trees
+                        </label>
+                    </div>
+                </form>
             </div>
         </nav>
     </div>
-    {% endif %}
+{% endif %}
 
 <!-- **** Bootstrap CDN **** -->
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
@@ -181,13 +192,28 @@
 
 <!-- **** Personalized script **** -->
 <script>
+    $(document).ready(function () {
+        applyFilters();
+    });
+
     function displayPoolRange(val) {
-         $("#pool-max-range-value").html(val+"m");
-         submitForm();
+        $("#pool-max-range-value").html(val);
+        applyFilters();
     }
+
     function displayMaxNeighbour(val) {
         $("#max-neighbour-value").html(val);
-        submitForm();
+        applyFilters();
+    }
+
+    function displayPetRange(val) {
+        $("#pets-min-range-value").html(val);
+        applyFilters();
+    }
+
+    function displayChildrenRange(val) {
+        $("#children-min-range-value").html(val);
+        applyFilters();
     }
 
 </script>

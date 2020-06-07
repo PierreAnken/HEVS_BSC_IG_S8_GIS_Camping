@@ -20,11 +20,10 @@ urlpatterns = [
     path('campingareas.json/', views.campingareasjson, name='campingareasjson'),
     path('pools.json/', views.poolsjson, name='poolsjson'),
     path('trees.json/', views.treesjson, name='treesjson'),
-    path('treesfilter.json/', views.treesfilterjson, name='treesfilterjson'),
-    path('poolsfilter.json/<int:pool_max_range>/', views.poolsfilterjson, name='poolsfilterjson'),
-    path('neighbourfilter.json/<int:max_neighbour>/', views.neighbourfilterjson, name='neighbourfilterjson'),
-    path('petfilter.json/', views.petfilterjson, name='petfilterjson'),
-    path('childrenfilter.json/', views.childrenfilterjson, name='childrenfilterjson'),
     path('userbookings.json/', views.userbookingjson, name='userbookingjson'),
 
+    path(
+        'applyfilters.json/<int:pool_max_range>/<int:max_neighbour>/<str:with_tree>/<int:pet_min_range>/<int:children_min_range>/',
+        views.applyfilters, name='applyfiltersjson'
+    )
 ]
