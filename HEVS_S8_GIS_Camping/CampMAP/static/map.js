@@ -17,32 +17,50 @@ let overlays = {
 
 // Styles for places marked as near pool/trees
 let styleMatchFilterPlaces = () => {
-    return {fillColor: 'green', fillOpacity: 0.7, stroke: false};
+    return {fillColor: '#069104', fillOpacity: 0.4, stroke: false};
 }
 
 let styleReserved = () => {
-    return {fillColor: '#fcd32f', fillOpacity: 0.8, stroke: true};
+    return {fillColor: '#fced16', fillOpacity: 1, stroke: true};
 }
 let styleBooked = () => {
     return {fillColor: '#fc3d2f', fillOpacity: 0.8, stroke: true};
 }
 let styleUserBooking = () => {
-    return {fill:false, stroke: false};
+    return {fill: false, stroke: false};
 }
 
 
 let greenIcon = L.icon({
     iconUrl: 'https://image.flaticon.com/icons/svg/616/616541.svg',
 
-    iconSize: [45, 110], // size of the icon
+    iconSize: [30, 55], // size of the icon
     shadowSize: [30, 50], // size of the shadow
-    iconAnchor: [23, 75], // point of the icon which will correspond to marker's location
+    iconAnchor: [17, 40], // point of the icon which will correspond to marker's location
     shadowAnchor: [-6, 70],  // the same for the shadow
     popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
 });
 
-let humanIcon = L.icon({
-    iconUrl: 'https://image.flaticon.com/icons/svg/2921/2921147.svg',
+let userIcon = L.icon({
+    iconUrl: 'https://image.flaticon.com/icons/svg/3021/3021878.svg',
+
+    iconSize: [35, 55], // size of the icon
+    shadowSize: [30, 50], // size of the shadow
+    iconAnchor: [18, 40], // point of the icon which will correspond to marker's location
+    shadowAnchor: [-6, 70],  // the same for the shadow
+    popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+let poolIcon = L.icon({
+    iconUrl: 'https://image.flaticon.com/icons/svg/2972/2972208.svg',
+
+    iconSize: [23, 55], // size of the icon
+    shadowSize: [30, 50], // size of the shadow
+    iconAnchor: [12, 35], // point of the icon which will correspond to marker's location
+    shadowAnchor: [-6, 70],  // the same for the shadow
+    popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+});
+let buildingIcon = L.icon({
+    iconUrl: 'https://image.flaticon.com/icons/svg/869/869636.svg',
 
     iconSize: [23, 55], // size of the icon
     shadowSize: [30, 50], // size of the shadow
@@ -69,101 +87,125 @@ function initialize() {
 
     var placesfile = '/places.json/';
     $.getJSON(placesfile, function (data) {
-        places = L.geoJson(data, {onEachFeature: onEachPlace});
+        places = L.geoJson(data, {onEachFeature: decorateEachFeature("place")});
         places.addTo(placeslayer);
     });
     var reservedfile = '/reservedplaces.json/';
     $.getJSON(reservedfile, function (data) {
-        places = L.geoJson(data, {style: styleReserved});
-        places.addTo(placeslayer);
+        reserved_places = L.geoJson(data, {style: styleReserved});
+        reserved_places.addTo(placeslayer);
     });
     var bookedfile = '/bookedplaces.json/';
     $.getJSON(bookedfile, function (data) {
-        booked_places = L.geoJson(data, {onEachFeature: onEachBookedPlace, style: styleBooked});
+        booked_places = L.geoJson(data, {onEachFeature: decorateEachFeature("booked"), style: styleBooked});
         booked_places.addTo(placeslayer);
     });
     var userbookingsfile = '/userbookings.json/';
     $.getJSON(userbookingsfile, function (data) {
-        user_bookings_places = L.geoJson(data, {onEachFeature: onEachUserBookings, style: styleUserBooking});
+        user_bookings_places = L.geoJson(data, {
+            onEachFeature: decorateEachFeature("userBooking"),
+            style: styleUserBooking
+        });
         user_bookings_places.addTo(placeslayer);
     });
 
     var buildingsfile = '/buildings.json/';
     $.getJSON(buildingsfile, function (data) {
-        buildings = L.geoJson(data, {onEachFeature: onEachFeature});
+        buildings = L.geoJson(data, {onEachFeature: decorateEachFeature("building")});
         buildings.addTo(buildingslayer);
     });
 
     var poolsfile = '/pools.json/';
     $.getJSON(poolsfile, function (data) {
-        pools = L.geoJson(data, {onEachFeature: onEachFeature});
+        pools = L.geoJson(data, {onEachFeature: decorateEachFeature("pool")});
         pools.addTo(poolslayer);
     });
 
     var treesfile = '/trees.json/';
     $.getJSON(treesfile, function (data) {
-        trees = L.geoJson(data, {onEachFeature: onEachFeature, pointToLayer: pointToLayer});
+        trees = L.geoJson(data, {onEachFeature: decorateEachFeature("tree"), pointToLayer: pointToTreeLayer});
         trees.addTo(treeslayer);
     });
 
-    function pointToLayer(feature, latlng) {
-        L.marker(latlng, {icon: greenIcon}).addTo(map);
+    function pointToTreeLayer(feature, latlng) {
+        L.marker(latlng, {icon: greenIcon}).addTo(treeslayer);
     }
 
     // **** Decorate feature ****
-    function onEachFeature(feature, layer) {
-        // if (feature.properties) {
-        //     layer.bindPopup(feature.properties.pk);
-        // }
-        layer.on({
-            mouseover: highlight,
-            mouseout: reset,
-            click: zoom
-        });
-    }
 
-    function onEachUserBookings(feature, layer) {
-        L.marker((layer.getBounds().getCenter()), {icon: humanIcon}).addTo(map);
-    }
-
-    function onEachBookedPlace(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
+    function decorateEachFeature(featureType) {
+        switch (featureType) {
+            case "place":
+                return function onEachPlace(feature, layer) {
+                    if (feature.properties) {
+                        layer.bindPopup(feature.properties.pk);
+                    }
+                    layer.on({
+                        mouseover: highlight,
+                        mouseout: reset,
+                        click: zoom
+                    });
+                    //display popup to book slot
+                    layer.on("click", function () {
+                        var popup = L.popup();
+                        popup.setLatLng(layer.getBounds().getCenter())
+                            .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${feature.properties.pk}'" >Reserve slot ${feature.properties.pk}</button>`)
+                            .openOn(map);
+                    });
+                }
+            case "tree":
+                return function onEachTree(feature, layer) {
+                    layer.on({
+                        mouseover: highlight,
+                        mouseout: reset,
+                        click: zoom
+                    });
+                }
+            case "pool":
+                return function onEachPool(feature, layer) {
+                    layer.on({
+                        mouseover: highlight,
+                        mouseout: reset,
+                        click: zoom
+                    });
+                    L.marker(layer.getBounds().getCenter(), {icon: poolIcon}).addTo(poolslayer);
+                }
+            case "building":
+                return function onEachBuilding(feature, layer) {
+                    layer.on({
+                        mouseover: highlight,
+                        mouseout: reset,
+                        click: zoom
+                    });
+                    L.marker(layer.getBounds().getCenter(), {icon: buildingIcon}).addTo(buildingslayer);
+                }
+            case "booked":
+                return function onEachBookedPlace(feature, layer) {
+                    if (feature.properties) {
+                        layer.bindPopup(feature.properties.pk);
+                    }
+                    layer.on({
+                        mouseover: highlight,
+                        mouseout: resetBooked,
+                        click: zoom
+                    });
+                    layer.on("click", function () {
+                        var popup = L.popup();
+                        popup.setLatLng(layer.getBounds().getCenter())
+                            .setContent(`<button class="btn btn-danger">Slot ${feature.properties.pk} booked</button>`)
+                            .openOn(map);
+                    });
+                }
+            case "userBooking":
+                return function onEachUserBookings(feature, layer) {
+                    L.marker((layer.getBounds().getCenter()), {icon: userIcon}).addTo(placeslayer);
+                }
         }
-        layer.on({
-            mouseover: highlight,
-            mouseout: resetBooked,
-            click: zoom
-        });
-        layer.on("click", function () {
-            var popup = L.popup();
-            popup.setLatLng(layer.getBounds().getCenter())
-                .setContent(`<button class="btn btn-danger">Slot ${feature.properties.pk} booked</button>`)
-                .openOn(map);
-        });
     }
 
     function resetBooked(e) {
         booked_places.resetStyle(e.target);
         booked_places.setStyle(styleBooked);
-    }
-
-    function onEachPlace(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
-        layer.on({
-            mouseover: highlight,
-            mouseout: reset,
-            click: zoom
-        });
-        //display popup to book slot
-        layer.on("click", function () {
-            var popup = L.popup();
-            popup.setLatLng(layer.getBounds().getCenter())
-                .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${feature.properties.pk}'" >Reserve slot ${feature.properties.pk}</button>`)
-                .openOn(map);
-        });
     }
 
     function reset(e) {
@@ -174,15 +216,6 @@ function initialize() {
     }
 
 
-    // **** Add popup with the location ****
-    function displayLocation(e) {
-        var popup = L.popup();
-        popup.setLatLng(e.latlng)
-            .setContent("The current location is: " + e.latlng.toString())
-            .openOn(map);
-    }
-
-
     // **** Assemble layers ****
     placeslayer.addTo(map);
     buildingslayer.addTo(map);
@@ -190,11 +223,9 @@ function initialize() {
     treeslayer.addTo(map);
     OpenStreetMap_Mapnik.addTo(map);
     L.control.layers(bases, overlays).addTo(map);
-
-
-    // map.on("click", displayLocation);
-
 }
+
+
 
 async function applyFilters() {
 
@@ -213,9 +244,8 @@ async function applyFilters() {
     let childrenMinRange = form.elements["children-min-range"].value;
 
     //get filtered places
-    let filtered_places_url = '/applyfilters.json/' + poolMaxRange + '/'+ maxNeighbour + '/'+ withTree + '/'+ petMinRange + '/'+ childrenMinRange + '/';
+    let filtered_places_url = '/applyfilters.json/' + poolMaxRange + '/' + maxNeighbour + '/' + withTree + '/' + petMinRange + '/' + childrenMinRange + '/';
     let filtered_places
-
     $.getJSON(filtered_places_url, function (data) {
         filtered_places = L.geoJson(data,
             {
@@ -227,9 +257,6 @@ async function applyFilters() {
     });
 
     function onEachPlaceMatchingFilter(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(feature.properties.pk);
-        }
         layer.on({
             mouseover: highlight,
             mouseout: resetPlaceMatchingFilter,
@@ -238,7 +265,7 @@ async function applyFilters() {
     }
 
     function resetPlaceMatchingFilter(e) {
-        if(typeof filtered_places !== 'undefined'){
+        if (typeof filtered_places !== 'undefined') {
             filtered_places.resetStyle(e.target);
             filtered_places.setStyle(styleMatchFilterPlaces);
         }
@@ -264,3 +291,4 @@ function highlight(e) {
 function zoom(e) {
     map.fitBounds(e.target.getBounds());
 }
+
