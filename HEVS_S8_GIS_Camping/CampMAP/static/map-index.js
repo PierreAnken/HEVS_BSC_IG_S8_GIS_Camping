@@ -12,7 +12,7 @@ function initialize() {
     var pools_layer = L.layerGroup();
 
     // **** Create the leaflet map ****
-    var map = L.map('campingmap', { minZoom: 10, maxZoom: 18 }).setView([46.211606, 7.3167], 18);
+    var map = L.map('campingmap', { minZoom: 10, maxZoom: 20 }).setView([46.211606, 7.3167], 18);
 
     var campingareasfile = '/campingareas.json/';
     $.getJSON(campingareasfile, function (data) {

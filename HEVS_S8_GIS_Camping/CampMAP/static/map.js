@@ -83,7 +83,7 @@ function initialize() {
 
 
     // **** Create the leaflet map ****
-    map = L.map('campingmap', {minZoom: 10, maxZoom: 19}).setView([46.211606, 7.3167], 18);
+    map = L.map('campingmap', {minZoom: 10, maxZoom: 20}).setView([46.211606, 7.3167], 18);
 
     var placesfile = '/places.json/';
     $.getJSON(placesfile, function (data) {
