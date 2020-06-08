@@ -87,14 +87,6 @@ function initialize() {
         }
     }
 
-    function onEachFeature(feature, layer) {
-        layer.on({
-            mouseover: highlight,
-            mouseout: reset,
-            click: alertUser
-        });
-    }
-
 
     // **** Define the highlight functions ****
     function highlight(e) {
