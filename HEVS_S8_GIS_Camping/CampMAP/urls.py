@@ -24,7 +24,7 @@ urlpatterns = [
     path('userbookings.json/', views.userbookingjson, name='userbookingjson'),
 
     path(
-        'applyfilters.json/<int:pool_max_range>/<int:max_neighbour>/<str:with_tree>/<int:pet_min_range>/<int:children_min_range>/',
+        'applyfilters.json/<int:pool_max_range>/<int:max_neighbour>/<str:tree_option>/<int:pet_min_range>/<int:children_min_range>/',
         views.applyfilters, name='applyfiltersjson'
     )
 ]

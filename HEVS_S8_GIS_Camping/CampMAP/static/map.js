@@ -226,7 +226,6 @@ function initialize() {
 }
 
 
-
 async function applyFilters() {
 
     console.log("applying filters")
@@ -239,12 +238,20 @@ async function applyFilters() {
     let form = document.getElementById("filter-form");
     let poolMaxRange = form.elements["pool-max-range"].value;
     let maxNeighbour = form.elements["max-neighbour"].value;
-    let withTree = form.elements["trees-filter"].checked;
+    let treeOptionRadio = form.elements["trees-filter"];
+    let treeOption
+    for (let i = 0, length = treeOptionRadio.length; i < length; i++) {
+        if (treeOptionRadio[i].checked) {
+            treeOption = treeOptionRadio[i].value
+            break;
+        }
+    }
+
     let petMinRange = form.elements["pets-min-range"].value;
     let childrenMinRange = form.elements["children-min-range"].value;
 
     //get filtered places
-    let filtered_places_url = '/applyfilters.json/' + poolMaxRange + '/' + maxNeighbour + '/' + withTree + '/' + petMinRange + '/' + childrenMinRange + '/';
+    let filtered_places_url = '/applyfilters.json/' + poolMaxRange + '/' + maxNeighbour + '/' + treeOption + '/' + petMinRange + '/' + childrenMinRange + '/';
     let filtered_places
     $.getJSON(filtered_places_url, function (data) {
         filtered_places = L.geoJson(data,

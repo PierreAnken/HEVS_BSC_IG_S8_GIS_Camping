@@ -36,7 +36,8 @@ class CampDistances:
         for container_shape in container_shapes:
             for other_shape in other_shapes:
                 if other_shape.geom.within(container_shape.geom):
-                    container_with_other_in.append(container_shape)
+                    if other_shape not in container_with_other_in:
+                        container_with_other_in.append(container_shape)
         return container_with_other_in
 
     @staticmethod
