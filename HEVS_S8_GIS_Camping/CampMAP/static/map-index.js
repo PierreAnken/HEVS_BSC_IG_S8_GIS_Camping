@@ -8,7 +8,8 @@ function initialize() {
 
     // **** Define the overlay ****
     var camping_areaslayer = L.layerGroup();
-
+    var buildings_layer = L.layerGroup();
+    var pools_layer = L.layerGroup();
 
     // **** Create the leaflet map ****
     var map = L.map('campingmap', { minZoom: 10, maxZoom: 18 }).setView([46.211606, 7.3167], 18);
@@ -18,11 +19,22 @@ function initialize() {
         campingareas = L.geoJson(data, { onEachFeature: onEachFeature });
         campingareas.addTo(camping_areaslayer);
     });
+    var buildingsfile = '/buildings.json/';
+    $.getJSON(buildingsfile, function (data) {
+        buildings = L.geoJson(data, { onEachFeature: onEachFeature });
+        buildings.addTo(buildings_layer);
+    });
 
+    var poolsfile = '/pools.json/';
+    $.getJSON(poolsfile, function (data) {
+        pools = L.geoJson(data, { onEachFeature: onEachFeature });
+        pools.addTo(pools_layer);
+    });
     // **** Assemble layers ****
     OpenStreetMap_Mapnik.addTo(map);
     camping_areaslayer.addTo(map);
-
+    buildings_layer.addTo(map);
+    pools_layer.addTo(map);
     // **** Decorate feature ****
     function onEachFeature(feature, layer) {
         layer.on({
