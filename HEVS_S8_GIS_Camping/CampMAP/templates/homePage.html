@@ -93,7 +93,8 @@
                     </tr>
                     {% for reservation in booked %}
                         <tr>
-                            <td>Slot number {{ reservation.place.gid }} : {{ reservation.camper.user.first_name }} {{ reservation.camper.user.last_name}} </td>
+                            <td>Slot number {{ reservation.place.gid }}
+                                : {{ reservation.camper.user.first_name }} {{ reservation.camper.user.last_name }} </td>
                             <td>
 
                                 <form action="{% url 'decline' %}" method="post" style="display: inline">
@@ -173,14 +174,20 @@
                         <input type="range" min="0" max="150" value="0" class="slider" id="children-min-range"
                                onchange="displayChildrenRange(this.value)">
                     </div>
+                    <label class="mt-4">Regarding trees?</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="trees-filter" id="trees-filter"
-                               value="trees">
-                        <label class="form-check-label" for="trees-filter">
-                            With trees
-                        </label>
+                        <div class="radio">
+                            <label><input type="radio" name="trees-filter" value="all" checked> All places</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="trees-filter" value="with"> Only with</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="trees-filter" value="without"> Only without</label>
+                        </div>
                     </div>
-                     <button type="button" class="btn btn-success mt-2" onclick="applyAllFilters()">Apply filters</button>
+                    <button type="button" class="btn btn-success mt-2" onclick="applyAllFilters()">Apply filters
+                    </button>
                 </form>
             </div>
         </nav>
@@ -210,6 +217,7 @@
     function displayChildrenRange(val) {
         $("#children-min-range-value").html(val);
     }
+
     function applyAllFilters() {
         applyFilters();
     }

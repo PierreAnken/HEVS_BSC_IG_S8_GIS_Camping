@@ -128,7 +128,7 @@ def poolsjson(request):
     return HttpResponse(ser)
 
 
-def applyfilters(request, pool_max_range, max_neighbour, with_tree, pet_min_range, children_min_range):
+def applyfilters(request, pool_max_range, max_neighbour, tree_option, pet_min_range, children_min_range):
     trees = Tree.objects.all()
     pools = Pool.objects.all()
     places = Place.objects.all()
@@ -139,9 +139,10 @@ def applyfilters(request, pool_max_range, max_neighbour, with_tree, pet_min_rang
 
     # 2 - filter with tree
     places_filtered_with_tree = CampDistances.get_shapes_into_other_shapes(filtered_places, trees)
-    if with_tree == "true":
+
+    if tree_option == "with":
         filtered_places = places_filtered_with_tree
-    else:
+    elif tree_option == "without":
         for place_with_tree in places_filtered_with_tree:
             if place_with_tree in filtered_places:
                 filtered_places.remove(place_with_tree)
@@ -178,8 +179,6 @@ def applyfilters(request, pool_max_range, max_neighbour, with_tree, pet_min_rang
         distance_from_kids = CampDistances.get_min_distance_from_objects(places_with_kids, place)
         if distance_from_kids >= children_min_range:
             places_away_from_kids.append(place)
-        else:
-            pass
     filtered_places = places_away_from_kids
 
     # 5 - removed booked places
