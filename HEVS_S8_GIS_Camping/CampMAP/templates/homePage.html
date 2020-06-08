@@ -18,12 +18,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="{% static "map.js" %}"></script>
 </head>
-<body onload="initialize()">
+<body onload="initialize()" style="font-family: 'Times New Roman', serif;">
 <!-- **** Connected as superuser **** -->
 {% if user.is_superuser %}
 
     <!-- **** Navbar **** -->
-    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633">
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #996633; font-weight: bold;">
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Manager Home Page</a>
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
@@ -118,7 +118,7 @@
     <!-- **** Connected as standard user **** -->
 {% else %}
     <!-- **** Navbar **** -->
-    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59">
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow" style="background-color: #87ba59; font-weight: bold;">
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Camper Home Page</a>
         <ul class="navbar-nav px-3" id="navItems">
             <li class="nav-item text-nowrap">
@@ -145,7 +145,7 @@
             <div class="sidebar-sticky p-3">
                 <form id="filter-form">
 
-                    <label for="filter">Filter for places that are:</label>
+                    <label for="filter" style="font-weight: bold;">Filters for places that are:</label>
                     <div class="form-check">
                         <label class="form-check-label" for="pool-max-range">
                             In pools' range of: <span id="pool-max-range-value">300</span> m
@@ -174,16 +174,25 @@
                         <input type="range" min="0" max="150" value="0" class="slider" id="children-min-range"
                                onchange="displayChildrenRange(this.value)">
                     </div>
-                    <label class="mt-4">Regarding trees?</label>
+                    <label class="mt-4" style="font-weight: bold;">What kind of places are you interested in?</label>
                     <div class="form-check">
-                        <div class="radio">
-                            <label><input type="radio" name="trees-filter" value="all" checked> All places</label>
+                        <div class="radio" name="radio_container">
+                            <label>
+                                <input type="radio" name="trees-filter" value="all" checked>
+                                <span class="checkmark"></span> All places
+                            </label>
                         </div>
-                        <div class="radio">
-                            <label><input type="radio" name="trees-filter" value="with"> Only with</label>
+                        <div class="radio" name="radio_container">
+                            <label>
+                                <input type="radio" name="trees-filter" value="with">
+                                <span class="checkmark"></span> Places with trees
+                            </label>
                         </div>
-                        <div class="radio">
-                            <label><input type="radio" name="trees-filter" value="without"> Only without</label>
+                        <div class="radio" name="radio_container">
+                            <label>
+                                <input type="radio" name="trees-filter" value="without">
+                                <span class="checkmark"></span> Places without trees
+                            </label>
                         </div>
                     </div>
                     <button type="button" class="btn btn-success mt-2" onclick="applyAllFilters()">Apply filters
@@ -222,8 +231,5 @@
         applyFilters();
     }
 
-
 </script>
-
 </body>
-
