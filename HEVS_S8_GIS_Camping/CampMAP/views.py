@@ -65,7 +65,7 @@ def reserve_slot(request, id_place):
     place = Place.objects.get(gid=id_place)
     existingReservation = Reservation.objects.filter(camper=camper, place=place)
     if len(existingReservation) > 0:
-        return HttpResponse('You already booked this')
+        return HttpResponse('<script>window.history.back();</script>')
     else:
         reservation = Reservation(camper=camper, place=place, status=1)
         reservation.save()

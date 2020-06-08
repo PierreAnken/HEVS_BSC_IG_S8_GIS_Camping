@@ -192,7 +192,7 @@ function initialize() {
                     layer.on("click", function () {
                         var popup = L.popup();
                         popup.setLatLng(layer.getBounds().getCenter())
-                            .setContent(`<button class="btn btn-danger">Slot ${feature.properties.pk} booked</button>`)
+                            .setContent(`<div class="alert alert-danger">Slot ${feature.properties.pk} booked</div>`)
                             .openOn(map);
                     });
                 }
