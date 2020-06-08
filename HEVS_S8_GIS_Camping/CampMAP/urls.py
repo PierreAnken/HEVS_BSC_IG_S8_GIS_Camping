@@ -14,6 +14,7 @@ urlpatterns = [
     path('decline/', views.delete_reservation, name='decline'),
     # **** Json files ****
     path('places.json/', views.placesjson, name='placesjson'),
+    path('oneplace.json/<int:id_place>', views.oneplacejson, name='oneplacejson'),
     path('reservedplaces.json/', views.reservedplacesjson, name='reservedplacesjson'),
     path('bookedplaces.json/', views.bookedplacesjson, name='bookedplacesjson'),
     path('buildings.json/', views.buildingsjson, name='buildingsjson'),

@@ -93,8 +93,9 @@
                     </tr>
                     {% for reservation in booked %}
                         <tr>
-                            <td>Slot number {{ reservation.place.gid }}</td>
+                            <td>Slot number {{ reservation.place.gid }} : {{ reservation.camper.user.first_name }} {{ reservation.camper.user.last_name}} </td>
                             <td>
+
                                 <form action="{% url 'decline' %}" method="post" style="display: inline">
                                     {% csrf_token %}
                                     <button type="submit" name="decline" value="{{ reservation.id }}"
@@ -143,42 +144,43 @@
             <div class="sidebar-sticky p-3">
                 <form id="filter-form">
 
-                    <label for="filter">Filter by</label>
+                    <label for="filter">Filter for places that are:</label>
                     <div class="form-check">
                         <label class="form-check-label" for="pool-max-range">
-                            Pool distance (<span id="pool-max-range-value">300</span>m)
+                            In pools' range of: <span id="pool-max-range-value">300</span> m
                         </label>
                         <input type="range" min="30" max="300" value="300" class="slider" id="pool-max-range"
                                onchange="displayPoolRange(this.value)">
                     </div>
                     <div class="form-check">
                         <label class="form-check-label" for="max-neighbour">
-                            Max Neighbour (<span id="max-neighbour-value">8</span>)
+                            With maximum <span id="max-neighbour-value">8</span> neighbour(s)
                         </label>
                         <input type="range" min="0" max="8" value="8" class="slider" id="max-neighbour"
                                onchange="displayMaxNeighbour(this.value)">
                     </div>
                     <div class="form-check">
-                        <input type="range" min="0" max="300" value="0" class="slider" id="pets-min-range"
-                               onchange="displayPetRange(this.value)">
                         <label class="form-check-label" for="pets-min-range">
-                            Pets min. distance (<span id="pets-min-range-value">0</span>m)
+                            At least <span id="pets-min-range-value">0</span> m away from pets
                         </label>
+                        <input type="range" min="0" max="150" value="0" class="slider" id="pets-min-range"
+                               onchange="displayPetRange(this.value)">
                     </div>
                     <div class="form-check">
-                        <input type="range" min="0" max="300" value="0" class="slider" id="children-min-range"
-                               onchange="displayChildrenRange(this.value)">
                         <label class="form-check-label" for="children-min-range">
-                            Pets min. distance (<span id="children-min-range-value">0</span>m)
+                            At least <span id="children-min-range-value">0</span> m away from kids
                         </label>
+                        <input type="range" min="0" max="150" value="0" class="slider" id="children-min-range"
+                               onchange="displayChildrenRange(this.value)">
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="trees-filter" id="trees-filter"
-                               value="trees" onchange="applyFilters()">
+                               value="trees">
                         <label class="form-check-label" for="trees-filter">
                             With trees
                         </label>
                     </div>
+                     <button type="button" class="btn btn-success mt-2" onclick="applyAllFilters()">Apply filters</button>
                 </form>
             </div>
         </nav>
@@ -192,29 +194,26 @@
 
 <!-- **** Personalized script **** -->
 <script>
-    $(document).ready(function () {
-        applyFilters();
-    });
 
     function displayPoolRange(val) {
         $("#pool-max-range-value").html(val);
-        applyFilters();
     }
 
     function displayMaxNeighbour(val) {
         $("#max-neighbour-value").html(val);
-        applyFilters();
     }
 
     function displayPetRange(val) {
         $("#pets-min-range-value").html(val);
-        applyFilters();
     }
 
     function displayChildrenRange(val) {
         $("#children-min-range-value").html(val);
+    }
+    function applyAllFilters() {
         applyFilters();
     }
+
 
 </script>
 

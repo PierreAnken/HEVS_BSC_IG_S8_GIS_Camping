@@ -103,6 +103,12 @@ def placesjson(request):
     ser = serialize('geojson', places, geometry_field='geom')
     return HttpResponse(ser)
 
+def oneplacejson(request,id_place):
+    place = Place.objects.filter(gid = id_place)
+    print('oi')
+    print(place)
+    ser = serialize('geojson', place, geometry_field='geom')
+    return HttpResponse(ser)
 
 def buildingsjson(request):
     buildings = Building.objects.all()
@@ -153,7 +159,7 @@ def applyfilters(request, pool_max_range, max_neighbour, with_tree, pet_min_rang
     places_with_pets = []
     places_with_kids = []
     for booking in bookings:
-        if booking.camper.pets > 0:
+        if booking.camper.pets is True:
             places_with_pets.append(booking.place)
         if booking.camper.kids > 0:
             places_with_kids.append(booking.place)
