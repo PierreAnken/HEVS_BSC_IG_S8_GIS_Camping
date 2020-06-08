@@ -90,6 +90,7 @@ def delete_reservation(request):
 def update_reservation(request):
     id = request.POST.get('accept')
     Reservation.objects.filter(id=id).update(status=2)
+    Reservation.objects.filter(place = Reservation.objects.get(id=id).place, status = 1).delete()
     return redirect('homepage')
 
 
@@ -217,6 +218,8 @@ def bookedplacesjson(request):
 
 
 def userbookingjson(request):
+    if(request.user.is_superuser) :
+        return HttpResponse([])
     camper = Camper.objects.get(user_id=request.user.id)
     print(camper)
     bookings = Reservation.objects.filter(status=2, camper=camper) | Reservation.objects.filter(status=1, camper=camper)
