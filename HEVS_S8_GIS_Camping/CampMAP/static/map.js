@@ -264,6 +264,13 @@ async function applyFilters() {
     });
 
     function onEachPlaceMatchingFilter(feature, layer) {
+        //display popup to book slot
+        layer.on("click", function () {
+            var popup = L.popup();
+            popup.setLatLng(layer.getBounds().getCenter())
+                .setContent(`<button class="btn btn-success" onclick="window.location.href='reserve/${feature.properties.pk}'" >Reserve slot ${feature.properties.pk}</button>`)
+                .openOn(map);
+        });
         layer.on({
             mouseover: highlight,
             mouseout: resetPlaceMatchingFilter,
